@@ -1,15 +1,24 @@
-ARKANSAS PATROL CHARGE TRIAGE V2.1 — FIELD TEST UPDATE
+ARKANSAS PATROL CHARGE TRIAGE V2.2 — FIELD-READY WORKFLOW
 
-From iPhone:
-1. Extract this ZIP in Files.
-2. Open GitHub in Safari and go to ArkansasLawDog/arkansas-charge-triage.
+UPLOAD ALL 19 FILES IN THIS FOLDER ONCE.
+
+Major changes:
+- Fact-based off-presence misdemeanor Battery arrest questions.
+- All DV enhancement/history/pregnancy factors appear on the final triage result.
+- Pregnancy + 5-year prior history show independent statutory bases without double-elevating the class.
+- Special Vehicle workflow classifies first from objective facts, then loads only applicable laws/citation checks.
+- E-bike Class 1/2/3, <750 W gate, verified assist speed, scooter verified maximum capability, gas cc/transmission, license/registration/insurance, rider gear, passenger rules, and autocycle rules.
+- Fort Smith Ordinance Quick Reference integrated from the user's City Ordinances document.
+- Fort Smith special-vehicle park rule (§18-63) and motorcycle/bicycle passenger rule (§24-178) are linked into applicable vehicle checks.
+
+iPhone / GitHub:
+1. Extract ZIP in Files.
+2. Safari > GitHub > ArkansasLawDog/arkansas-charge-triage.
 3. Add file > Upload files.
-4. Select EVERY file from this extracted folder.
+4. Select all 19 files ONCE.
 5. Commit directly to main.
-6. Do NOT change GitHub Pages settings; leave main / (root).
-7. Wait about 1 minute.
-8. Open the live website in Safari and refresh.
-9. Confirm the badge says: V2.1 • Fact-First Field Test.
-10. Fully close and reopen the Home Screen app.
-
-If the old version remains, refresh the live site in Safari once more. V2.1 uses a new service-worker cache.
+6. Leave GitHub Pages on main / (root).
+7. Wait about a minute.
+8. Refresh the live site in Safari.
+9. Confirm: V2.2 • Field-Ready Workflow.
+10. Fully close/reopen the Home Screen app.
