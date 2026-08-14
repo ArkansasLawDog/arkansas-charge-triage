@@ -1,0 +1,15 @@
+ARKANSAS PATROL CHARGE TRIAGE V2.1 — FIELD TEST UPDATE
+
+From iPhone:
+1. Extract this ZIP in Files.
+2. Open GitHub in Safari and go to ArkansasLawDog/arkansas-charge-triage.
+3. Add file > Upload files.
+4. Select EVERY file from this extracted folder.
+5. Commit directly to main.
+6. Do NOT change GitHub Pages settings; leave main / (root).
+7. Wait about 1 minute.
+8. Open the live website in Safari and refresh.
+9. Confirm the badge says: V2.1 • Fact-First Field Test.
+10. Fully close and reopen the Home Screen app.
+
+If the old version remains, refresh the live site in Safari once more. V2.1 uses a new service-worker cache.

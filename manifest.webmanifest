@@ -1,7 +1,7 @@
 {
   "name": "Arkansas Patrol Charge Triage",
   "short_name": "AR Charge Triage",
-  "description": "Scenario-driven Arkansas patrol charge triage reference.",
+  "description": "Arkansas patrol charge triage, special-vehicle triage, traffic validation, and infographic reference.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

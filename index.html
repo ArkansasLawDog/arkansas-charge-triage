@@ -4,139 +4,115 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b2b57">
-<title>Arkansas Patrol Charge Triage — v1</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="AR Charge Triage">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Arkansas Patrol Charge Triage — v2</title>
 <style>
 :root{
   --navy:#0b2b57;--blue:#174a7e;--lt:#eef4fb;--line:#ccd7e5;--ink:#111827;
   --muted:#5b6678;--green:#137a4b;--greenbg:#eaf7ef;--amber:#9a5b00;--amberbg:#fff4dc;
-  --red:#a82020;--redbg:#fdecec;--purple:#6b3fa0;--purplebg:#f3ecfb;--white:#fff;
-  --shadow:0 8px 24px rgba(9,30,66,.08);
+  --orange:#c86500;--orangebg:#fff0df;--red:#a82020;--redbg:#fdecec;--purple:#6b3fa0;--purplebg:#f3ecfb;
+  --white:#fff;--shadow:0 8px 24px rgba(9,30,66,.08);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#f5f7fa;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-button,select,input{font:inherit}
+button,select,input,textarea{font:inherit}
 button{cursor:pointer}
-.app{max-width:960px;margin:auto;min-height:100vh;background:#fff}
-header{background:var(--navy);color:#fff;padding:18px 18px 16px;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.app{max-width:980px;margin:auto;min-height:100vh;background:#fff}
+header{background:var(--navy);color:#fff;padding:18px;position:sticky;top:0;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.18)}
 .header-row{display:flex;align-items:center;gap:12px}
-.logo{width:44px;height:44px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-weight:900}
-h1{font-size:1.35rem;margin:0;line-height:1.1}
-header p{margin:4px 0 0;font-size:.85rem;color:#dce8f7}
-main{padding:18px}
+.logo{width:50px;height:50px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-weight:950}
+h1{font-size:1.4rem;margin:0;line-height:1.1}
+header p{margin:5px 0 0;font-size:.86rem;color:#dce8f7;line-height:1.35}
+main{padding:16px}
 .status{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.pill{border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:800;background:#e7eef8;color:var(--navy)}
+.pill{border-radius:999px;padding:6px 10px;font-size:.76rem;font-weight:900;background:#e7eef8;color:var(--navy)}
 .pill.green{background:var(--greenbg);color:var(--green)}
-.hero{border:1px solid var(--line);border-radius:18px;padding:16px;background:linear-gradient(135deg,#f8fbff,#fff);margin-bottom:18px}
-.hero h2{margin:0 0 5px;color:var(--navy);font-size:1.3rem}
-.hero p{margin:0;color:var(--muted);line-height:1.4}
+.hero{border:1px solid var(--line);border-radius:18px;padding:16px;background:linear-gradient(135deg,#f8fbff,#fff);margin-bottom:16px}
+.hero h2{margin:0 0 5px;color:var(--navy);font-size:1.28rem}.hero p{margin:0;color:var(--muted);line-height:1.4}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.cat,.subcat{border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px;text-align:left;box-shadow:var(--shadow);min-height:112px}
-.cat:active,.subcat:active{transform:scale(.99)}
-.icon{font-size:1.65rem;margin-bottom:8px}
-.cat strong,.subcat strong{display:block;color:var(--navy);font-size:1.05rem}
-.cat small,.subcat small{display:block;color:var(--muted);margin-top:5px;line-height:1.25}
-.section-title{display:flex;align-items:center;gap:10px;margin:8px 0 14px}
-.back{border:0;background:#e8eef7;color:var(--navy);border-radius:10px;padding:9px 12px;font-weight:800}
-.section-title h2{margin:0;color:var(--navy);font-size:1.25rem}
-.form-card{border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-.module-title{border-bottom:4px solid var(--navy);padding-bottom:12px;margin-bottom:14px}
-.module-title h2{margin:0;color:var(--navy);font-size:1.5rem}
-.module-title p{margin:5px 0 0;color:var(--muted)}
-.q{margin:0 0 15px}
-.q label{display:block;font-weight:850;color:var(--navy);margin-bottom:7px}
-.q .hint{display:block;color:var(--muted);font-size:.79rem;margin-top:5px;line-height:1.3}
-select,input[type=number]{width:100%;border:2px solid #c9d4e2;border-radius:12px;padding:13px 12px;background:#fff;color:var(--ink);min-height:50px}
-select:focus,input:focus{outline:3px solid #cfe0f4;border-color:var(--blue)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.primary{border:0;background:var(--navy);color:#fff;border-radius:12px;padding:13px 18px;font-weight:900;flex:1}
-.secondary{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:12px;padding:12px 16px;font-weight:850}
+.cat,.subcat{border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px;text-align:left;box-shadow:var(--shadow);min-height:108px}
+.cat strong,.subcat strong{display:block;color:var(--navy);font-size:1.05rem}.cat small,.subcat small{display:block;color:var(--muted);margin-top:5px;line-height:1.25}
+.icon{font-size:1.6rem;margin-bottom:8px}
+.section-title{display:flex;align-items:center;gap:10px;margin:8px 0 14px}.section-title h2{margin:0;color:var(--navy);font-size:1.2rem}
+.back{border:0;background:#e8eef7;color:var(--navy);border-radius:10px;padding:9px 12px;font-weight:900}
+.card{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;box-shadow:var(--shadow);margin-bottom:14px}
+.module-title{border-bottom:4px solid var(--navy);padding-bottom:12px;margin-bottom:14px}.module-title h2{margin:0;color:var(--navy);font-size:1.52rem}.module-title p{margin:5px 0 0;color:var(--muted)}
+.tier-title{font-weight:950;color:var(--navy);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 9px;display:flex;align-items:center;gap:8px}
+.tier-title.required:before{content:"REQUIRED";background:var(--redbg);color:var(--red);padding:4px 7px;border-radius:7px;font-size:.68rem}
+.tier-title.optional:before{content:"OPTIONAL";background:var(--lt);color:var(--blue);padding:4px 7px;border-radius:7px;font-size:.68rem}
+.q{margin:0 0 17px}.q label{display:block;font-weight:900;color:var(--navy);margin-bottom:7px;line-height:1.25}
+.q .hint{display:block;color:var(--muted);font-size:.8rem;margin-top:6px;line-height:1.35}
+.reqmark{color:var(--red);font-weight:950}
+select,input[type=number],input[type=text],textarea{width:100%;border:2px solid #c9d4e2;border-radius:12px;padding:13px 12px;background:#fff;color:var(--ink);min-height:50px}
+textarea{min-height:100px;resize:vertical}
+select:focus,input:focus,textarea:focus{outline:3px solid #cfe0f4;border-color:var(--blue)}
+.choice-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.choice{border:2px solid #d4dce8;border-radius:13px;background:#fff;text-align:left;padding:12px;display:flex;gap:10px;align-items:flex-start}
+.choice.selected{border-color:var(--navy);box-shadow:0 0 0 3px #d9e6f5}
+.choice .radio{width:20px;height:20px;border:2px solid #8ba0bc;border-radius:50%;flex:0 0 auto;margin-top:2px}
+.choice.selected .radio{border:6px solid var(--navy)}
+.choice strong{font-weight:950}.kw-purpose{color:var(--blue)}.kw-reckless{color:var(--orange)}.kw-knowing{color:var(--purple)}.kw-negligent{color:var(--amber)}.kw-danger{color:var(--red)}.kw-green{color:var(--green)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.seg button{border:2px solid #d4dce8;background:#fff;border-radius:11px;padding:10px 7px;font-weight:850}.seg button.selected{background:var(--navy);border-color:var(--navy);color:#fff}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{border:1px solid #d4dce8;border-radius:11px;padding:10px;background:#fff;display:flex;gap:9px;align-items:flex-start;line-height:1.25}.check input{width:19px;height:19px;accent-color:var(--navy);flex:0 0 auto;margin-top:1px}
+.callout{border-radius:12px;padding:12px;margin:10px 0 14px;line-height:1.35}.callout.history{background:var(--amberbg);border:1px solid #e5b55a;color:#603b00}.callout.danger{background:var(--redbg);border:1px solid #dc9999;color:#6c1616}.callout.info{background:var(--lt);border:1px solid #b8cee7;color:#173f6b}
+details.optional{border:1px solid var(--line);border-radius:13px;margin:12px 0;background:#fbfcfe}details.optional summary{padding:12px;font-weight:900;color:var(--navy)}details.optional .inside{padding:0 12px 12px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.primary{border:0;background:var(--navy);color:#fff;border-radius:12px;padding:13px 18px;font-weight:950;flex:1}.secondary{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:12px;padding:12px 16px;font-weight:900}
+.error{background:var(--redbg);border:1px solid #dda0a0;color:#751717;padding:12px;border-radius:12px;margin-top:12px;font-weight:800}
 .result{margin-top:18px;border:2px solid var(--navy);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-.result-head{background:var(--navy);color:#fff;padding:16px}
-.result-head .eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.08em;color:#cfe0f4}
-.result-head h2{margin:4px 0;font-size:1.55rem}
-.result-head .statute{font-weight:900}
-.result-grid{display:grid;grid-template-columns:1fr 1fr}
-.block{padding:14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.block:nth-child(even){border-right:0}
-.block h3{margin:0 0 8px;color:var(--navy);font-size:.88rem;text-transform:uppercase;letter-spacing:.04em}
-.block ul{margin:0;padding-left:19px}
-.block li{margin:5px 0;line-height:1.32}
-.classification{font-weight:950;font-size:1.05rem}
-.arrest-yes{color:var(--green);font-weight:950}
-.arrest-maybe{color:var(--amber);font-weight:950}
-.arrest-no{color:var(--red);font-weight:950}
-.full{grid-column:1/-1;border-right:0}
-.quote{background:#f7f9fc;border-left:4px solid var(--blue);padding:11px 12px;border-radius:0 10px 10px 0;line-height:1.4}
-.sources a{display:inline-block;margin:4px 8px 0 0;color:var(--blue);font-weight:800;text-decoration:none}
-.alert{background:var(--amberbg);border:1px solid #e6be77;color:#613c00;padding:12px;border-radius:12px;margin:12px 0;font-weight:700;line-height:1.35}
-.critical{background:var(--redbg);border:1px solid #dd9a9a;color:#681414;padding:12px;border-radius:12px;margin:12px 0;font-weight:800;line-height:1.35}
-.info{background:var(--lt);border:1px solid #bfd0e5;padding:12px;border-radius:12px;margin:12px 0;line-height:1.35}
-details{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:#fff}
-summary{font-weight:850;color:var(--navy);padding:12px;cursor:pointer}
-details .inside{padding:0 12px 12px;color:var(--ink);line-height:1.4}
-footer{padding:18px;color:var(--muted);font-size:.78rem;text-align:center}
-.hide{display:none!important}
-.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.badge{padding:5px 8px;border-radius:8px;font-size:.75rem;font-weight:900;background:#e7eef8;color:var(--navy)}
-.badge.felony{background:var(--redbg);color:var(--red)}
-.badge.misd{background:var(--amberbg);color:var(--amber)}
-.copy-ok{color:var(--green);font-size:.8rem;font-weight:800;align-self:center}
+.result-head{background:var(--navy);color:#fff;padding:16px}.result-head .eyebrow{font-size:.76rem;font-weight:900;letter-spacing:.08em;color:#cfe0f4}.result-head h2{margin:5px 0;font-size:1.5rem}.result-head .statute{font-weight:950;line-height:1.3}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.badge{padding:6px 9px;border-radius:9px;font-size:.78rem;font-weight:950;background:#fff3dc;color:#8c5200}.badge.red{background:#ffe4e4;color:#8d1717}.badge.green{background:#dff3e8;color:#0f6941}
+.penalty{background:#f6edcf;color:#704700;border-radius:12px;padding:11px 12px;margin-top:12px;font-weight:800;line-height:1.4}.penalty strong{color:#4d3200}.whybox{background:var(--greenbg);border:1px solid #9bcdb2;color:#124f34;border-radius:12px;padding:12px;margin:12px 0 0;line-height:1.45}
+.whybox strong{color:#0b5f39}
+.impactbox{background:var(--amberbg);border:1px solid #e5b55a;color:#603b00;border-radius:12px;padding:12px;line-height:1.4}
+.impactbox ul{margin:7px 0 0;padding-left:20px}
+
+.result-grid{display:grid;grid-template-columns:1fr 1fr}.block{padding:14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.block:nth-child(even){border-right:0}.block h3{margin:0 0 8px;color:var(--navy);font-size:.88rem;text-transform:uppercase;letter-spacing:.04em}.block ul{margin:0;padding-left:19px}.block li{margin:5px 0;line-height:1.35}.full{grid-column:1/-1;border-right:0}
+.arrest-yes{color:var(--green);font-weight:950}.arrest-maybe{color:var(--amber);font-weight:950}.arrest-no{color:var(--red);font-weight:950}
+.quote{background:#f7f9fc;border-left:4px solid var(--blue);padding:11px 12px;border-radius:0 10px 10px 0;line-height:1.45;white-space:pre-wrap}
+.sources a{display:inline-block;margin:4px 8px 0 0;color:var(--blue);font-weight:850;text-decoration:none}
+.report-box{margin-top:12px;border:2px solid var(--green);border-radius:16px;overflow:hidden}.report-box h3{margin:0;background:var(--green);color:#fff;padding:12px 14px}.report-box .body{padding:14px;background:#fbfffc}.report-box textarea{min-height:240px}
+.library-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.lib-card{border:1px solid var(--line);border-radius:15px;padding:12px;background:#fff}.lib-card img{width:100%;border-radius:10px;border:1px solid #ddd;display:block}.lib-card strong{display:block;color:var(--navy);margin-top:8px}.lib-card button{margin-top:8px;width:100%}
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;display:none;overflow:auto;padding:14px}.viewer.open{display:block}.viewer img{display:block;max-width:100%;height:auto;margin:45px auto 20px;background:#fff}.viewer .close{position:fixed;right:16px;top:16px;z-index:101;background:#fff;border:0;border-radius:999px;width:42px;height:42px;font-size:22px;font-weight:900}
+.vehicle-result{border:2px solid var(--blue);border-radius:16px;overflow:hidden;margin-top:16px}.vehicle-head{background:var(--blue);color:#fff;padding:14px}.vehicle-head h2{margin:0}.stop-yes{color:var(--green);font-weight:950}.stop-maybe{color:var(--amber);font-weight:950}.stop-no{color:var(--red);font-weight:950}
+.hidden{display:none!important}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.78rem}
 @media(max-width:650px){
-  main{padding:12px}.grid{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}
-  .block{border-right:0}.full{grid-column:auto}.cat,.subcat{min-height:95px}
-  header{padding-top:max(14px,env(safe-area-inset-top))}
-}
-@media print{
-  header{position:static}.actions,.back{display:none}.app{max-width:none}.result{box-shadow:none}
+  main{padding:12px}.grid,.library-grid{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}.block{border-right:0}.full{grid-column:auto}
+  .check-grid{grid-template-columns:1fr}.seg{grid-template-columns:1fr 1fr 1fr}.cat,.subcat{min-height:92px}
+  header{padding-top:max(16px,env(safe-area-inset-top))}
 }
 </style>
-
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="AR Charge Triage">
-<link rel="apple-touch-icon" href="icon-180.png">
-
 </head>
 <body>
 <div class="app">
 <header>
-  <div class="header-row">
-    <div class="logo">AR</div>
-    <div>
-      <h1>Arkansas Patrol Charge Triage</h1>
-      <p>Scenario → elements → likely charge → arrest authority → report facts</p>
-    </div>
-  </div>
+  <div class="header-row"><div class="logo">AR</div><div><h1>Arkansas Patrol Charge Triage</h1><p>Scenario → elements → exact statute → likely charge → arrest authority → optional report support</p></div></div>
 </header>
-
 <main>
-  <div class="status">
-    <span class="pill green">V1 • 11 charge modules</span>
-    <span class="pill">Justia primary</span>
-    <span class="pill">2025 Acts incorporated where applicable</span>
+<div class="status"><span class="pill green">V2.1 • Fact-First Field Test</span><span class="pill">Justia primary</span><span class="pill">2025 Acts verified where applicable</span></div>
+<section id="home">
+  <div class="hero"><h2>Select a tool</h2><p>Criminal triage and special-vehicle triage guide unfamiliar scenarios. Standard automobile traffic remains a fast criteria-validation reference.</p></div>
+  <div class="grid">
+    <button class="cat" onclick="openCriminal()"><div class="icon">⚖️</div><strong>Criminal Charge Triage</strong><small>Elements • exact subsection • arrest authority • enhancements • optional report skeleton</small></button>
+    <button class="cat" onclick="openSpecialVehicle()"><div class="icon">🏍️</div><strong>Special Vehicle Triage</strong><small>E-bike • E-scooter • electric motorcycle/dirt bike • motorcycle • moped • Slingshot</small></button>
+    <button class="cat" onclick="openTraffic()"><div class="icon">🚓</div><strong>Standard Traffic Validation</strong><small>Starting with Reckless Driving; common automobile violations will be added incrementally</small></button>
+    <button class="cat" onclick="openLibrary()"><div class="icon">📚</div><strong>Infographic Library</strong><small>Quick-reference charge pages available inside the app</small></button>
   </div>
-
-  <section id="home">
-    <div class="hero">
-      <h2>What type of call are you triaging?</h2>
-      <p>Start broad. The next screen narrows the facts to the applicable charge family.</p>
-    </div>
-    <div class="grid">
-      <button class="cat" onclick="showCategory('violence')"><div class="icon">👊</div><strong>Physical Violence</strong><small>Assault • Battery • Domestic variants</small></button>
-      <button class="cat" onclick="showCategory('property')"><div class="icon">🏠</div><strong>Property</strong><small>Trespass • Criminal Mischief • Theft</small></button>
-      <button class="cat" onclick="showCategory('public')"><div class="icon">🚨</div><strong>Public Order</strong><small>Disorderly • Loitering • Obstruction • Public Intoxication</small></button>
-      <button class="cat" onclick="showCategory('drugs')"><div class="icon">⚗️</div><strong>Drugs</strong><small>Controlled Substance • Drug Paraphernalia</small></button>
-    </div>
-  </section>
-
-  <section id="category" class="hide"></section>
-  <section id="wizard" class="hide"></section>
+</section>
+<section id="criminal" class="hidden"></section>
+<section id="wizard" class="hidden"></section>
+<section id="special" class="hidden"></section>
+<section id="traffic" class="hidden"></section>
+<section id="library" class="hidden"></section>
 </main>
 <footer>Arkansas Patrol Charge Triage • modular working build</footer>
 </div>
-
+<div id="viewer" class="viewer"><button class="close" onclick="closeViewer()">×</button><img id="viewerImg" alt="Infographic"></div>
 <script>
 const URLS={
  assault204:"https://law.justia.com/codes/arkansas/title-5/subtitle-2/chapter-13/subchapter-2/section-5-13-204/",
@@ -154,706 +130,924 @@ const URLS={
  da1:"https://law.justia.com/codes/arkansas/title-5/subtitle-3/chapter-26/subchapter-3/section-5-26-307/",
  da2:"https://law.justia.com/codes/arkansas/title-5/subtitle-3/chapter-26/subchapter-3/section-5-26-308/",
  da3:"https://law.justia.com/codes/arkansas/title-5/subtitle-3/chapter-26/subchapter-3/section-5-26-309/",
+ pregnancy:"https://law.justia.com/codes/arkansas/title-5/subtitle-3/chapter-26/subchapter-3/section-5-26-312/",
  arrest:"https://law.justia.com/codes/arkansas/title-16/subtitle-6/chapter-81/subchapter-1/section-16-81-106/",
  dvArrest:"https://law.justia.com/codes/arkansas/title-16/subtitle-6/chapter-81/subchapter-1/section-16-81-113/",
  trespass:"https://law.justia.com/codes/arkansas/title-5/subtitle-4/chapter-39/subchapter-2/section-5-39-203/",
  mischief1:"https://law.justia.com/codes/arkansas/title-5/subtitle-4/chapter-38/subchapter-2/section-5-38-203/",
  mischief2:"https://law.justia.com/codes/arkansas/title-5/subtitle-4/chapter-38/subchapter-2/section-5-38-204/",
  theft:"https://law.justia.com/codes/arkansas/title-5/subtitle-4/chapter-36/subchapter-1/section-5-36-103/",
+ act833:"https://arkleg.state.ar.us/Acts/FTPDocument?ddBienniumSession=2025%2F2025R&file=833.pdf&path=%2FACTS%2F2025R%2FPublic%2F",
  disorderly:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-71/subchapter-2/section-5-71-207/",
  pubintox:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-71/subchapter-2/section-5-71-212/",
  loiter:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-71/subchapter-2/section-5-71-213/",
  obstruction:"https://law.justia.com/codes/arkansas/title-5/subtitle-5/chapter-54/subchapter-1/section-5-54-102/",
+ act1000:"https://arkleg.state.ar.us/Acts/FTPDocument?ddBienniumSession=2025%2F2025R&file=1000.pdf&path=%2FACTS%2F2025R%2FPublic%2F",
  possession:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-64/subchapter-4/section-5-64-419/",
  fentanyl:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-64/subchapter-4/section-5-64-421/",
  paraphernalia:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-64/subchapter-4/section-5-64-443/",
  defs:"https://law.justia.com/codes/arkansas/title-5/subtitle-1/chapter-1/section-5-1-102/",
- act833:"https://arkleg.state.ar.us/Acts/FTPDocument?ddBienniumSession=2025%2F2025R&file=833.pdf&path=%2FACTS%2F2025R%2FPublic%2F",
- act1000:"https://arkleg.state.ar.us/Acts/FTPDocument?ddBienniumSession=2025%2F2025R&file=1000.pdf&path=%2FACTS%2F2025R%2FPublic%2F"
+ sentencing:"https://law.justia.com/codes/arkansas/title-5/subtitle-1/chapter-4/subchapter-4/section-5-4-401/",
+ fines:"https://law.justia.com/codes/arkansas/title-5/subtitle-1/chapter-4/subchapter-2/section-5-4-201/",
+ reckless:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-50/subchapter-3/section-27-50-308/",
+ ebikeDef:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-17/section-27-51-1702/",
+ ebikeRules:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-17/section-27-51-1703/",
+ ebikeEquipment:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-17/section-27-51-1704/",
+ ebikePaths:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-17/section-27-51-1705/",
+ ebikeClass3:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-17/section-27-51-1706/",
+ escooterDef:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-19/section-27-51-1902/",
+ escooterOp:"https://law.justia.com/codes/arkansas/title-27/subtitle-4/chapter-51/subchapter-19/section-27-51-1903/",
+ cycleDef:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-1/section-27-20-101/",
+ cycleEquip:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-1/section-27-20-104/",
+ cycleReg:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-1/section-27-20-105/",
+ cycleLicense:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-1/section-27-20-106/",
+ motorizedBicycle:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-1/section-27-20-111/",
+ insurance:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-22/subchapter-1/section-27-22-104/",
+ autocycleDef:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-3/section-27-20-303/",
+ autocycleReg:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-3/section-27-20-304/",
+ autocycleOp:"https://law.justia.com/codes/arkansas/title-27/subtitle-2/chapter-20/subchapter-3/section-27-20-306/"
 };
 
-const cats={
- violence:{title:"Physical Violence",icon:"👊",items:[
-  ["assault","Threat / fear / risk — no required injury","Assault"],
-  ["battery","Actual injury / prohibited physical contact","Battery"]
- ]},
- property:{title:"Property",icon:"🏠",items:[
-  ["trespass","Unauthorized entry or refusal to leave","Criminal Trespass"],
-  ["mischief","Damage or tampering with property","Criminal Mischief"],
-  ["theft","Taking / unauthorized control / deception / threat","Theft of Property"]
- ]},
- public:{title:"Public Order",icon:"🚨",items:[
-  ["disorderly","Public disturbance + listed conduct","Disorderly Conduct"],
-  ["loitering","Lingering / prowling + statutory circumstance","Loitering"],
-  ["obstruction","Interference with governmental function / false ID","Obstructing Governmental Operations"],
-  ["pubintox","Manifest intoxication + danger or unreasonable annoyance","Public Intoxication"]
- ]},
- drugs:{title:"Drugs",icon:"⚗️",items:[
-  ["possession","Possession of controlled substance","Possession of Controlled Substance"],
-  ["paraphernalia","Possession/use of drug paraphernalia","Possession of Drug Paraphernalia"]
- ]}
+const locations=["Residence","Apartment","Restaurant","Bar / Nightclub","Retail / Business","Parking Lot","Public Street / Sidewalk","Vehicle","Hotel / Motel","Park","School","Gas Station","Other"];
+
+const libraryItems=[
+ ["Assault","ref-assault.png"],["Battery","ref-battery.png"],["Criminal Mischief","ref-criminal-mischief.png"],["Theft of Property","ref-theft-of-property.png"],
+ ["Criminal Trespass","ref-criminal-trespass.png"],["Disorderly Conduct","ref-disorderly-conduct.png"],["Loitering","ref-loitering.png"],
+ ["Obstructing Governmental Operations","ref-obstruction.png"],["Public Intoxication","ref-public-intoxication.png"],
+ ["Possession of Controlled Substance","ref-controlled-substance.png"],["Possession of Drug Paraphernalia","ref-drug-paraphernalia.png"]
+];
+
+function hideAll(){["home","criminal","wizard","special","traffic","library"].forEach(id=>document.getElementById(id).classList.add("hidden"))}
+function home(){hideAll();document.getElementById("home").classList.remove("hidden");scrollTo(0,0)}
+function topTitle(title,back="home()"){return `<div class="section-title"><button class="back" onclick="${back}">← Back</button><h2>${title}</h2></div>`}
+
+const criminalCats={
+ violence:{title:"Physical Violence",items:[["assault","Assault","Risk / fear; no actual injury required"],["battery","Battery","Actual injury or listed prohibited physical contact"]]},
+ property:{title:"Property",items:[["trespass","Criminal Trespass","Unauthorized entry/remain"],["mischief","Criminal Mischief","Damage / tampering"],["theft","Theft of Property","Unauthorized control / deception / threat"]]},
+ public:{title:"Public Order",items:[["disorderly","Disorderly Conduct","Public disturbance + listed act"],["loitering","Loitering","Lingering + specific statutory circumstance"],["obstruction","Obstructing Governmental Operations","Affirmative interference / false ID / listed act"],["pubintox","Public Intoxication","Public + manifest intoxication + danger/annoyance"]]},
+ drugs:{title:"Drugs",items:[["possession","Possession of Controlled Substance","Substance + weight + possession nexus"],["paraphernalia","Possession of Drug Paraphernalia","Item + possession + drug-related purpose"]]}
 };
+function openCriminal(){
+ hideAll();const el=document.getElementById("criminal");el.classList.remove("hidden");
+ el.innerHTML=topTitle("Criminal Charge Triage")+`<div class="hero"><h2>Select scenario type</h2><p>Required questions determine the base charge. Optional enhancement and report prompts do not block the base result unless the fact changes classification.</p></div>
+ <div class="grid">${Object.entries(criminalCats).map(([k,c])=>`<button class="cat" onclick="openCriminalCat('${k}')"><strong>${c.title}</strong><small>${c.items.map(x=>x[1]).join(" • ")}</small></button>`).join("")}</div>`;
+}
+function openCriminalCat(k){
+ const c=criminalCats[k],el=document.getElementById("criminal");
+ el.innerHTML=topTitle(c.title,"openCriminal()")+`<div class="grid">${c.items.map(x=>`<button class="subcat" onclick="startModule('${x[0]}')"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join("")}</div>`;
+ scrollTo(0,0);
+}
+
+function qChoice(id,label,opts,required=true,hint="",showIf=null){return {id,label,type:"choice",opts,required,hint,showIf}}
+function qSeg(id,label,opts,required=true,hint="",showIf=null){return {id,label,type:"seg",opts,required,hint,showIf}}
+function qSelect(id,label,opts,required=true,hint="",showIf=null){return {id,label,type:"select",opts,required,hint,showIf}}
+function qNum(id,label,required=true,hint="",showIf=null){return {id,label,type:"number",required,hint,showIf}}
+function qText(id,label,required=false,hint="",showIf=null){return {id,label,type:"text",required,hint,showIf}}
+function qMulti(id,label,opts,required=false,hint="",showIf=null){return {id,label,type:"multi",opts,required,hint,showIf}}
+const relationshipOpts=[
+ ["none","No qualifying DV relationship"],["spouse","Current spouse"],["former","Former spouse"],["parentchild","Parent / child or child residing in household"],["blood","Related by blood within fourth degree"],["cohabit","Current / former cohabitant"],["childcommon","Child in common"],["dating","Current / former dating relationship"]
+];
+const yesNoUnknown=[["no","NO"],["yes","YES"],["unknown","UNKNOWN — check/verify"]];
+const presenceOpts=[["yes","YES — officer observed offense"],["no","NO — not committed in officer's presence"]];
+const evidenceQuestions=[
+ qMulti("photos","Photos captured?",[["injury","Injury"],["damage","Property damage"],["scene","Scene"],["weapon","Weapon / object"],["drugs","Drugs / paraphernalia"],["other","Other relevant evidence"]],false,"Optional evidence-preservation reminder."),
+ qMulti("video","Additional video source checked?",[["neighbor","Neighbor / residential security"],["doorbell","Doorbell camera"],["business","Business surveillance"],["witness","Witness cell-phone video"],["other","Other digital video"],["unchecked","Unknown / not checked"]],false,"Separate from routine body-worn and in-car video."),
+ qText("evidenceOther","Other evidence / preservation note",false)
+];
+const contextQuestions=[
+ qSelect("locationType","Incident location type",locations.map(x=>[x,x]),false,"Optional unless the offense itself requires a specific location."),
+ qText("exactLocation","Exact location / address",false)
+];
 
 const modules={
- assault:{
- title:"Assault",subtitle:"Risk / fear; actual injury is not required.",
- questions:[
-  qSelect("relationship","DV relationship? (family / household member)",[
-   ["none","No qualifying DV relationship"],["spouse","Current spouse"],["former","Former spouse"],["parentchild","Parent / child or minor residing in household"],
-   ["blood","Related by blood within fourth degree"],["cohabit","Current / former cohabitant"],["childcommon","Child in common"],["dating","Current / former dating relationship"]
-  ],"Ark. Code § 5-26-302(2). A casual business/social relationship alone is not a dating relationship."),
-  qSelect("conduct","Which best describes the conduct?",[
-   ["fear","Purposefully caused fear/apprehension of imminent physical injury"],
-   ["riskPhysical","Recklessly created substantial risk of physical injury"],
-   ["riskSerious","Recklessly created substantial risk of death or serious physical injury"],
-   ["purposeBreath","Purposefully restricted breathing/blood circulation; no extreme-indifference facts"],
-   ["aggDanger","Purposefully created substantial danger of death/serious injury under extreme-indifference circumstances"],
-   ["aggFirearm","Purposefully displayed firearm creating substantial danger under extreme-indifference circumstances"],
-   ["aggBreath","Purposefully restricted breathing/circulation under extreme-indifference circumstances"]
-  ]),
-  qSelect("presence","Was the offense committed in the officer's presence?",[["yes","Yes"],["no","No"]]),
-  qSelect("dvwindow","If DV: timing for warrantless-arrest analysis",[
-    ["na","Not DV / not applicable"],["within4","Within preceding 4 hours"],["within12injury","More than 4 but within 12 hours AND physical injury exists"],["outside","Outside these windows"]
-  ],"If physical injury exists, also evaluate Battery.")
- ]},
- battery:{
- title:"Battery",subtitle:"Actual physical injury or a listed battery-specific act.",
- questions:[
-  qSelect("relationship","DV relationship? (family / household member)",[
-   ["none","No qualifying DV relationship"],["spouse","Current spouse"],["former","Former spouse"],["parentchild","Parent / child or minor residing in household"],
-   ["blood","Related by blood within fourth degree"],["cohabit","Current / former cohabitant"],["childcommon","Child in common"],["dating","Current / former dating relationship"]
-  ]),
-  qSelect("injury","Result / injury",[
-   ["physical","Physical injury: impairment, substantial pain, bruising/swelling/visible trauma"],
-   ["serious","Serious physical injury: substantial risk of death or protracted disfigurement/impairment"],
-   ["permanent","Purposefully caused serious permanent disfigurement / amputation / permanent disabling injury"],
-   ["drug","Nonconsensual drug/substance caused stupor, unconsciousness, impairment or injury"],
-   ["fluid","Bodily fluid/pathogen/human waste intentionally transferred to first responder"]
-  ]),
-  qSelect("mental","Mental state",[
-   ["purpose","Purposeful"],["knowing","Knowing"],["reckless","Reckless"],["negligent","Negligent"]
-  ]),
-  qSelect("weapon","Weapon / method",[
-   ["none","None / hands / ordinary force"],["deadly","Deadly weapon other than firearm"],["firearm","Firearm"]
-  ]),
-  qSelect("extreme","Extreme indifference to value of human life?",[["no","No / not established"],["yes","Yes"]]),
+assault:{
+ title:"Assault",subtitle:"Risk / fear. Actual injury is not required.",
+ required:[
+  qSelect("relationship","DV relationship?",relationshipOpts,true,"If qualifying, domestic-assault statutes and domestic-abuse arrest authority may apply."),
+  qChoice("conduct","Which best describes the conduct?",[
+   {v:"fear",k:"PURPOSELY",tone:"purpose",t:"caused fear / apprehension of imminent physical injury"},
+   {v:"riskPhysical",k:"RECKLESSLY",tone:"reckless",t:"created substantial risk of physical injury"},
+   {v:"riskSerious",k:"RECKLESSLY",tone:"reckless",t:"created substantial risk of death or serious physical injury"},
+   {v:"purposeBreath",k:"PURPOSELY",tone:"purpose",t:"restricted breathing / blood circulation; no extreme-indifference facts"},
+   {v:"aggDanger",k:"PURPOSELY + EXTREME INDIFFERENCE",tone:"danger",t:"created substantial danger of death / serious physical injury"},
+   {v:"aggFirearm",k:"PURPOSELY + FIREARM + EXTREME INDIFFERENCE",tone:"danger",t:"displayed firearm creating substantial danger"},
+   {v:"aggBreath",k:"PURPOSELY + BREATHING RESTRICTION + EXTREME INDIFFERENCE",tone:"danger",t:"restricted respiration / circulation under extreme-indifference circumstances"}
+  ],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("dvwindow","If DV: timing for warrantless-arrest analysis",[["na","N/A"],["within4","≤ 4 hr"],["within12injury","≤ 12 hr + injury"]],false,"Outside these windows does not create the domestic-abuse warrantless authority.",v=>v.relationship && v.relationship!=="none"),
+  qMulti("childPresent","Child / special situation",[["child","Child present and aware"],["order","Protective order issue"],["hate","Possible bias/hate-crime factor"]],false)
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+battery:{
+ title:"Battery",subtitle:"Fact-first injury / force analysis. The app resolves injury level, weapon status, degree, and DV enhancements from objective inputs.",
+ required:[
+  qSelect("relationship","DV relationship?",relationshipOpts,true,"A qualifying family/household relationship routes the analysis to domestic-battering statutes."),
+  qChoice("actType","What type of battery conduct occurred?",[
+   {v:"physical",k:"PHYSICAL FORCE / CONTACT",tone:"purpose",t:"force or contact caused injury"},
+   {v:"drug",k:"NONCONSENSUAL DRUG / SUBSTANCE",tone:"knowing",t:"caused stupor, unconsciousness, impairment, or injury"},
+   {v:"fluid",k:"BODILY FLUID / PATHOGEN / HUMAN WASTE",tone:"danger",t:"transferred onto a first responder"}
+  ],true),
+  qChoice("mental","What best describes the suspect's mental state?",[
+   {v:"purpose",k:"PURPOSELY",tone:"purpose",t:"conscious object to cause the injury / result"},
+   {v:"knowing",k:"KNOWINGLY",tone:"knowing",t:"aware the conduct/result was practically certain"},
+   {v:"reckless",k:"RECKLESSLY",tone:"reckless",t:"consciously disregarded a substantial and unjustifiable risk"},
+   {v:"negligent",k:"NEGLIGENTLY",tone:"negligent",t:"should have been aware of a substantial and unjustifiable risk"}
+  ],true,"The app combines this with objective injury/method facts to resolve the subsection."),
+  qSelect("forceMethod","How was force applied?",[
+   ["fist","Closed-fist punch"],["slap","Open-hand slap"],["kick","Kick"],["knee","Knee strike"],["elbow","Elbow strike"],["push","Push / shove"],
+   ["throw","Grabbed / threw victim"],["bite","Bite"],["choke","Choking / neck pressure"],["bat","Bat / club"],["knife","Knife / cutting instrument"],
+   ["household","Household item / object"],["firearm","Firearm"],["vehicle","Vehicle"],["other","Other method / object"]
+  ],true,"Use the factual method rather than selecting a legal weapon label.",v=>v.actType==="physical"),
+  qSelect("bodyArea","Primary body area affected",[
+   ["head","Head / face"],["neck","Neck / throat"],["torso","Chest / abdomen / back"],["armleg","Arm / leg"],["handfoot","Hand / foot"],["multiple","Multiple areas"],["other","Other"]
+  ],true,"Used for injury documentation and object-use analysis.",v=>v.actType==="physical"),
+  qSelect("objectUse","If an object/device was used, how was it used?",[
+   ["na","Not applicable"],["strike","Struck / swung at victim"],["throw","Thrown at victim"],["stab","Stabbed / punctured"],["cut","Cut / slashed"],
+   ["press","Pressed / compressed against victim"],["vehicleImpact","Vehicle deliberately used to strike / pin victim"],["other","Other"]
+  ],true,"Select N/A for hands/feet/body-only force.",v=>v.actType==="physical"),
+  qText("objectDesc","Describe household/other object",true,"Example: glass bottle, frying pan, metal flashlight, wooden chair.",v=>v.actType==="physical"&&["household","other"].includes(v.forceMethod)),
+  qMulti("objectFeatures","Object features observed",[
+   ["sharp","Sharp / pointed edge or point"],["heavy","Heavy / rigid object"],["glassmetal","Glass / metal construction"],["adapted","Modified / adapted for use as a weapon"],["none","None of these / not applicable"],["unknown","Unknown"]
+  ],true,"Objective object features help the app apply the deadly-weapon definition.",v=>v.actType==="physical"&&["bat","knife","household","other"].includes(v.forceMethod)),
+  qMulti("visibleInjuries","Visible injuries / injury evidence",[
+   ["none","No visible injury"],["redness","Redness / visible trauma mark"],["bruise","Bruising"],["swelling","Swelling"],["abrasion","Scratch / abrasion"],
+   ["laceration","Laceration / cut"],["puncture","Puncture / stab wound"],["bleeding","Bleeding"],["bite","Bite mark"],["burn","Burn"],
+   ["neckmark","Neck / throat marks"],["fracture","Suspected / confirmed fracture"],["loc","Loss of consciousness"],["movement","Impaired movement / function"]
+  ],true,"Visible injury is not required if substantial pain or impairment of physical condition is established.",v=>v.actType==="physical"),
+  qSeg("substantialPain","Victim reports SUBSTANTIAL pain?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Physical injury can be established by substantial pain even without a visible mark.",v=>v.actType==="physical"),
+  qSeg("physicalImpairment","Impairment of physical condition?",[["yes","YES — impaired condition/function"],["no","NO"],["unknown","UNKNOWN"]],true,"Examples: cannot normally use/move affected area, impaired walking, breathing, vision, or other physical condition.",v=>v.actType==="physical"),
+  qSeg("riskDeath","Did the injury create a substantial risk of death?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Serious-physical-injury criterion.",v=>v.actType==="physical"),
+  qSeg("protractedDisfigure","Protracted / long-lasting disfigurement?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Serious-physical-injury criterion.",v=>v.actType==="physical"),
+  qSeg("protractedHealth","Protracted / long-lasting impairment of health?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Serious-physical-injury criterion.",v=>v.actType==="physical"),
+  qSeg("protractedFunction","Loss or protracted impairment of bodily member / organ function?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Serious-physical-injury criterion.",v=>v.actType==="physical"),
+  qSeg("permanentDamage","Serious permanent disfigurement OR destroyed/amputated/permanently disabled member or organ?",[["yes","YES"],["no","NO"],["unknown","UNKNOWN"]],true,"Permanent-injury first-degree criterion.",v=>v.actType==="physical"),
+  qMulti("extremeFacts","Grave-danger facts present?",[
+   ["none","None identified"],["vital","Repeated / forceful attack to head, neck, or other vital area"],["helpless","Continued attack after victim was helpless / incapacitated"],
+   ["vehicle","High-danger vehicle impact / similar life-threatening conduct"],["other","Other facts showing extreme disregard for human life"],["unknown","Unknown / need more facts"]
+  ],true,"Used only if an extreme-indifference subsection could change the degree.",v=>v.actType==="physical"),
   qSelect("special","Special victim / circumstance",[
-   ["none","None"],["age60","Victim 60 or older"],["age12","Victim 12 or younger"],["age4","Victim 4 or younger"],
-   ["leo","Law enforcement / correctional employee acting in line of duty"],
-   ["protected","Other § 5-13-202(a)(4) protected victim (firefighter, teacher, healthcare, state employee, incompetent person, etc.)"],
-   ["intoxvehicle","Serious injury while operating / controlling motor vehicle or motorboat while intoxicated"]
-  ]),
-  qSelect("pregnant","If DV: victim known/reasonably should be known pregnant?",[["no","No"],["yes","Yes"]]),
-  qSelect("prior5","If DV: at least one qualifying DV offense within 5 years?",[["no","No"],["yes","Yes"]]),
-  qSelect("prior2ten","If DV: two prior qualifying family/household battery/aggravated-assault convictions within 10 years?",[["no","No"],["yes","Yes"]]),
-  qSelect("presence","Was the offense committed in the officer's presence?",[["yes","Yes"],["no","No"]]),
-  qSelect("danger","If misdemeanor battery was NOT witnessed: evidence of bodily harm + danger of further violence without immediate arrest?",[["no","No / not established"],["yes","Yes"]]),
-  qSelect("dvwindow","If DV: timing for domestic-abuse arrest authority",[
-    ["na","Not DV / not applicable"],["within4","Within preceding 4 hours"],["within12injury","More than 4 but within 12 hours with physical injury"],["outside","Outside these windows"]
-  ])
- ]},
- trespass:{
- title:"Criminal Trespass",subtitle:"Purposeful unlawful entry or remaining.",
- questions:[
-  qSelect("unlawful","Did the person PURPOSELY enter or remain unlawfully?",[["yes","Yes"],["no","No / permission or lawful authority existed"]]),
-  qSelect("location","Location",[
-   ["vehicle","Vehicle of another person"],["premises","Premises owned/leased by another"],["occupiable","Occupiable structure"],["critical","Critical infrastructure"]
-  ]),
-  qSelect("tool","Possessed qualifying entry/harvesting/killing/artifact-location tool or qualifying fishing gear?",[["no","No"],["yes","Yes"]]),
-  qSelect("removed","Removed posted sign, fence, or portion of fence?",[["no","No"],["yes","Yes"]]),
-  qSelect("prior","Relevant prior trespass history",[
-   ["none","None / unknown"],["one","At least one prior conviction under § 5-39-203"],["twoA","Two or more qualifying Class A misdemeanor convictions under § 5-39-203 or § 5-39-305"]
-  ]),
-  qSelect("defense","Does a listed statutory defense clearly apply?",[
-   ["no","No / not apparent"],["yes","Yes — guest/invitee, business/health/safety reason, authorized by law, open to public, or qualifying adjoining-property travel"]
-  ]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- mischief:{
- title:"Criminal Mischief",subtitle:"Mental state + damage amount control the level.",
- questions:[
-  qSelect("conduct","What occurred?",[
-   ["purpose","Purposefully and without legal justification damaged/destroyed property"],
-   ["reckless","Recklessly damaged/destroyed another person's property"],
-   ["tamper","Purposefully tampered with another person's property causing substantial inconvenience"]
-  ]),
-  qNumber("damage","Actual damage / repair estimate ($)","Enter the best supported dollar amount."),
-  qSelect("critical","Critical infrastructure involved?",[["no","No"],["yes","Yes"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- theft:{
- title:"Theft of Property",subtitle:"Unauthorized control/deception/threat + purpose to deprive.",
- questions:[
-  qSelect("method","Method",[
-   ["control","Knowingly took/exercised unauthorized control or unauthorized transfer with purpose to deprive"],
-   ["deception","Obtained property by deception with purpose to deprive"],
-   ["threat","Obtained property by threat with purpose to deprive"]
-  ]),
-  qSelect("property","Property type",[
-   ["ordinary","Ordinary property"],["firearm","Firearm"],["card","Credit/debit card or account number"],
-   ["postal","Postal package from residential curtilage or delivery vehicle"],["special","Other special statutory property — manual review"]
-  ]),
-  qNumber("value","Property value ($)","For a firearm, value determines Class C vs Class D."),
-  qSelect("threatlevel","If obtained by threat, which applies?",[
-   ["na","Not obtained by threat"],["ordinary","Threat — no listed Class B circumstance"],["serious","Threat of serious physical injury or destruction of occupiable structure"],["fiduciary","Threat + confidential/fiduciary relationship"]
-  ]),
-  qSelect("prior10","Prior theft conviction of any classification within 10 years?",[["no","No"],["yes","Yes"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- disorderly:{
- title:"Disorderly Conduct",subtitle:"Public inconvenience/annoyance/alarm + a listed act.",
- questions:[
-  qSelect("mental","Required public-disturbance mental state",[
-   ["purpose","Purpose to cause public inconvenience, annoyance, or alarm"],["reckless","Recklessly created risk of public inconvenience, annoyance, or alarm"],["none","Neither established"]
-  ]),
-  qSelect("act","Qualifying act",[
-   ["fight","§ 5-71-207(a)(1) — Fighting / violent / threatening / tumultuous behavior"],
-   ["noise","§ 5-71-207(a)(2) — Unreasonable or excessive noise"],
-   ["speech","§ 5-71-207(a)(3) — Public abusive/obscene speech or gesture likely to provoke violent/disorderly response"],
-   ["meeting","§ 5-71-207(a)(4) — Disrupted lawful assembly/meeting"],
-   ["traffic","§ 5-71-207(a)(5) — Obstructed vehicular/pedestrian traffic"],
-   ["disperse","§ 5-71-207(a)(6) — With 2+ others in public, refused lawful order to disperse"],
-   ["hazard","§ 5-71-207(a)(7) — Created hazardous or physically offensive condition"],
-   ["symbol","§ 5-71-207(a)(8) — Publicly damaged/desecrated patriotic/religious symbol"],
-   ["expose","§ 5-71-207(a)(9) — Publicly exposed private parts"]
-  ]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- loitering:{
- title:"Loitering",subtitle:"Lingering/remain/prowl + one specific statutory circumstance.",
- questions:[
-  qSelect("variant","Which circumstance?",[
-   ["a1","§ 5-71-213(a)(1) — Prowling/lingering without apparent reason + alarm/concern + refuses ID/credible account"],
-   ["a2","§ 5-71-213(a)(2) — Near school without legitimate reason/relationship/permission"],
-   ["a3a","§ 5-71-213(a)(3)(A) — Lingering in harassing/threatening manner"],
-   ["a3b","§ 5-71-213(a)(3)(B) — Lingering in way likely to cause alarm"],
-   ["a3c","§ 5-71-213(a)(3)(C) — Lingering creating traffic hazard/impediment"],
-   ["a4","§ 5-71-213(a)(4) — Purpose of unlawful gambling"],
-   ["a5","§ 5-71-213(a)(5) — Purpose of prostitution/deviate sexual activity"],
-   ["a6","§ 5-71-213(a)(6) — Purpose of unlawful controlled-substance activity"],
-   ["a7","§ 5-71-213(a)(7) — Purpose of unlawful alcohol activity"],
-   ["a8","§ 5-71-213(a)(8) — Purpose of spying/invading privacy"],
-   ["a9","§ 5-71-213(a)(9) — Around ATM/off-site terminal without legitimate purpose"]
-  ]),
-  qSelect("opportunity","For (a)(1): was subject given opportunity to identify and explain, unless impracticable?",[
-   ["na","Not an (a)(1) case"],["yes","Yes"],["impracticable","No — flight/other circumstance made it impracticable"],["no","No"]
-  ]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- obstruction:{
- title:"Obstructing Governmental Operations",subtitle:"Affirmative interference or a specifically listed act.",
- questions:[
-  qSelect("variant","What occurred?",[
-   ["interfere","§ 5-54-102(a)(1) — Knowingly obstructed, impaired, or hindered governmental function"],
-   ["falseid","§ 5-54-102(a)(4) — Falsely identified self to law/code enforcement"],
-   ["subpoena","§ 5-54-102(a)(5) — Personally served criminal subpoena; knowingly failed to appear"],
-   ["ivd","§ 5-54-102(a)(2) — Title IV-D physical custodian knowingly refused requested information"],
-   ["paternity","§ 5-54-102(a)(3) — Failed court-ordered noninvasive paternity testing"]
-  ]),
-  qSelect("force","Used or threatened physical force while obstructing?",[["no","No"],["yes","Yes"]]),
-  qSelect("repeatfalse","If false ID: second or subsequent offense under (a)(4)?",[["no","No"],["yes","Yes"]]),
-  qSelect("excluded","Is conduct only flight, refusal to submit to arrest, or avoidance with no affirmative interference?",[["no","No"],["yes","Yes"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- pubintox:{
- title:"Public Intoxication",subtitle:"Public + manifest intoxication + danger OR unreasonable annoyance.",
- questions:[
-  qSelect("publicplace","In a public place?",[["yes","Yes"],["no","No"]]),
-  qSelect("manifest","Manifestly under influence of alcohol or controlled substance?",[["yes","Yes"],["no","No / insufficient signs"]]),
-  qSelect("basis","Qualifying circumstance",[
-   ["danger","§ 5-71-212(a)(1) — Likely to endanger self, another person, or property"],
-   ["annoy","§ 5-71-212(a)(2) — Unreasonably annoys a person in the vicinity"],
-   ["none","Neither established"]
-  ]),
-  qSelect("priors","Two or more prior public-intoxication convictions within 5 years?",[["no","No"],["yes","Yes"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- possession:{
- title:"Possession of Controlled Substance",subtitle:"Simple possession module. Amount + schedule/substance determine classification.",
- questions:[
-  qSelect("control","Possession/control established?",[["yes","Yes — actual dominion/control/management or facts supporting constructive possession"],["no","No / insufficient nexus to substance"]]),
-  qSelect("substance","Substance category",[
-   ["mhc","Methamphetamine, heroin, or cocaine — Schedule I/II"],
-   ["fentanyl","Fentanyl"],
-   ["s12other","Schedule I/II other than methamphetamine, fentanyl, heroin, cocaine"],
-   ["s3","Schedule III"],["s45","Schedule IV or V"],["s6","Schedule VI / marijuana"],["unknown","Unknown / schedule not established"]
-  ]),
-  qNumber("amount","Aggregate weight / amount","Enter numeric amount; include adulterant/diluent."),
-  qSelect("unit","Unit",[["g","grams"],["oz","ounces"],["lb","pounds"]]),
-  qSelect("priors4","Four or more prior possession convictions under § 5-64-419 / former § 5-64-401(c)?",[["no","No"],["yes","Yes"]]),
-  qSelect("inmate","Possessed while inmate in listed detention facility?",[["no","No"],["yes","Yes"]]),
-  qSelect("deliver","Evidence suggests purpose to deliver rather than simple possession?",[["no","No"],["yes","Yes / possible PWTD"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]},
- paraphernalia:{
- title:"Possession of Drug Paraphernalia",subtitle:"Purpose for the item + substance + prior Chapter 64 conviction.",
- questions:[
-  qSelect("purpose","Purpose for paraphernalia",[
-   ["use","§ 5-64-443(a) — Inject/ingest/inhale/introduction OR store/contain/conceal/weigh controlled substance"],
-   ["manufacture","§ 5-64-443(b) — Plant/grow/manufacture/compound/process/prepare/test/analyze/pack/repack"]
-  ]),
-  qSelect("substance","Associated controlled substance",[
-   ["high","Methamphetamine, heroin, fentanyl, or cocaine"],["other","Other controlled substance"],["unknown","Unknown"]
-  ]),
-  qSelect("prior","Prior conviction under Chapter 64?",[["no","No"],["yes","Yes"]]),
-  qSelect("purposeproof","Facts establish possession AND purpose to use item for listed drug function?",[["yes","Yes"],["no","No / ordinary item with insufficient drug nexus"]]),
-  qSelect("presence","Committed in officer's presence?",[["yes","Yes"],["no","No"]])
- ]}
+   ["none","None"],["age60","Victim 60+"],["age12","Victim 12 or younger"],["age4","Victim 4 or younger"],
+   ["leo","Law enforcement officer / correctional employee acting in line of duty"],["firecode","Firefighter / code enforcement officer acting in line of duty"],
+   ["teacher","Teacher / school employee acting in course of employment"],["state","State officer / employee performing lawful duty"],
+   ["healthcare","Healthcare / EMS provider performing medical-related duties"],["incompetent","Victim legally incompetent under § 5-25-101"],
+   ["intoxvehicle","Serious injury caused while operating/controlling motor vehicle or motorboat while intoxicated"]
+  ],true,v=>v.actType==="physical"),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qMulti("treatment","Medical / treatment facts",[
+   ["ems","EMS evaluated / treated"],["hospital","Transported / treated at hospital"],["surgery","Surgery required / scheduled"],["admit","Hospital admission"],["none","No treatment known"],["unknown","Unknown"]
+  ],false,"Supports injury documentation but does not substitute for statutory injury criteria.",v=>v.actType==="physical"),
+  qSeg("pregnant","If DV: victim pregnant?",[["no","NO"],["yes","YES"],["unknown","UNKNOWN"]],false,"Pregnancy can elevate domestic battering.",v=>v.relationship && v.relationship!=="none"),
+  qMulti("pregKnowledge","If pregnant: how was suspect knowledge established?",[
+   ["visible","Visibly pregnant"],["told","Victim told suspect"],["ack","Suspect acknowledged pregnancy"],["prenatal","Prenatal/pregnancy circumstances made it apparent"],["other","Other facts showing knew / reasonably should have known"]
+  ],false,"Visible pregnancy supports the 'knew or reasonably should have known' requirement.",v=>v.pregnant==="yes"),
+  qSeg("prior5","CHECK PRIOR HISTORY — at least one qualifying DV offense within 5 years?",[
+   ["no","NO — no 5-year elevation"],["yes","YES — current domestic-battering classification may elevate"],["unknown","UNKNOWN — check history before final charge"]
+  ],false,"If YES, DB3 can become Class D felony, DB2 Class B felony, and ordinary DB1 Class A felony.",v=>v.relationship && v.relationship!=="none"),
+  qSeg("prior2ten","CHECK PRIOR HISTORY — two qualifying family/household battery or aggravated-assault priors within 10 years?",[
+   ["no","NO"],["yes","YES — current DB2/DB3 conduct can become Domestic Battering 1st"],["unknown","UNKNOWN — check history before final charge"]
+  ],false,"Can create an independent path to Domestic Battering 1st under § 5-26-303(a)(5).",v=>v.relationship && v.relationship!=="none"),
+  qSeg("danger","Off-presence misdemeanor battery — exception met?",[
+   ["yes","YES — warrantless arrest may apply"],["no","NO — exception not established"],["unknown","UNKNOWN — confirm before arrest"]
+  ],false,"Requires probable cause + evidence of bodily harm + danger of further violence without immediate arrest. § 16-81-106(b)(2)(B).",v=>v.presence==="no"),
+  qSeg("dvwindow","If DV: incident timing",[["na","N/A"],["within4","≤ 4 hr"],["within12injury","≤ 12 hr + physical injury"]],false,"Domestic-abuse warrantless authority may apply.",v=>v.relationship && v.relationship!=="none")
+ ],
+ report:[
+  ...contextQuestions,
+  qText("victimStatement","Key victim statement / pain description",false),
+  qText("objectNote","Additional method / object detail",false),
+  ...evidenceQuestions
+ ]
+},
+mischief:{
+ title:"Criminal Mischief",subtitle:"Mental state + actual damage amount determine the level.",
+ required:[
+  qChoice("conduct","What occurred?",[
+   {v:"purpose",k:"PURPOSELY",tone:"purpose",t:"damaged / destroyed property without legal justification"},
+   {v:"reckless",k:"RECKLESSLY",tone:"reckless",t:"damaged / destroyed another person's property"},
+   {v:"tamper",k:"PURPOSELY",tone:"purpose",t:"tampered with another person's property causing substantial inconvenience"}
+  ],true),
+  qNum("damage","Actual damage / supported repair estimate ($)",true,"REQUIRED because the dollar threshold determines the charge classification."),
+  qSeg("critical","Critical infrastructure involved?",[["no","NO"],["yes","YES"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qMulti("mischiefFlags","Situation-specific flags",[["nonferrous","Felony involved removal of nonferrous metal"],["mailbox","Residential mailbox / U.S. mail container damaged"],["graffiti","Permanent graffiti"],["timber","Timber cutting/removal case"]],false)
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+theft:{
+ title:"Theft of Property",subtitle:"Method + property type + value + history determine classification.",
+ required:[
+  qChoice("method","Theft method",[
+   {v:"control",k:"KNOWINGLY",tone:"knowing",t:"took / exercised unauthorized control or unauthorized transfer + purpose to deprive"},
+   {v:"deception",k:"KNOWINGLY + DECEPTION",tone:"knowing",t:"obtained property by deception + purpose to deprive"},
+   {v:"threat",k:"KNOWINGLY + THREAT",tone:"danger",t:"obtained property by threat + purpose to deprive"}
+  ],true),
+  qSelect("property","Property type",[["ordinary","Ordinary property"],["firearm","Firearm"],["card","Credit/debit card or account number"],["postal","Postal package from residential curtilage or delivery vehicle"],["special","Other special statutory property — manual review"]],true),
+  qNum("value","Property value ($)",true,"REQUIRED when value can determine classification."),
+  qSelect("threatlevel","If threat: which applies?",[["na","Not obtained by threat"],["ordinary","Ordinary threat"],["serious","Threat of serious physical injury or destruction of occupiable structure"],["fiduciary","Threat + confidential/fiduciary relationship"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("prior10","CHECK PRIOR HISTORY — prior theft offense within 10 years?",[["no","NO — base value rule"],["yes","YES — ≤ $1,000 may become Class D felony"],["unknown","UNKNOWN — check prior history"]],false,"2025 Act 833 renumbered the low-value prior-theft provision to § 5-36-103(b)(3)(I).")
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+trespass:{
+ title:"Criminal Trespass",subtitle:"Purposeful unlawful entry/remain + property/elevation facts.",
+ required:[
+  qSeg("unlawful","Purposefully entered or remained unlawfully?",[["yes","YES"],["no","NO"]],true),
+  qSelect("location","Where?",[["vehicle","Vehicle of another"],["premises","Premises owned/leased by another"],["occupiable","Occupiable structure"],["critical","Critical infrastructure"]],true),
+  qSeg("tool","Possessed qualifying entry / harvesting / killing / artifact-location tool or qualifying fishing gear?",[["no","NO"],["yes","YES"]],true),
+  qSeg("removed","Removed posted sign, fence, or portion of fence?",[["no","NO"],["yes","YES"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("prior","CHECK PRIOR HISTORY — relevant trespass history?",[["none","NONE known"],["one","ONE prior — may elevate to Class A misdemeanor"],["twoA","2+ qualifying Class A trespass convictions — may elevate to Class D felony"],["unknown","UNKNOWN — check prior history"]],false),
+  qSeg("defense","Any listed statutory defense appears to apply?",[["no","NO"],["yes","YES / possible"],["unknown","UNKNOWN"]],false,"Guest/invitee, business/health/safety reason, authorized by law, open to public, adjoining-property travel, etc.")
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+disorderly:{
+ title:"Disorderly Conduct",subtitle:"Public inconvenience / annoyance / alarm + one listed act.",
+ required:[
+  qChoice("mental","Required public-disturbance mental state",[
+   {v:"purpose",k:"PURPOSELY",tone:"purpose",t:"caused public inconvenience, annoyance, or alarm"},
+   {v:"reckless",k:"RECKLESSLY",tone:"reckless",t:"created risk of public inconvenience, annoyance, or alarm"}
+  ],true),
+  qSelect("act","Exact listed conduct",[["fight","(a)(1) Fighting / violent / threatening / tumultuous behavior"],["noise","(a)(2) Unreasonable / excessive noise"],["speech","(a)(3) Public abusive/obscene language or gesture likely to provoke violent/disorderly response"],["meeting","(a)(4) Disrupted lawful assembly/meeting"],["traffic","(a)(5) Obstructed vehicular/pedestrian traffic"],["disperse","(a)(6) With 2+ others in public, refused lawful dispersal order"],["hazard","(a)(7) Created hazardous / physically offensive condition"],["symbol","(a)(8) Publicly damaged/desecrated patriotic/religious symbol"],["expose","(a)(9) Publicly exposed private parts"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+loitering:{
+ title:"Loitering",subtitle:"Lingering / remaining / prowling + one specific statutory circumstance.",
+ required:[
+  qSelect("variant","Exact circumstance",[["a1","(a)(1) No apparent reason + circumstances warrant alarm + refuses ID/credible account"],["a2","(a)(2) Near school without legitimate reason/relationship/permission"],["a3a","(a)(3)(A) Harassing/threatening manner"],["a3b","(a)(3)(B) Likely to cause alarm"],["a3c","(a)(3)(C) Traffic hazard/impediment"],["a4","(a)(4) Purpose of unlawful gambling"],["a5","(a)(5) Prostitution/deviate sexual activity"],["a6","(a)(6) Unlawful controlled-substance activity"],["a7","(a)(7) Unlawful alcohol activity"],["a8","(a)(8) Spying/invading privacy"],["a9","(a)(9) Around ATM/off-site terminal without legitimate purpose"]],true),
+  qSeg("opportunity","For (a)(1): opportunity to identify/explain?",[["na","N/A"],["yes","YES"],["impracticable","NO — impracticable due to flight/other circumstance"],["no","NO"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+obstruction:{
+ title:"Obstructing Governmental Operations",subtitle:"Affirmative interference or specifically listed conduct. 2025 Act 1000 included.",
+ required:[
+  qSelect("variant","What occurred?",[["interfere","§ 5-54-102(a)(1) Knowingly obstructed/impaired/hindered governmental function"],["falseid","§ 5-54-102(a)(4) Falsely identified self to law/code enforcement"],["subpoena","§ 5-54-102(a)(5) Personally served criminal subpoena; knowingly failed to appear"],["ivd","§ 5-54-102(a)(2) Title IV-D custodian knowingly refused requested information"],["paternity","§ 5-54-102(a)(3) Failed court-ordered noninvasive paternity testing"]],true),
+  qSeg("force","Used or threatened physical force while obstructing?",[["no","NO"],["yes","YES"]],true),
+  qSeg("excluded","Only flight / refusal to submit / passive avoidance without affirmative interference?",[["no","NO"],["yes","YES — exclusion may apply"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("repeatfalse","CHECK PRIOR HISTORY — if false ID, second/subsequent offense?",[["no","NO"],["yes","YES — Class A misdemeanor"],["unknown","UNKNOWN — check history"]],false,v=>v.variant==="falseid")
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+pubintox:{
+ title:"Public Intoxication",subtitle:"Public + manifest intoxication + DANGER or UNREASONABLE ANNOYANCE.",
+ required:[
+  qSeg("publicplace","In a public place?",[["yes","YES"],["no","NO"]],true),
+  qSeg("manifest","Manifestly under influence of alcohol or controlled substance?",[["yes","YES"],["no","NO / insufficient signs"]],true),
+  qMulti("intoxSigns","Objective signs / evidence of intoxication",[["odor","Odor of alcohol"],["glassy","Bloodshot / glassy eyes"],["slurred","Slurred speech"],["balance","Unsteady balance / staggering"],["coord","Impaired coordination"],["confused","Confusion / disorientation"],["admit","Admission of drinking / substance use"],["alcohol","Alcohol / open container present"],["observed","Officer observed person drinking / consuming substance"]],true,"Select the objective facts supporting 'manifestly under the influence.'",v=>v.manifest==="yes"),
+  qChoice("basis","Qualifying circumstance",[
+   {v:"danger",k:"DANGER",tone:"danger",t:"likely to endanger self, another person, or property — § 5-71-212(a)(1)"},
+   {v:"annoy",k:"UNREASONABLE ANNOYANCE",tone:"reckless",t:"unreasonably annoys a person in the vicinity — § 5-71-212(a)(2)"}
+  ],true),
+  qMulti("dangerFacts","Danger facts",[["self","Safety risk to self"],["others","Safety risk to others"],["property","Risk to property"],["traffic","Walked / fell into traffic"],["drive","Attempted to drive / operate vehicle"],["falls","Repeated falls / unable to safely ambulate"],["aggressive","Aggressive / unsafe conduct"],["other","Other specific danger"]],true,"Select at least one danger fact.",v=>v.basis==="danger"),
+  qMulti("annoyFacts","Unreasonable-annoyance facts",[["yelling","Repeated yelling at people"],["follow","Following / harassing people"],["leavealone","Refused to leave people alone"],["business","Repeatedly disturbed patrons/employees"],["other","Other specific unreasonable annoyance"]],true,"Select at least one specific annoyance fact.",v=>v.basis==="annoy"),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("priors","CHECK PRIOR HISTORY — 2+ Public Intoxication convictions within 5 years?",[["no","NO — base Class C misdemeanor"],["yes","YES — unclassified misdemeanor"],["unknown","UNKNOWN — check prior history"]],false,"This question changes the classification if YES.")
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+possession:{
+ title:"Possession of Controlled Substance",subtitle:"Possession nexus + substance + aggregate weight determine classification.",
+ required:[
+  qSeg("control","Possession / control established?",[["yes","YES"],["no","NO / insufficient nexus"]],true),
+  qSelect("substance","Substance category",[["mhc","Methamphetamine / heroin / cocaine"],["fentanyl","Fentanyl"],["s12other","Schedule I / II other than meth, fentanyl, heroin, cocaine"],["s3","Schedule III"],["s45","Schedule IV / V"],["s6","Schedule VI / marijuana"],["unknown","Unknown / schedule not established"]],true),
+  qNum("amount","Aggregate weight / amount",true,"Include adulterant/diluent."),
+  qSelect("unit","Unit",[["g","grams"],["oz","ounces"],["lb","pounds"]],true),
+  qSeg("deliver","Evidence suggests purpose to deliver rather than simple possession?",[["no","NO"],["yes","YES — evaluate PWTD instead"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("priors4","CHECK PRIOR HISTORY — 4+ prior possession convictions?",[["no","NO"],["yes","YES — may elevate certain lower schedules"],["unknown","UNKNOWN — check history"]],false,"Relevant to lower-level Schedule III, IV/V, and some Schedule VI possession."),
+  qSeg("inmate","Possessed while inmate in listed detention facility?",[["no","NO"],["yes","YES — next higher classification"]],false)
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+},
+paraphernalia:{
+ title:"Possession of Drug Paraphernalia",subtitle:"Item + possession + purpose + associated substance / history.",
+ required:[
+  qChoice("purpose","Paraphernalia purpose",[
+   {v:"use",k:"USE / INGEST / STORE / CONCEAL / WEIGH",tone:"green",t:"§ 5-64-443(a)"},
+   {v:"manufacture",k:"GROW / MANUFACTURE / PROCESS / PREPARE / TEST / PACK",tone:"danger",t:"§ 5-64-443(b)"}
+  ],true),
+  qSelect("substance","Associated controlled substance",[["high","Methamphetamine / heroin / fentanyl / cocaine"],["other","Other controlled substance"],["unknown","Unknown"]],true),
+  qSeg("purposeproof","Facts establish possession + purpose to use item for listed drug function?",[["yes","YES"],["no","NO / ordinary item only"]],true),
+  qSeg("presence","Committed in officer's presence?",presenceOpts,true)
+ ],
+ enhancement:[
+  qSeg("prior","CHECK PRIOR HISTORY — prior Chapter 64 conviction?",[["no","NO — base classification"],["yes","YES — may enhance § 5-64-443(a) high-risk drug case to Class D felony"],["unknown","UNKNOWN — check prior history"]],false,"Not simply 'second paraphernalia' — associated substance and prior Chapter 64 conviction matter.")
+ ],
+ report:[...contextQuestions,...evidenceQuestions]
+}
 };
 
-function qSelect(id,label,options,hint=""){
- return {id,label,type:"select",options,hint};
-}
-function qNumber(id,label,hint=""){
- return {id,label,type:"number",hint};
-}
-function showCategory(id){
- document.getElementById("home").classList.add("hide");
- document.getElementById("wizard").classList.add("hide");
- const c=cats[id], el=document.getElementById("category");
- el.classList.remove("hide");
- el.innerHTML=`<div class="section-title"><button class="back" onclick="goHome()">← Back</button><h2>${c.icon} ${c.title}</h2></div>
- <div class="hero"><h2>What best describes the scenario?</h2><p>Select the closest fact pattern. You can back out without losing the app.</p></div>
- <div class="grid">${c.items.map(x=>`<button class="subcat" onclick="startModule('${x[0]}')"><strong>${x[2]}</strong><small>${x[1]}</small></button>`).join("")}</div>`;
-}
-function goHome(){
- document.getElementById("category").classList.add("hide");
- document.getElementById("wizard").classList.add("hide");
- document.getElementById("home").classList.remove("hide");
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function startModule(id){
- const m=modules[id], el=document.getElementById("wizard");
- document.getElementById("category").classList.add("hide");
- el.classList.remove("hide");
- el.dataset.module=id;
- el.innerHTML=`<div class="section-title"><button class="back" onclick="returnCategory('${categoryFor(id)}')">← Back</button><h2>Charge Triage</h2></div>
- <div class="form-card">
- <div class="module-title"><h2>${m.title}</h2><p>${m.subtitle}</p></div>
- <form id="triageForm">${m.questions.map(renderQ).join("")}
- <div class="actions"><button type="button" class="primary" onclick="evaluateCurrent()">Generate Charge Triage</button><button type="button" class="secondary" onclick="startModule('${id}')">Reset</button></div>
- </form></div><div id="result"></div>`;
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function categoryFor(id){
- if(["assault","battery"].includes(id)) return "violence";
- if(["trespass","mischief","theft"].includes(id)) return "property";
- if(["disorderly","loitering","obstruction","pubintox"].includes(id)) return "public";
- return "drugs";
-}
-function returnCategory(id){showCategory(id);window.scrollTo({top:0,behavior:"smooth"});}
-function renderQ(q){
- if(q.type==="number") return `<div class="q"><label for="${q.id}">${q.label}</label><input id="${q.id}" name="${q.id}" type="number" min="0" step="any" placeholder="Enter amount">${q.hint?`<span class="hint">${q.hint}</span>`:""}</div>`;
- return `<div class="q"><label for="${q.id}">${q.label}</label><select id="${q.id}" name="${q.id}">${q.options.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join("")}</select>${q.hint?`<span class="hint">${q.hint}</span>`:""}</div>`;
-}
-function vals(){
- const f=document.getElementById("triageForm"),o={};
- new FormData(f).forEach((v,k)=>o[k]=v);
- return o;
-}
-function isFelony(cls){return /felony/i.test(cls);}
-function arrestText(cls,presence,opt={}){
- if(isFelony(cls)) return {kind:"yes",text:"YES — felony probable-cause / reasonable-grounds warrantless arrest authority under § 16-81-106(b)(2)(A)."};
- if(opt.dv){
-   if(opt.dvwindow==="within4" || opt.dvwindow==="within12injury"){
-     return {kind:"yes",text:"YES — domestic-abuse warrantless authority may apply even if not witnessed, within the statutory 4-hour window or 12-hour window for cases involving physical injury. Evaluate predominant aggressor. § 16-81-113(a)."};
-   }
+function visible(q,v){try{return !q.showIf || q.showIf(v)}catch(e){return true}}
+function renderQuestion(q,v){
+ if(!visible(q,v))return "";
+ const req=q.required?` <span class="reqmark">*</span>`:"";
+ const hint=q.hint?`<span class="hint">${q.hint}</span>`:"";
+ if(q.type==="choice"){
+   return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><div class="choice-grid">${q.opts.map(o=>`<button type="button" class="choice ${v[q.id]===o.v?"selected":""}" onclick="setVal('${q.id}','${o.v}')"><span class="radio"></span><span><strong class="kw-${o.tone||"purpose"}">${o.k}</strong><br>${o.t}</span></button>`).join("")}</div>${hint}</div>`;
  }
- if(presence==="yes") return {kind:"yes",text:"YES — misdemeanor/public offense committed in the officer's presence. § 16-81-106(b)(2)(A)."};
- if(opt.battery && opt.danger==="yes") return {kind:"maybe",text:"POSSIBLE — off-presence misdemeanor battery exception: probable cause + evidence of bodily harm + danger of violence unless arrest is made without delay. § 16-81-106(b)(2)(B)."};
- return {kind:"no",text:"GENERALLY NO under the basic statutory rule if this misdemeanor was not committed in the officer's presence. Check any separate statute, court rule, warrant, or department-policy authority."};
+ if(q.type==="seg"){
+   return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><div class="seg">${q.opts.map(o=>`<button type="button" class="${v[q.id]===o[0]?"selected":""}" onclick="setVal('${q.id}','${o[0]}')">${o[1]}</button>`).join("")}</div>${hint}</div>`;
+ }
+ if(q.type==="multi"){
+   const arr=v[q.id]||[];
+   return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><div class="check-grid">${q.opts.map(o=>`<label class="check"><input type="checkbox" ${arr.includes(o[0])?"checked":""} onchange="toggleMulti('${q.id}','${o[0]}',this.checked)"><span>${o[1]}</span></label>`).join("")}</div>${hint}</div>`;
+ }
+ if(q.type==="select"){
+   return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><select onchange="setVal('${q.id}',this.value)"><option value="">— Select —</option>${q.opts.map(o=>`<option value="${o[0]}" ${v[q.id]===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select>${hint}</div>`;
+ }
+ if(q.type==="number"){
+   return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><input type="number" min="0" step="any" value="${v[q.id]??""}" onchange="setVal('${q.id}',this.value)">${hint}</div>`;
+ }
+ return `<div class="q" data-q="${q.id}"><label>${q.label}${req}</label><input type="text" value="${escAttr(v[q.id]??"")}" onchange="setVal('${q.id}',this.value)">${hint}</div>`;
 }
-function source(label,url){return {label,url};}
-function resultBase(charge,statute,cls){
- return {charge,statute,classification:cls,elements:[],confirm:[],enhancements:[],reportFacts:[],verbiage:"",sources:[]};
+let currentModule=null,currentVals={};
+function startModule(id){
+ currentModule=id;currentVals={};hideAll();document.getElementById("wizard").classList.remove("hidden");renderModule();
 }
-function insufficient(title,why,sources=[]){
- return {charge:"INSUFFICIENT FACTS / MANUAL REVIEW",statute:title,classification:"No charge automatically selected",arrest:{kind:"no",text:"Do not use the triage result as arrest authority until the missing statutory element is established."},elements:[why],confirm:["Re-check the facts and select the closest statutory variant."],enhancements:[],reportFacts:[],verbiage:"Document the specific observed facts rather than a legal conclusion.",sources};
+function setVal(id,val){currentVals[id]=val;renderModule(false)}
+function toggleMulti(id,val,on){let a=currentVals[id]||[];currentVals[id]=on?[...new Set([...a,val])]:a.filter(x=>x!==val);renderModule(false)}
+function renderModule(toTop=true){
+ const m=modules[currentModule],el=document.getElementById("wizard");
+ const required=m.required.map(q=>renderQuestion(q,currentVals)).join("");
+ const enh=m.enhancement.filter(q=>visible(q,currentVals)).map(q=>renderQuestion(q,currentVals)).join("");
+ const rep=m.report.map(q=>renderQuestion(q,currentVals)).join("");
+ const historyNeeded=m.enhancement.some(q=>/prior|history/i.test(q.id+q.label));
+ el.innerHTML=topTitle("Charge Triage",`openCriminalCat('${categoryFor(currentModule)}')`)+`<div class="card"><div class="module-title"><h2>${m.title}</h2><p>${m.subtitle}</p></div>
+ <div class="tier-title required">Base charge / classification facts</div>${required}
+ ${historyNeeded?`<div class="callout history"><strong>CHECK PRIOR HISTORY</strong> — this offense family contains a prior-conviction enhancement. You can still generate the base charge if history is unknown; the result will flag it for verification.</div>`:""}
+ ${enh?`<details class="optional" open><summary>Enhancement / arrest checks</summary><div class="inside">${enh}</div></details>`:""}
+ <details class="optional"><summary>Optional incident / evidence details</summary><div class="inside">${rep}</div></details>
+ <div id="formError"></div><div class="actions"><button class="primary" onclick="evaluateCurrent()">Generate Charge Triage</button><button class="secondary" onclick="resetModule()">Reset</button></div></div><div id="result"></div>`;
+ if(toTop)scrollTo(0,0);
+}
+function resetModule(){currentVals={};renderModule()}
+function categoryFor(id){if(["assault","battery"].includes(id))return"violence";if(["trespass","mischief","theft"].includes(id))return"property";if(["disorderly","loitering","obstruction","pubintox"].includes(id))return"public";return"drugs"}
+function missingRequired(){
+ const m=modules[currentModule],missing=[];
+ for(const q of m.required){
+  if(!visible(q,currentVals))continue;
+  let val=currentVals[q.id];
+  if(q.type==="multi"){if(!Array.isArray(val)||val.length===0)missing.push(q.label)}
+  else if(val===undefined||val===null||val==="")missing.push(q.label)
+ }
+ return missing;
 }
 function evaluateCurrent(){
- const id=document.getElementById("wizard").dataset.module,v=vals();
- let r;
- try{r=evaluators[id](v);}catch(e){console.error(e);r=insufficient("System check","Unable to resolve this combination. Use the linked statute for manual review.");}
+ const missing=missingRequired();const err=document.getElementById("formError");
+ if(missing.length){err.innerHTML=`<div class="error">Required before final triage: ${missing.join("; ")}</div>`;return}
+ err.innerHTML="";
+ let r=evaluators[currentModule](currentVals);
  renderResult(r);
 }
-const evaluators={};
+function isFelony(c){return /felony/i.test(c)}
+function penaltyFor(cls,special=null){
+ if(special)return special;
+ const c=cls.toLowerCase();
+ if(c.includes("class a misdemeanor"))return "Statutory maximum: up to 1 year jail + up to $2,500 fine.";
+ if(c.includes("class b misdemeanor"))return "Statutory maximum: up to 90 days jail + up to $1,000 fine.";
+ if(c.includes("class c misdemeanor"))return "Statutory maximum: up to 30 days jail + up to $500 fine.";
+ if(c.includes("class d felony"))return "Statutory maximum: up to 6 years imprisonment + up to $10,000 fine.";
+ if(c.includes("class c felony"))return "Statutory maximum: 3–10 years imprisonment + up to $10,000 fine.";
+ if(c.includes("class b felony"))return "Statutory maximum: 5–20 years imprisonment + up to $15,000 fine.";
+ if(c.includes("class a felony"))return "Statutory maximum: 6–30 years imprisonment + up to $15,000 fine.";
+ if(c.includes("class y felony"))return "Statutory maximum imprisonment: 10–40 years or life. General § 5-4-201 does not list a standard Class Y fine; check the offense-specific statute.";
+ return "Check the offense-specific sentencing provision.";
+}
+function arrestText(cls,presence,opt={}){
+ if(isFelony(cls))return{kind:"yes",text:"YES — reasonable grounds to believe the person committed a felony. § 16-81-106(b)(2)(A)."};
+ if(opt.dv && ["within4","within12injury"].includes(opt.dvwindow))return{kind:"yes",text:"YES / may apply — domestic-abuse warrantless authority can apply even if not witnessed within the statutory time window. Evaluate predominant aggressor. § 16-81-113(a)."};
+ if(presence==="yes")return{kind:"yes",text:"YES — public offense committed in the officer's presence. § 16-81-106(b)(2)(A)."};
+ if(opt.battery && opt.danger==="yes")return{kind:"maybe",text:"POSSIBLE — off-presence misdemeanor battery exception if probable cause + evidence of bodily harm + danger of violence without immediate arrest. § 16-81-106(b)(2)(B)."};
+ return{kind:"no",text:"GENERALLY NO under the basic statute for an off-presence misdemeanor. Check separate statute, court rule, warrant, and department policy."};
+}
+function baseResult(charge,statute,cls){return{charge,statute,classification:cls,elements:[],confirm:[],enhancements:[],reportFacts:[],verbiage:"",sources:[],arrest:null,penalty:null,why:"",chargeImpact:[]}}
+function source(label,url){return{label,url}}
+function unknownHistoryFlag(v,label){return v==="unknown"?`${label} — verify criminal history before finalizing enhancement.`:null}
+function evidenceFacts(v){
+ const out=[];
+ if(v.locationType)out.push(`Incident location type: ${v.locationType}${v.exactLocation?` — ${v.exactLocation}`:""}`);
+ if(v.photos?.length)out.push(`Photos captured: ${v.photos.join(", ")}`);
+ if(v.video?.length)out.push(`Additional video check: ${v.video.join(", ")}`);
+ if(v.video?.includes("unchecked"))out.push("Potential video source not yet checked — ask/preserve before clearing.");
+ if(v.evidenceOther)out.push(`Other evidence: ${v.evidenceOther}`);
+ return out;
+}
+function insufficient(statute,why,sources=[]){return{charge:"INSUFFICIENT / UNRESOLVED FACTS",statute,classification:"No final charge selected",elements:[why],confirm:[why],enhancements:[],reportFacts:[],verbiage:"Document the specific unresolved fact(s).",sources,arrest:{kind:"no",text:"Do not use an unresolved triage result as arrest authority."},penalty:"No penalty shown until a charge/classification is resolved.",why:"The app could not resolve a single charge because a specific classification fact remains unknown or a required statutory element is not established.",chargeImpact:[]}}
 
+
+function hasYes(v,keys){return keys.some(k=>v[k]==="yes")}
+function hasUnknown(v,keys){return keys.some(k=>v[k]==="unknown")}
+function batteryFacts(v){
+ const out={physical:false,physicalUnknown:false,serious:false,seriousUnknown:false,permanent:false,permanentUnknown:false,deadly:"no",deadlyReason:"",methodLabel:"",injuryProof:[],seriousProof:[]};
+ if(v.actType==="drug"){out.physical=true;out.injuryProof.push("nonconsensual drug/substance act caused impairment/injury");return out}
+ if(v.actType==="fluid"){return out}
+ const vis=(v.visibleInjuries||[]).filter(x=>x!=="none");
+ if(vis.length){out.physical=true;out.injuryProof.push(`visible trauma/injury evidence: ${vis.join(", ")}`)}
+ if(v.substantialPain==="yes"){out.physical=true;out.injuryProof.push("victim reported substantial pain")}
+ if(v.physicalImpairment==="yes"){out.physical=true;out.injuryProof.push("impairment of physical condition")}
+ if(!out.physical&&(v.substantialPain==="unknown"||v.physicalImpairment==="unknown"))out.physicalUnknown=true;
+ const seriousKeys=["riskDeath","protractedDisfigure","protractedHealth","protractedFunction"];
+ if(hasYes(v,seriousKeys)){
+  out.serious=true;
+  if(v.riskDeath==="yes")out.seriousProof.push("substantial risk of death");
+  if(v.protractedDisfigure==="yes")out.seriousProof.push("protracted disfigurement");
+  if(v.protractedHealth==="yes")out.seriousProof.push("protracted impairment of health");
+  if(v.protractedFunction==="yes")out.seriousProof.push("loss/protracted impairment of bodily member or organ function");
+ }
+ if(!out.serious&&hasUnknown(v,seriousKeys))out.seriousUnknown=true;
+ out.permanent=v.permanentDamage==="yes";out.permanentUnknown=v.permanentDamage==="unknown";
+ const labels={fist:"closed-fist punch",slap:"open-hand slap",kick:"kick",knee:"knee strike",elbow:"elbow strike",push:"push/shove",throw:"grab/throw",bite:"bite",choke:"choking/neck pressure",bat:"bat/club",knife:"knife/cutting instrument",household:"household item/object",firearm:"firearm",vehicle:"vehicle",other:"other method/object"};
+ out.methodLabel=labels[v.forceMethod]||v.forceMethod||"method";
+ if(v.forceMethod==="firearm"){out.deadly="firearm";out.deadlyReason="Firearm is a deadly weapon by statutory definition."}
+ else if(["fist","slap","kick","knee","elbow","push","throw","bite","choke"].includes(v.forceMethod)){out.deadly="no";out.deadlyReason="No separate object/device was used as a deadly weapon."}
+ else if(v.forceMethod==="knife"){
+   if(["stab","cut"].includes(v.objectUse)||(v.visibleInjuries||[]).some(x=>["puncture","laceration"].includes(x))){out.deadly="deadly";out.deadlyReason="Knife/cutting instrument was used to stab/cut or caused puncture/laceration, supporting capability of causing death or serious physical injury in the manner used."}
+   else out.deadly="unresolved";
+ }else if(v.forceMethod==="bat"){
+   if(["strike","throw"].includes(v.objectUse)&&(["head","neck","torso","multiple"].includes(v.bodyArea)||out.serious)){out.deadly="deadly";out.deadlyReason="Bat/club was used as an impact weapon against a vital/multiple area or produced serious injury, supporting deadly-weapon capability in the manner used."}
+   else out.deadly="unresolved";
+ }else if(v.forceMethod==="vehicle"){
+   if(v.objectUse==="vehicleImpact"&&(out.serious||(v.extremeFacts||[]).some(x=>["vehicle","vital","helpless","other"].includes(x)))){out.deadly="deadly";out.deadlyReason="Vehicle was deliberately used to strike/pin the victim under grave-danger/serious-injury facts, supporting deadly-weapon capability in the manner used."}
+   else out.deadly="unresolved";
+ }else if(["household","other"].includes(v.forceMethod)){
+   const feats=v.objectFeatures||[];
+   if(out.serious){out.deadly="deadly";out.deadlyReason="The object actually caused serious physical injury, demonstrating capability of serious physical injury in the manner used."}
+   else if((feats.includes("sharp")&&["stab","cut"].includes(v.objectUse))||feats.includes("adapted")||(feats.includes("heavy")&&["strike","throw"].includes(v.objectUse)&&["head","neck","torso","multiple"].includes(v.bodyArea))){
+     out.deadly="deadly";out.deadlyReason="Entered object features + manner of use support capability of causing death or serious physical injury.";
+   }else out.deadly="unresolved";
+ }
+ return out;
+}
+function batteryInjuryExplanation(f){
+ if(f.serious)return `SERIOUS PHYSICAL INJURY resolved because the entered facts include ${f.seriousProof.join(", ")}.`;
+ if(f.physical)return `PHYSICAL INJURY resolved because the entered facts include ${f.injuryProof.join(", ")}.`;
+ return "Physical injury is not established by the entered facts.";
+}
+function defaultWhy(r){
+ if(r.why)return r.why;
+ const e=(r.elements||[]).slice(0,5).join("; ");
+ return `The recommended charge matches ${r.statute} because the entered facts establish ${e||"the listed statutory elements"}. The classification shown is the level triggered by those entered facts.`;
+}
+
+const evaluators={};
 evaluators.assault=v=>{
- const dv=v.relationship!=="none"; let r;
- const general={
-  fear:["Assault — Third Degree","§ 5-13-207(a)","Class C misdemeanor",URLS.assault207],
-  riskPhysical:["Assault — Second Degree","§ 5-13-206(a)","Class B misdemeanor",URLS.assault206],
-  riskSerious:["Assault — First Degree","§ 5-13-205(a)(1)","Class A misdemeanor",URLS.assault205],
-  purposeBreath:["Assault — First Degree","§ 5-13-205(a)(2)","Class A misdemeanor",URLS.assault205],
-  aggDanger:["Aggravated Assault","§ 5-13-204(a)(1)","Class D felony",URLS.assault204],
-  aggFirearm:["Aggravated Assault","§ 5-13-204(a)(2)","Class D felony",URLS.assault204],
-  aggBreath:["Aggravated Assault","§ 5-13-204(a)(3)","Class D felony",URLS.assault204]
+ const dv=v.relationship!=="none";let row;
+ const gen={
+  fear:["Assault — Third Degree","§ 5-13-207(a), (b)","Class C misdemeanor",URLS.assault207],
+  riskPhysical:["Assault — Second Degree","§ 5-13-206(a), (b)","Class B misdemeanor",URLS.assault206],
+  riskSerious:["Assault — First Degree","§ 5-13-205(a)(1), (b)","Class A misdemeanor",URLS.assault205],
+  purposeBreath:["Assault — First Degree","§ 5-13-205(a)(2), (b)","Class A misdemeanor",URLS.assault205],
+  aggDanger:["Aggravated Assault","§ 5-13-204(a)(1), (b)","Class D felony",URLS.assault204],
+  aggFirearm:["Aggravated Assault","§ 5-13-204(a)(2), (b)","Class D felony",URLS.assault204],
+  aggBreath:["Aggravated Assault","§ 5-13-204(a)(3), (b)","Class D felony",URLS.assault204]
  };
- const domestic={
-  fear:["Third Degree Assault on Family/Household Member","§ 5-26-309(a)","Class C misdemeanor",URLS.da3],
-  riskPhysical:["Second Degree Assault on Family/Household Member","§ 5-26-308(a)","Class B misdemeanor",URLS.da2],
-  riskSerious:["First Degree Assault on Family/Household Member","§ 5-26-307(a)","Class A misdemeanor",URLS.da1],
-  aggDanger:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(1)","Class D felony",URLS.daAgg],
-  aggFirearm:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(2)","Class D felony",URLS.daAgg],
-  aggBreath:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(3)","Class D felony",URLS.daAgg]
+ const dom={
+  fear:["Third Degree Assault on Family/Household Member","§ 5-26-309(a), (b)","Class C misdemeanor",URLS.da3],
+  riskPhysical:["Second Degree Assault on Family/Household Member","§ 5-26-308(a), (b)","Class B misdemeanor",URLS.da2],
+  riskSerious:["First Degree Assault on Family/Household Member","§ 5-26-307(a), (b)","Class A misdemeanor",URLS.da1],
+  aggDanger:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(1), (b)","Class D felony",URLS.daAgg],
+  aggFirearm:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(2), (b)","Class D felony",URLS.daAgg],
+  aggBreath:["Aggravated Assault on Family/Household Member","§ 5-26-306(a)(3), (b)","Class D felony",URLS.daAgg]
  };
- let row;
- if(dv && domestic[v.conduct]) row=domestic[v.conduct];
- else row=general[v.conduct];
- r=resultBase(...row.slice(0,3));
- r.sources=[source("Primary statute",row[3]),source("Arrest authority",URLS.arrest)];
- if(dv){r.sources.push(source("DV definition",URLS.dvDef),source("DV arrest authority",URLS.dvArrest));}
- const e={
-  fear:["Purposefully created apprehension","Apprehension was of imminent physical injury","Victim actually apprehended/felt the imminent threat"],
-  riskPhysical:["Reckless conduct","Substantial risk of physical injury","Risk was to another person"],
-  riskSerious:["Reckless conduct","Substantial risk of death or serious physical injury","Risk was to another person"],
-  purposeBreath:["Purposefully impeded/prevented respiration or blood circulation","Pressure to throat/neck or blocking nose/mouth","No consent defense apparent"],
-  aggDanger:["Purposeful conduct","Circumstances manifest extreme indifference to human life","Substantial danger of death or serious physical injury"],
+ row=(dv && dom[v.conduct])?dom[v.conduct]:gen[v.conduct];
+ let r=baseResult(row[0],row[1],row[2]);r.sources=[source("Primary statute",row[3]),source("Arrest authority",URLS.arrest)];
+ if(dv)r.sources.push(source("DV definition",URLS.dvDef),source("DV arrest authority",URLS.dvArrest));
+ const els={
+  fear:["Purposefully created apprehension","Apprehension was of imminent physical injury","Victim actually perceived the imminent threat"],
+  riskPhysical:["Reckless conduct","Substantial risk of physical injury to another person"],
+  riskSerious:["Reckless conduct","Substantial risk of death or serious physical injury to another person"],
+  purposeBreath:["Purposefully impeded/prevented respiration or blood circulation","Pressure to throat/neck or blocking nose/mouth"],
+  aggDanger:["Purposeful conduct","Extreme-indifference circumstances","Substantial danger of death or serious physical injury"],
   aggFirearm:["Purposefully displayed firearm","Extreme-indifference circumstances","Display created substantial danger of death or serious physical injury"],
   aggBreath:["Purposefully impeded respiration/blood circulation","Pressure to chest/throat/neck or blocked nose/mouth","Extreme-indifference circumstances"]
- };
- r.elements=e[v.conduct];
- r.reportFacts=["Exact act and exact words used","Mental state facts: purposeful vs reckless","Distance, ability, weapon/object and opportunity","Specific risk created or victim's apprehension","Witness statements, video/photos, admissions"];
- if(["purposeBreath","aggBreath"].includes(v.conduct)) r.reportFacts.push("Where pressure/blocking occurred, duration, breathing/circulation effect, visible signs and victim statements");
- if(v.conduct==="fear") r.reportFacts.push("Why victim believed physical injury was imminent");
- if(dv){
-   r.enhancements.push("DV relationship: document the exact § 5-26-302 family/household relationship.");
-   r.enhancements.push("If accounts conflict, document predominant-aggressor factors under § 16-81-113(a)(2).");
-   if(v.conduct==="purposeBreath") r.enhancements.push("DV relationship present, but § 5-26-307 does not contain the general § 5-13-205(a)(2) breathing variant. Evaluate § 5-26-306(a)(3) only if extreme-indifference facts are present.");
- }
- r.confirm=["Actual physical injury? If yes, also evaluate Battery.","Self-defense/defense-of-third-party facts where applicable"];
+ };r.elements=els[v.conduct];
+ r.reportFacts=["Exact act and exact words used","Facts supporting purposeful vs reckless conduct","Distance, ability/opportunity, weapon/object if any","Specific risk created or victim's apprehension",...evidenceFacts(v)];
+ if(v.conduct==="fear")r.reportFacts.push("Why victim believed injury was imminent.");
+ if(["purposeBreath","aggBreath"].includes(v.conduct))r.reportFacts.push("Pressure/blocking location, duration, breathing/circulation effect, visible signs, victim statements.");
+ if(dv){r.enhancements.push("Document exact family/household relationship and predominant-aggressor factors when accounts conflict.");if(v.childPresent?.includes("child"))r.enhancements.push("Child present/aware — evaluate any applicable child-presence enhancement based on final offense classification.");}
+ r.confirm=["Actual physical injury? If yes, also evaluate Battery.","Self-defense / defense-of-third-party facts."];
  r.arrest=arrestText(r.classification,v.presence,{dv,dvwindow:v.dvwindow});
- const phrase={
-  fear:"The suspect purposely [specific act/threat], causing the victim to apprehend imminent physical injury.",
-  riskPhysical:"The suspect recklessly [specific conduct], creating a substantial risk of physical injury to the victim.",
-  riskSerious:"The suspect recklessly [specific conduct], creating a substantial risk of death or serious physical injury to the victim.",
-  purposeBreath:"The suspect purposely applied pressure to the victim's throat/neck or blocked the nose/mouth, impeding respiration or blood circulation.",
-  aggDanger:"Under circumstances manifesting extreme indifference to human life, the suspect purposely [specific conduct], creating a substantial danger of death or serious physical injury.",
-  aggFirearm:"Under circumstances manifesting extreme indifference to human life, the suspect purposely displayed a firearm in a manner creating a substantial danger of death or serious physical injury.",
-  aggBreath:"Under circumstances manifesting extreme indifference to human life, the suspect purposely applied pressure to the chest/throat/neck or blocked the nose/mouth, impeding respiration or blood circulation."
- };
- r.verbiage=phrase[v.conduct];
- return r;
+ r.verbiage=v.conduct==="fear"?"The suspect purposely [specific act/threat], causing the victim to apprehend imminent physical injury.":v.conduct==="riskPhysical"?"The suspect recklessly [specific conduct], creating a substantial risk of physical injury to the victim.":v.conduct==="riskSerious"?"The suspect recklessly [specific conduct], creating a substantial risk of death or serious physical injury to the victim.":v.conduct==="purposeBreath"?"The suspect purposely applied pressure to the victim's throat/neck or blocked the nose/mouth, impeding respiration or blood circulation.":"Under circumstances manifesting extreme indifference to human life, the suspect purposely [specific conduct], creating the statutory danger.";
+ r.penalty=penaltyFor(r.classification);return r;
 };
-
 evaluators.battery=v=>{
- const dv=v.relationship!=="none", inj=v.injury, m=v.mental,w=v.weapon,s=v.special,ext=v.extreme==="yes";
- let charge="",statute="",cls="",url="",degree="";
+ const dv=v.relationship!=="none",m=v.mental,special=v.special,ext=(v.extremeFacts||[]).some(x=>!["none","unknown"].includes(x)),f=batteryFacts(v);
+ let charge,stat,cls,url,degree="",baseCharge="",baseClass="",baseStat="",appliedImpact=[];
+ if(v.actType==="physical"){
+   if(!f.physical&&!f.serious&&!f.permanent){
+     if(f.physicalUnknown||f.seriousUnknown||f.permanentUnknown)return insufficient("Battery injury threshold unresolved","The injury questions leave physical injury or serious physical injury unresolved. Obtain the missing victim/medical facts before selecting a degree.",[source("Definitions — § 5-1-102",URLS.defs)]);
+     return insufficient("Physical-injury element not established","No impairment of physical condition, substantial pain, bruising/swelling/visible trauma mark, or serious-injury criterion was established.",[source("Definitions — § 5-1-102",URLS.defs)]);
+   }
+   if(f.deadly==="unresolved"&&["purpose","negligent","reckless"].includes(m)&&["bat","knife","household","vehicle","other"].includes(v.forceMethod)){
+     return insufficient("Deadly-weapon classification affects the degree",`The object facts do not yet resolve whether the ${f.methodLabel} was capable of causing death or serious physical injury in the manner used. Add/confirm object features, manner of use, body area struck, and injury facts.`,[source("Deadly-weapon definition — § 5-1-102(4)",URLS.defs)]);
+   }
+ }
+ if(v.actType==="drug"&&m!=="purpose")return insufficient("Battery drug/substance variant","The nonconsensual drug/substance battery variant requires purposeful conduct.",[source("Battery 3rd — § 5-13-203(a)(4)",URLS.battery203)]);
+ if(v.actType==="fluid"&&m!=="knowing")return insufficient("Battery bodily-fluid variant","The first-responder bodily-fluid/pathogen/human-waste variant requires knowing conduct.",[source("Battery 3rd — § 5-13-203(a)(5)",URLS.battery203)]);
+ const inj=f.permanent?"permanent":f.serious?"serious":f.physical?"physical":v.actType==="drug"?"drug":"fluid";
+ const weapon=f.deadly==="firearm"?"firearm":f.deadly==="deadly"?"deadly":"none";
  if(dv){
-   if(inj==="permanent" && m==="purpose"){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(2)";cls="Class Y felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="serious" && m==="knowing" && s==="age4" && ext){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(7)";cls="Class Y felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="serious" && m==="purpose" && (w==="deadly"||w==="firearm")){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(1)";cls="Class B felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="serious" && ext){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(3)";cls="Class B felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="serious" && m==="knowing" && (s==="age60"||s==="age12")){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(4)";cls="Class B felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="physical" && m==="purpose" && w==="firearm"){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(6)";cls="Class B felony";url=URLS.db1;degree="DB1";}
-   else if(v.prior2ten==="yes" && (inj==="physical"||inj==="serious")){charge="Domestic Battering — First Degree";statute="§ 5-26-303(a)(5)";cls="Class B felony";url=URLS.db1;degree="DB1";}
-   else if(inj==="serious" && m==="purpose"){charge="Domestic Battering — Second Degree";statute="§ 5-26-304(a)(1)";cls="Class C felony";url=URLS.db2;degree="DB2";}
-   else if(inj==="physical" && m==="purpose" && w==="deadly"){charge="Domestic Battering — Second Degree";statute="§ 5-26-304(a)(2)";cls="Class C felony";url=URLS.db2;degree="DB2";}
-   else if(inj==="serious" && m==="reckless" && w==="deadly"){charge="Domestic Battering — Second Degree";statute="§ 5-26-304(a)(3)(A)";cls="Class C felony";url=URLS.db2;degree="DB2";}
-   else if(inj==="serious" && m==="reckless" && s==="age4"){charge="Domestic Battering — Second Degree";statute="§ 5-26-304(a)(3)(B)";cls="Class C felony";url=URLS.db2;degree="DB2";}
-   else if(inj==="physical" && m==="knowing" && (s==="age60"||s==="age12")){charge="Domestic Battering — Second Degree";statute="§ 5-26-304(a)(4)";cls="Class C felony";url=URLS.db2;degree="DB2";}
-   else if(inj==="physical" && m==="purpose"){charge="Domestic Battering — Third Degree";statute="§ 5-26-305(a)(1)";cls="Class A misdemeanor";url=URLS.db3;degree="DB3";}
-   else if(inj==="physical" && m==="reckless"){charge="Domestic Battering — Third Degree";statute="§ 5-26-305(a)(2)";cls="Class A misdemeanor";url=URLS.db3;degree="DB3";}
-   else if(inj==="physical" && m==="negligent" && (w==="deadly"||w==="firearm")){charge="Domestic Battering — Third Degree";statute="§ 5-26-305(a)(3)";cls="Class A misdemeanor";url=URLS.db3;degree="DB3";}
-   else if(inj==="drug" && m==="purpose"){charge="Domestic Battering — Third Degree";statute="§ 5-26-305(a)(4)";cls="Class A misdemeanor";url=URLS.db3;degree="DB3";}
-   else return insufficient("Battery / domestic battery","Selected facts do not cleanly match a listed domestic-battery variant. Re-check injury level, mental state, weapon, and protected-victim facts.",[source("Domestic battery subchapter",URLS.db1),source("Definitions",URLS.defs)]);
-   if(degree==="DB1" && !/Class Y/.test(cls) && (v.pregnant==="yes"||v.prior5==="yes")) cls="Class A felony";
-   if(degree==="DB2" && (v.pregnant==="yes"||v.prior5==="yes")) cls="Class B felony";
-   if(degree==="DB3" && (v.pregnant==="yes"||v.prior5==="yes")) cls="Class D felony";
+   if(v.actType==="fluid")return insufficient("Domestic battering statutes","The domestic-battering statutes do not contain the § 5-13-203(a)(5) first-responder bodily-fluid variant; evaluate general Battery.",[source("Battery 3rd",URLS.battery203),source("Domestic battering",URLS.db3)]);
+   if(inj==="permanent"&&m==="purpose"){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(2), (b)(2)(A)";baseClass="Class Y felony";url=URLS.db1;degree="DB1Y";}
+   else if(inj==="serious"&&m==="knowing"&&special==="age4"&&ext){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(7), (b)(2)(A)";baseClass="Class Y felony";url=URLS.db1;degree="DB1Y";}
+   else if(inj==="serious"&&m==="purpose"&&(weapon==="deadly"||weapon==="firearm")){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(1), (b)(1)";baseClass="Class B felony";url=URLS.db1;degree="DB1";}
+   else if(inj==="serious"&&ext){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(3), (b)(1)";baseClass="Class B felony";url=URLS.db1;degree="DB1";}
+   else if(inj==="serious"&&m==="knowing"&&(special==="age60"||special==="age12")){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(4), (b)(1)";baseClass="Class B felony";url=URLS.db1;degree="DB1";}
+   else if(inj==="physical"&&m==="purpose"&&weapon==="firearm"){baseCharge="Domestic Battering — First Degree";baseStat="§ 5-26-303(a)(6), (b)(1)";baseClass="Class B felony";url=URLS.db1;degree="DB1";}
+   else if(inj==="serious"&&m==="purpose"){baseCharge="Domestic Battering — Second Degree";baseStat="§ 5-26-304(a)(1), (b)(1)";baseClass="Class C felony";url=URLS.db2;degree="DB2";}
+   else if(inj==="physical"&&m==="purpose"&&weapon==="deadly"){baseCharge="Domestic Battering — Second Degree";baseStat="§ 5-26-304(a)(2), (b)(1)";baseClass="Class C felony";url=URLS.db2;degree="DB2";}
+   else if(inj==="serious"&&m==="reckless"&&(weapon==="deadly"||weapon==="firearm")){baseCharge="Domestic Battering — Second Degree";baseStat="§ 5-26-304(a)(3)(A), (b)(1)";baseClass="Class C felony";url=URLS.db2;degree="DB2";}
+   else if(inj==="serious"&&m==="reckless"&&special==="age4"){baseCharge="Domestic Battering — Second Degree";baseStat="§ 5-26-304(a)(3)(B), (b)(1)";baseClass="Class C felony";url=URLS.db2;degree="DB2";}
+   else if(inj==="physical"&&m==="knowing"&&(special==="age60"||special==="age12")){baseCharge="Domestic Battering — Second Degree";baseStat="§ 5-26-304(a)(4), (b)(1)";baseClass="Class C felony";url=URLS.db2;degree="DB2";}
+   else if(inj==="physical"&&m==="purpose"){baseCharge="Domestic Battering — Third Degree";baseStat="§ 5-26-305(a)(1), (b)(1)";baseClass="Class A misdemeanor";url=URLS.db3;degree="DB3";}
+   else if(inj==="physical"&&m==="reckless"){baseCharge="Domestic Battering — Third Degree";baseStat="§ 5-26-305(a)(2), (b)(1)";baseClass="Class A misdemeanor";url=URLS.db3;degree="DB3";}
+   else if(inj==="physical"&&m==="negligent"&&(weapon==="deadly"||weapon==="firearm")){baseCharge="Domestic Battering — Third Degree";baseStat="§ 5-26-305(a)(3), (b)(1)";baseClass="Class A misdemeanor";url=URLS.db3;degree="DB3";}
+   else if(inj==="drug"&&m==="purpose"){baseCharge="Domestic Battering — Third Degree";baseStat="§ 5-26-305(a)(4), (b)(1)";baseClass="Class A misdemeanor";url=URLS.db3;degree="DB3";}
+   else return insufficient("Domestic Battering","Objective facts do not cleanly match a listed domestic-battering variant. Recheck mental state, injury evidence, method, and special-victim facts.",[source("Domestic battering 1st",URLS.db1),source("Domestic battering 2nd",URLS.db2),source("Domestic battering 3rd",URLS.db3)]);
+   charge=baseCharge;stat=baseStat;cls=baseClass;
+   if(v.prior2ten==="yes"&&(degree==="DB2"||degree==="DB3")){
+     appliedImpact.push(`Two qualifying family/household battery or aggravated-assault convictions within 10 years convert conduct that otherwise fits ${baseCharge} into Domestic Battering — First Degree under § 5-26-303(a)(5).`);
+     charge="Domestic Battering — First Degree";stat="§ 5-26-303(a)(5), (b)(1)";cls="Class B felony";url=URLS.db1;degree="DB1";
+   }
+   if(!degree.endsWith("Y")&&v.pregnant==="yes"){
+     if(!(v.pregKnowledge||[]).length)return insufficient("Pregnancy enhancement unresolved","Pregnancy was selected but no fact shows the suspect knew or reasonably should have known. Select visible pregnancy / statement / acknowledgment / other knowledge evidence.",[source("Pregnancy enhancement",url),source("Pregnancy definition",URLS.pregnancy)]);
+     const before=cls;
+     if(degree==="DB1"){cls="Class A felony";stat=stat.replace("(b)(1)","(b)(2)(B)(i)")}
+     if(degree==="DB2"){cls="Class B felony";stat=stat.replace("(b)(1)","(b)(2)(A)")}
+     if(degree==="DB3"){cls="Class D felony";stat=stat.replace("(b)(1)","(b)(2)(A)")}
+     appliedImpact.push(`Pregnancy elevation applied because the victim was pregnant and the selected facts show the suspect knew or reasonably should have known. ${before} → ${cls}.`);
+   }
+   if(!degree.endsWith("Y")&&v.prior5==="yes"){
+     const before=cls;
+     if(degree==="DB1"){cls="Class A felony";stat=stat.replace("(b)(1)","(b)(2)(B)(ii)")}
+     if(degree==="DB2"){cls="Class B felony";stat=stat.replace("(b)(1)","(b)(2)(B)")}
+     if(degree==="DB3"){cls="Class D felony";stat=stat.replace("(b)(1)","(b)(2)(B)")}
+     appliedImpact.push(`At least one qualifying DV offense within 5 years elevates the current domestic-battering classification. ${before} → ${cls}.`);
+   }
  }else{
-   if(inj==="permanent" && m==="purpose"){charge="Battery — First Degree";statute="§ 5-13-201(a)(2)";cls="Class Y felony";url=URLS.battery201;}
-   else if(inj==="serious" && m==="knowing" && s==="age4" && ext){charge="Battery — First Degree";statute="§ 5-13-201(a)(9)";cls="Class Y felony";url=URLS.battery201;}
-   else if(inj==="serious" && m==="purpose" && (w==="deadly"||w==="firearm")){charge="Battery — First Degree";statute="§ 5-13-201(a)(1)";cls="Class B felony";url=URLS.battery201;}
-   else if(inj==="serious" && ext){charge="Battery — First Degree";statute="§ 5-13-201(a)(3)";cls="Class B felony";url=URLS.battery201;}
-   else if(inj==="serious" && m==="knowing" && (s==="age60"||s==="age12")){charge="Battery — First Degree";statute="§ 5-13-201(a)(7)";cls="Class B felony";url=URLS.battery201;}
-   else if(inj==="physical" && m==="purpose" && w==="firearm"){charge="Battery — First Degree";statute="§ 5-13-201(a)(8)";cls="Class B felony";url=URLS.battery201;}
-   else if(inj==="serious" && m==="purpose"){charge="Battery — Second Degree";statute="§ 5-13-202(a)(1)";cls="Class D felony";url=URLS.battery202;}
-   else if(inj==="physical" && m==="purpose" && w==="deadly"){charge="Battery — Second Degree";statute="§ 5-13-202(a)(2)";cls="Class D felony";url=URLS.battery202;}
-   else if(inj==="serious" && m==="reckless" && (w==="deadly"||w==="firearm")){charge="Battery — Second Degree";statute="§ 5-13-202(a)(3)(A)";cls="Class D felony";url=URLS.battery202;}
-   else if(inj==="serious" && m==="reckless" && s==="intoxvehicle"){charge="Battery — Second Degree";statute="§ 5-13-202(a)(3)(B)";cls="Class C felony";url=URLS.battery202;}
-   else if(inj==="serious" && m==="reckless" && s==="age4"){charge="Battery — Second Degree";statute="§ 5-13-202(a)(3)(C)";cls="Class D felony";url=URLS.battery202;}
-   else if(inj==="physical" && m==="knowing" && ["age60","age12","leo","protected"].includes(s)){charge="Battery — Second Degree";statute="§ 5-13-202(a)(4)";cls="Class D felony";url=URLS.battery202;}
-   else if(inj==="physical" && m==="purpose"){charge="Battery — Third Degree";statute="§ 5-13-203(a)(1)";cls="Class A misdemeanor";url=URLS.battery203;}
-   else if(inj==="physical" && m==="reckless"){charge="Battery — Third Degree";statute="§ 5-13-203(a)(2)";cls="Class A misdemeanor";url=URLS.battery203;}
-   else if(inj==="physical" && m==="negligent" && (w==="deadly"||w==="firearm")){charge="Battery — Third Degree";statute="§ 5-13-203(a)(3)";cls="Class A misdemeanor";url=URLS.battery203;}
-   else if(inj==="drug" && m==="purpose"){charge="Battery — Third Degree";statute="§ 5-13-203(a)(4)";cls="Class A misdemeanor";url=URLS.battery203;}
-   else if(inj==="fluid" && m==="knowing"){charge="Battery — Third Degree";statute="§ 5-13-203(a)(5)";cls="Class A misdemeanor — special mandatory sentencing provision";url=URLS.battery203;}
-   else return insufficient("Battery","Selected facts do not cleanly match a listed battery variant. Re-check injury, mental state, weapon, and victim status.",[source("Battery statutes",URLS.battery201),source("Definitions",URLS.defs)]);
-   if(charge==="Battery — First Degree" && s==="leo") cls="Class Y felony";
+   if(v.actType==="drug"){charge="Battery — Third Degree";stat="§ 5-13-203(a)(4), (b)(1)";cls="Class A misdemeanor";url=URLS.battery203;}
+   else if(v.actType==="fluid"){charge="Battery — Third Degree";stat="§ 5-13-203(a)(5), (b)(2)";cls="Class A misdemeanor";url=URLS.battery203;}
+   else if(inj==="permanent"&&m==="purpose"){charge="Battery — First Degree";stat="§ 5-13-201(a)(2), (c)(2)";cls="Class Y felony";url=URLS.battery201;}
+   else if(inj==="serious"&&m==="knowing"&&special==="age4"&&ext){charge="Battery — First Degree";stat="§ 5-13-201(a)(9), (c)(2)";cls="Class Y felony";url=URLS.battery201;}
+   else if(inj==="serious"&&m==="purpose"&&(weapon==="deadly"||weapon==="firearm")){charge="Battery — First Degree";stat="§ 5-13-201(a)(1), (c)(1)";cls="Class B felony";url=URLS.battery201;}
+   else if(inj==="serious"&&ext){charge="Battery — First Degree";stat="§ 5-13-201(a)(3), (c)(1)";cls="Class B felony";url=URLS.battery201;}
+   else if(inj==="serious"&&m==="knowing"&&(special==="age60"||special==="age12")){charge="Battery — First Degree";stat="§ 5-13-201(a)(7), (c)(1)";cls="Class B felony";url=URLS.battery201;}
+   else if(inj==="physical"&&m==="purpose"&&weapon==="firearm"){charge="Battery — First Degree";stat="§ 5-13-201(a)(8), (c)(1)";cls="Class B felony";url=URLS.battery201;}
+   else if(inj==="serious"&&m==="purpose"){charge="Battery — Second Degree";stat="§ 5-13-202(a)(1), (b)(2)";cls="Class D felony";url=URLS.battery202;}
+   else if(inj==="physical"&&m==="purpose"&&weapon==="deadly"){charge="Battery — Second Degree";stat="§ 5-13-202(a)(2), (b)(2)";cls="Class D felony";url=URLS.battery202;}
+   else if(inj==="serious"&&m==="reckless"&&(weapon==="deadly"||weapon==="firearm")){charge="Battery — Second Degree";stat="§ 5-13-202(a)(3)(A), (b)(2)";cls="Class D felony";url=URLS.battery202;}
+   else if(inj==="serious"&&m==="reckless"&&special==="intoxvehicle"){charge="Battery — Second Degree";stat="§ 5-13-202(a)(3)(B), (b)(1)";cls="Class C felony";url=URLS.battery202;}
+   else if(inj==="serious"&&m==="reckless"&&special==="age4"){charge="Battery — Second Degree";stat="§ 5-13-202(a)(3)(C), (b)(2)";cls="Class D felony";url=URLS.battery202;}
+   else if(inj==="physical"&&m==="knowing"&&["age60","age12","leo","firecode","teacher","state","healthcare","incompetent"].includes(special)){charge="Battery — Second Degree";stat="§ 5-13-202(a)(4), (b)(2)";cls="Class D felony";url=URLS.battery202;}
+   else if(inj==="physical"&&m==="purpose"){charge="Battery — Third Degree";stat="§ 5-13-203(a)(1), (b)(1)";cls="Class A misdemeanor";url=URLS.battery203;}
+   else if(inj==="physical"&&m==="reckless"){charge="Battery — Third Degree";stat="§ 5-13-203(a)(2), (b)(1)";cls="Class A misdemeanor";url=URLS.battery203;}
+   else if(inj==="physical"&&m==="negligent"&&(weapon==="deadly"||weapon==="firearm")){charge="Battery — Third Degree";stat="§ 5-13-203(a)(3), (b)(1)";cls="Class A misdemeanor";url=URLS.battery203;}
+   else return insufficient("Battery","Objective facts do not cleanly match a listed battery variant. Recheck mental state, injury evidence, method/object use, and special-victim facts.",[source("Battery 1st",URLS.battery201),source("Battery 2nd",URLS.battery202),source("Battery 3rd",URLS.battery203)]);
+   if(charge==="Battery — First Degree"&&special==="leo"&&!stat.includes("(c)(2)")){cls="Class Y felony";stat=stat.replace("(c)(1)","(c)(3)")}
  }
- let r=resultBase(charge,statute,cls);
- r.elements=["Actual injury or listed battery-specific act","Required mental state for selected subsection","Required weapon/victim/circumstance facts for selected subsection"];
- r.reportFacts=["Exact injury and body location","Pain, bruising, swelling, visible marks, fractures or other impairment","How injury occurred; weapon/method used","Mental-state facts and statements","Photos/video, witnesses, admissions, EMS/medical treatment"];
- r.confirm=["Use statutory definitions of physical injury and serious physical injury under § 5-1-102(14), (21).","Confirm weapon qualifies as a deadly weapon when required."];
- r.sources=[source("Primary statute",url),source("Definitions",URLS.defs),source("Arrest authority",URLS.arrest)];
+ let r=baseResult(charge,stat,cls);r.chargeImpact=appliedImpact;
+ r.sources=[source("Primary statute",url),source("Definitions — injury/deadly weapon",URLS.defs),source("Arrest authority",URLS.arrest)];
+ if(dv)r.sources.push(source("DV definitions",URLS.dvDef),source("DV arrest authority",URLS.dvArrest),source("Pregnancy definition",URLS.pregnancy));
+ if(v.actType==="physical"){
+   r.elements=[batteryInjuryExplanation(f),`Mental state: ${m.toUpperCase()}`,`Force method: ${f.methodLabel}`,weapon==="firearm"?"Weapon status: FIREARM / deadly weapon":weapon==="deadly"?`Weapon status: DEADLY WEAPON — ${f.deadlyReason}`:"No deadly-weapon element needed/established for this subsection"];
+   r.reportFacts=[`Force method: ${f.methodLabel}; body area: ${v.bodyArea}`,`Visible injury/evidence: ${(v.visibleInjuries||[]).join(", ")}`,`Substantial pain: ${v.substantialPain}; physical impairment: ${v.physicalImpairment}`,`Serious-injury criteria: ${f.seriousProof.length?f.seriousProof.join(", "):"none selected"}`,v.objectDesc?`Object description: ${v.objectDesc}`:"",f.deadlyReason?`Weapon analysis facts: ${f.deadlyReason}`:"",...evidenceFacts(v)].filter(Boolean);
+ }else if(v.actType==="drug"){
+   r.elements=["Purposeful nonconsensual administration of drug/substance","Stupor, unconsciousness, physical/mental impairment, or injury resulted"];r.reportFacts=["Substance administered","How administered","No consent","Resulting stupor/unconsciousness/impairment/injury",...evidenceFacts(v)];
+ }else{
+   r.elements=["Knowing physical contact with first responder","Spitting/throwing/otherwise transferring bodily fluid, pathogen, or human waste onto first responder"];r.reportFacts=["First-responder status","Exact fluid/waste/pathogen transferred","How transfer occurred","Statements / evidence",...evidenceFacts(v)];
+ }
+ if(v.treatment?.length)r.reportFacts.push(`Treatment facts: ${v.treatment.join(", ")}`);
  if(dv){
-   r.enhancements.push("Document exact family/household relationship under § 5-26-302.");
-   if(v.pregnant==="yes") r.enhancements.push("Pregnancy enhancement selected — classification adjusted where § 5-26-303/304/305 provides.");
-   if(v.prior5==="yes") r.enhancements.push("Qualifying DV prior within 5 years selected — classification adjusted where statute provides.");
-   if(v.prior2ten==="yes") r.enhancements.push("Two qualifying family/household battery/aggravated-assault priors within 10 years may support § 5-26-303(a)(5) when current conduct is domestic battering under § 5-26-304 or § 5-26-305.");
-   r.enhancements.push("If accounts conflict, document predominant-aggressor factors.");
-   r.sources.push(source("DV definition",URLS.dvDef),source("DV arrest authority",URLS.dvArrest));
+   r.enhancements.push("Qualifying family/household relationship routes the offense to the domestic-battering statutes.");
+   if(v.pregnant==="yes")r.enhancements.push(`Pregnancy knowledge facts: ${(v.pregKnowledge||[]).join(", ")}`);
+   const h1=unknownHistoryFlag(v.prior5,"5-year DV history");if(h1)r.enhancements.push(h1+" Possible classification elevation.");
+   const h2=unknownHistoryFlag(v.prior2ten,"Two qualifying priors within 10 years");if(h2)r.enhancements.push(h2+" Possible independent Domestic Battering 1st pathway.");
  }
- if(s==="leo"||s==="protected"||s==="age60"||s==="age12"||s==="age4") r.enhancements.push("Protected/special victim selected — document age/status and facts showing suspect knew the qualifying status when required.");
+ r.confirm=[];
  r.arrest=arrestText(cls,v.presence,{dv,dvwindow:v.dvwindow,battery:true,danger:v.danger});
- r.verbiage=`The suspect ${m==="purpose"?"purposely":m==="knowing"?"knowingly":m==="reckless"?"recklessly":"negligently"} caused ${inj==="serious"||inj==="permanent"?"serious physical injury":"physical injury"} to the victim by [specific act/method]. Document the exact injury, mechanism, and facts supporting the required mental state.`;
+ r.verbiage=v.actType==="physical"?`The suspect ${m==="purpose"?"purposely":m==="knowing"?"knowingly":m==="reckless"?"recklessly":"negligently"} used ${f.methodLabel} against the victim, affecting the ${v.bodyArea}. ${batteryInjuryExplanation(f)} ${weapon==="deadly"||weapon==="firearm"?f.deadlyReason:""}`:v.actType==="drug"?"The suspect purposely administered [substance] to the victim without consent, causing [stupor/unconsciousness/impairment/injury].":"The suspect knowingly transferred [bodily fluid/pathogen/human waste] onto the first responder by [specific act].";
+ const relationshipText=dv?"A qualifying family/household relationship is established, so the domestic-battering statute applies. ":"";
+ const injuryText=v.actType==="physical"?`${batteryInjuryExplanation(f)} `:"";
+ const weaponText=v.actType==="physical"&&weapon!=="none"?`${f.deadlyReason} `:"";
+ r.why=`${relationshipText}${injuryText}${weaponText}The selected mental state, force method, injury result, victim/circumstance facts, and any applied history/pregnancy facts match ${stat}. That combination produces ${charge}, ${cls}.`;
+ if(v.actType==="fluid")r.penalty="Battery 3rd under § 5-13-203(a)(5): Class A misdemeanor with mandatory $2,500 fine + mandatory minimum 30 days imprisonment; check the statute for the mandatory-release restriction.";
+ else r.penalty=penaltyFor(cls);
  return r;
 };
-
-evaluators.trespass=v=>{
- if(v.unlawful!=="yes") return insufficient("§ 5-39-203(a)","Purposeful unlawful entry or remaining is not established.",[source("Justia — § 5-39-203",URLS.trespass)]);
- if(v.defense==="yes") return insufficient("§ 5-39-203(c)","A listed statutory defense appears to apply; do not auto-select Criminal Trespass.",[source("Justia — § 5-39-203",URLS.trespass)]);
- let cls,sub;
- if(v.location==="critical"||v.prior==="twoA"){cls="Class D felony";sub=v.location==="critical"?"§ 5-39-203(b)(1)(B)":"§ 5-39-203(b)(1)(A)";}
- else if(v.tool==="yes"||v.prior==="one"){cls="Class A misdemeanor";sub=v.tool==="yes"?"§ 5-39-203(b)(2)(A)":"§ 5-39-203(b)(2)(C)";}
- else if(v.location==="occupiable"||v.removed==="yes"){cls="Class B misdemeanor";sub=v.location==="occupiable"?"§ 5-39-203(b)(3)(A)":"§ 5-39-203(b)(3)(B)";}
- else{cls="Class C misdemeanor";sub="§ 5-39-203(b)(4)";}
- const locsub=v.location==="vehicle"?"§ 5-39-203(a)(1)":v.location==="critical"?"§ 5-39-203(a)(3)":"§ 5-39-203(a)(2)";
- let r=resultBase("Criminal Trespass",`${locsub}; classification ${sub}`,cls);
- r.elements=["Purposefully entered or remained unlawfully",v.location==="vehicle"?"Vehicle of another person":v.location==="critical"?"Critical infrastructure":"Premises owned or leased by another person"];
- r.reportFacts=["How/when subject entered or remained","Owner/agent consent status and notice","Any request to leave and subject response","Signs, fences, tools, location type and prior-history basis if used for elevation"];
- r.confirm=["Check statutory defenses in § 5-39-203(c)-(e)."];
- r.verbiage="The suspect purposely entered/remained unlawfully on [property/location] after [notice/request to leave/no permission]. Document the facts establishing lack of privilege or authorization.";
- r.arrest=arrestText(cls,v.presence);
- r.sources=[source("Justia — § 5-39-203",URLS.trespass),source("Arrest authority",URLS.arrest)];
- return r;
-};
-
 evaluators.mischief=v=>{
- const dmg=Number(v.damage);
- if(!Number.isFinite(dmg)||dmg<0) return insufficient("Damage amount","Enter a supported actual-damage amount to classify the offense.",[source("Criminal Mischief 1st",URLS.mischief1),source("Criminal Mischief 2nd",URLS.mischief2)]);
- let first=v.conduct==="purpose",charge,statute,cls,sub,url;
- if(first){
-   charge="Criminal Mischief — First Degree";statute="§ 5-38-203(a)(1)";url=URLS.mischief1;
-   if(v.critical==="yes"){statute="§ 5-38-203(a)(3)";cls="Class B felony";sub="§ 5-38-203(b)(4)(B)";}
-   else if(dmg<=1000){cls="Class A misdemeanor";sub="§ 5-38-203(b)(1)";}
-   else if(dmg<=5000){cls="Class D felony";sub="§ 5-38-203(b)(2)";}
-   else if(dmg<25000){cls="Class C felony";sub="§ 5-38-203(b)(3)";}
-   else{cls="Class B felony";sub="§ 5-38-203(b)(4)(A)";}
+ const dmg=Number(v.damage);let r,stat,cls,url;
+ if(v.conduct==="purpose"){
+  url=URLS.mischief1;
+  if(v.critical==="yes"){stat="§ 5-38-203(a)(3), (b)(4)(B)";cls="Class B felony";}
+  else if(dmg<=1000){stat="§ 5-38-203(a)(1), (b)(1)";cls="Class A misdemeanor";}
+  else if(dmg<=5000){stat="§ 5-38-203(a)(1), (b)(2)";cls="Class D felony";}
+  else if(dmg<25000){stat="§ 5-38-203(a)(1), (b)(3)";cls="Class C felony";}
+  else{stat="§ 5-38-203(a)(1), (b)(4)(A)";cls="Class B felony";}
+  r=baseResult("Criminal Mischief — First Degree",stat,cls);r.elements=["Purposefully and without legal justification damaged/destroyed property",`Actual damage: $${dmg.toLocaleString()}`];
  }else{
-   charge="Criminal Mischief — Second Degree";url=URLS.mischief2;
-   statute=v.conduct==="reckless"?"§ 5-38-204(a)(1)":"§ 5-38-204(a)(2)";
-   if(dmg>=5000){cls="Class D felony";sub="§ 5-38-204(b)(2)";}
-   else if(dmg>=1000){cls="Class A misdemeanor";sub="§ 5-38-204(b)(1)";}
-   else{cls="Class B misdemeanor";sub="§ 5-38-204(b)(3)";}
+  url=URLS.mischief2;const a=v.conduct==="reckless"?"§ 5-38-204(a)(1)":"§ 5-38-204(a)(2)";
+  if(dmg>=5000){stat=`${a}, (b)(2)`;cls="Class D felony";}else if(dmg>=1000){stat=`${a}, (b)(1)`;cls="Class A misdemeanor";}else{stat=`${a}, (b)(3)`;cls="Class B misdemeanor";}
+  r=baseResult("Criminal Mischief — Second Degree",stat,cls);r.elements=[v.conduct==="reckless"?"Recklessly damaged/destroyed another person's property":"Purposely tampered with another person's property causing substantial inconvenience",`Actual damage: $${dmg.toLocaleString()}`];
  }
- let r=resultBase(charge,`${statute}; classification ${sub}`,cls);
- r.elements=[first?"Purposeful damage/destruction without legal justification":v.conduct==="reckless"?"Reckless damage/destruction of another's property":"Purposeful tampering with another's property causing substantial inconvenience",`Actual damage: $${dmg.toLocaleString()}`];
- r.reportFacts=["Property owner and consent/legal-justification status","Exactly how property was damaged/tampered with","Facts showing purposeful vs reckless conduct","Actual damage/repair estimate and basis","Photos/video, witnesses, admissions"];
- r.verbiage=`The suspect ${first?"purposely and without legal justification":v.conduct==="reckless"?"recklessly":"purposely"} ${v.conduct==="tamper"?"tampered with":"damaged"} [property]. The actual damage was estimated at $${dmg.toLocaleString()} based on [estimate/repair cost/owner documentation].`;
- r.arrest=arrestText(cls,v.presence);
- r.sources=[source("Primary statute",url),source("Arrest authority",URLS.arrest)];
- return r;
+ r.reportFacts=["Property owner and consent/legal-justification status","Exactly how property was damaged/tampered with","Facts showing purposeful vs reckless conduct","Actual damage/repair estimate and basis",...evidenceFacts(v)];
+ if(v.mischiefFlags?.includes("nonferrous"))r.enhancements.push("Felony nonferrous-metal removal can carry an additional 5-year term under § 5-38-203(d) or § 5-38-204(c).");
+ if(v.mischiefFlags?.includes("mailbox")||v.mischiefFlags?.includes("graffiti"))r.enhancements.push("Mailbox/graffiti sentencing provision: restitution + at least 25 hours community service.");
+ r.verbiage=`The suspect ${v.conduct==="purpose"?"purposely and without legal justification":v.conduct==="reckless"?"recklessly":"purposely"} ${v.conduct==="tamper"?"tampered with":"damaged"} [property], causing approximately $${dmg.toLocaleString()} in actual damage based on [estimate/repair documentation].`;
+ r.why=`${v.conduct==="purpose"?"Purposeful":"Reckless/tampering"} conduct is established and the entered actual damage amount is $${dmg.toLocaleString()}. That dollar threshold selects ${stat}, producing ${cls}.`;r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=[source("Primary statute",url),source("Arrest authority",URLS.arrest)];return r;
 };
-
 evaluators.theft=v=>{
- const value=Number(v.value);
- if(!Number.isFinite(value)||value<0) return insufficient("Property value","Enter a supported value, even when a special property type may independently determine classification.",[source("Justia — § 5-36-103",URLS.theft)]);
- let charge="Theft of Property",stat=v.method==="control"?"§ 5-36-103(a)(1)":"§ 5-36-103(a)(2)",cls="",sub="",sources=[source("Justia — § 5-36-103",URLS.theft)];
- if(v.method==="threat" && v.threatlevel==="serious"){cls="Class B felony";sub="§ 5-36-103(b)(1)(B)";}
- else if(v.method==="threat" && v.threatlevel==="fiduciary"){cls="Class B felony";sub="§ 5-36-103(b)(1)(C)";}
- else if(v.method==="threat"){cls="Class C felony";sub="§ 5-36-103(b)(2)(B)";}
- else if(v.property==="postal"){cls="Class C felony";sub="§ 5-36-103(b)(2)(G) — as amended by Act 833 of 2025";sources.push(source("Arkansas Act 833 (2025)",URLS.act833));}
- else if(v.property==="card"){cls="Class D felony";sub="§ 5-36-103(b)(3)(C)";}
- else if(v.property==="firearm"){if(value>=2500){cls="Class C felony";sub="§ 5-36-103(b)(2)(C)";}else{cls="Class D felony";sub="§ 5-36-103(b)(3)(B)";}}
- else if(v.property==="special") return insufficient("§ 5-36-103(b)","A special statutory property type was selected. Use the linked full statute because this MVP does not yet automate every special-property classification.",sources);
- else if(value>=25000){cls="Class B felony";sub="§ 5-36-103(b)(1)(A)";}
- else if(value>5000){cls="Class C felony";sub="§ 5-36-103(b)(2)(A)";}
- else if(value>1000){cls="Class D felony";sub="§ 5-36-103(b)(3)(A)";}
- else if(v.prior10==="yes"){cls="Class D felony";sub="§ 5-36-103(b)(3)(I) — after Act 833 renumbering";sources.push(source("Arkansas Act 833 (2025)",URLS.act833));}
- else{cls="Class A misdemeanor";sub="§ 5-36-103(b)(4)(A)";}
- let r=resultBase(charge,`${stat}; classification ${sub}`,cls);
- r.elements=[v.method==="control"?"Knowingly took/exercised unauthorized control or unauthorized transfer":"Knowingly obtained property by "+(v.method==="deception"?"deception":"threat"),"Purpose to deprive owner of property"];
- r.reportFacts=["Owner and lawful possessory interest","Exact property taken/controlled","How control was unauthorized or how deception/threat occurred","Facts showing purpose to deprive","Value basis, receipts/serials, surveillance, witness/suspect statements"];
+ const val=Number(v.value);let cls,sub,sources=[source("Justia — § 5-36-103",URLS.theft)],statBase=v.method==="control"?"§ 5-36-103(a)(1)":"§ 5-36-103(a)(2)";
+ if(v.property==="special")return insufficient(statBase,"Special statutory property selected — use full statute for manual review.",sources);
+ if(v.method==="threat"&&v.threatlevel==="serious"){cls="Class B felony";sub="(b)(1)(B)";}
+ else if(v.method==="threat"&&v.threatlevel==="fiduciary"){cls="Class B felony";sub="(b)(1)(C)";}
+ else if(v.method==="threat"){cls="Class C felony";sub="(b)(2)(B)";}
+ else if(v.property==="postal"){cls="Class C felony";sub="(b)(2)(G)";sources.push(source("2025 Act 833",URLS.act833));}
+ else if(v.property==="card"){cls="Class D felony";sub="(b)(3)(C)";}
+ else if(v.property==="firearm"){if(val>=2500){cls="Class C felony";sub="(b)(2)(C)";}else{cls="Class D felony";sub="(b)(3)(B)";}}
+ else if(val>=25000){cls="Class B felony";sub="(b)(1)(A)";}
+ else if(val>5000){cls="Class C felony";sub="(b)(2)(A)";}
+ else if(val>1000){cls="Class D felony";sub="(b)(3)(A)";}
+ else if(v.prior10==="yes"){cls="Class D felony";sub="(b)(3)(I)";sources.push(source("2025 Act 833",URLS.act833));}
+ else{cls="Class A misdemeanor";sub="(b)(4)(A)";}
+ let r=baseResult("Theft of Property",`${statBase}, ${sub}`,cls);
+ r.elements=[v.method==="control"?"Knowingly took/exercised unauthorized control or unauthorized transfer":`Knowingly obtained property by ${v.method}`,"Purpose to deprive owner of property"];
+ r.reportFacts=["Owner / lawful possessory interest","Exact property and identifying features","How control was unauthorized or how deception/threat occurred","Purpose-to-deprive facts","Value basis and documentation",...evidenceFacts(v)];
+ if(v.prior10==="yes"&&val<=1000)r.chargeImpact.push("Prior theft offense within 10 years changes ordinary property valued at $1,000 or less from Class A misdemeanor to Class D felony under § 5-36-103(b)(3)(I).");const f=unknownHistoryFlag(v.prior10,"Prior theft within 10 years");if(f)r.enhancements.push(f);
  r.verbiage=`The suspect knowingly ${v.method==="control"?"took/exercised unauthorized control over":"obtained"} [property] ${v.method==="deception"?"by deception ":v.method==="threat"?"by threat ":""}with the purpose of depriving the owner of the property.`;
- r.arrest=arrestText(cls,v.presence);r.sources=sources.concat([source("Arrest authority",URLS.arrest)]);
- return r;
+ r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=sources.concat(source("Arrest authority",URLS.arrest));return r;
 };
-
+evaluators.trespass=v=>{
+ if(v.unlawful!=="yes")return insufficient("§ 5-39-203(a)","Purposeful unlawful entry/remaining is not established.",[source("Justia — § 5-39-203",URLS.trespass)]);
+ if(v.defense==="yes")return insufficient("§ 5-39-203(c)-(e)","A listed defense/affirmative defense appears to apply.",[source("Justia — § 5-39-203",URLS.trespass)]);
+ let a=v.location==="vehicle"?"(a)(1)":v.location==="critical"?"(a)(3)":"(a)(2)",b,cls;
+ if(v.location==="critical"||v.prior==="twoA"){b=v.location==="critical"?"(b)(1)(B)":"(b)(1)(A)";cls="Class D felony";}
+ else if(v.tool==="yes"||v.prior==="one"){b=v.tool==="yes"?"(b)(2)(A)":"(b)(2)(C)";cls="Class A misdemeanor";}
+ else if(v.location==="occupiable"||v.removed==="yes"){b=v.location==="occupiable"?"(b)(3)(A)":"(b)(3)(B)";cls="Class B misdemeanor";}
+ else{b="(b)(4)";cls="Class C misdemeanor";}
+ let r=baseResult("Criminal Trespass",`§ 5-39-203${a}, ${b}`,cls);r.elements=["Purposefully entered or remained unlawfully",v.location==="vehicle"?"Vehicle of another":v.location==="critical"?"Critical infrastructure":"Premises owned/leased by another"];
+ if(v.prior==="one")r.chargeImpact.push("One qualifying prior trespass conviction is the fact elevating this trespass to Class A misdemeanor.");if(v.prior==="twoA")r.chargeImpact.push("Two or more qualifying prior Class A trespass convictions are the fact elevating this trespass to Class D felony.");const f=unknownHistoryFlag(v.prior,"Trespass history");if(f)r.enhancements.push(f);if(v.defense==="unknown")r.confirm.push("Check statutory defenses/affirmative defenses before charging.");
+ r.reportFacts=["Consent/privilege status","How subject entered/remained","Notice/request to leave and response","Posted signs/fence/tools/location type",...evidenceFacts(v)];
+ r.verbiage="The suspect purposely entered/remained unlawfully on [property/location] after [notice / request to leave / lack of permission].";r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=[source("Justia — § 5-39-203",URLS.trespass),source("Arrest authority",URLS.arrest)];return r;
+};
 evaluators.disorderly=v=>{
- if(v.mental==="none") return insufficient("§ 5-71-207(a)","Purpose to cause public inconvenience/annoyance/alarm, or reckless creation of that risk, is not established.",[source("Justia — § 5-71-207",URLS.disorderly)]);
  const map={fight:"(a)(1)",noise:"(a)(2)",speech:"(a)(3)",meeting:"(a)(4)",traffic:"(a)(5)",disperse:"(a)(6)",hazard:"(a)(7)",symbol:"(a)(8)",expose:"(a)(9)"};
- let r=resultBase("Disorderly Conduct",`§ 5-71-207${map[v.act]}`,"Class C misdemeanor");
- r.elements=[v.mental==="purpose"?"Purpose to cause public inconvenience, annoyance, or alarm":"Recklessly created risk of public inconvenience, annoyance, or alarm","Selected listed conduct under "+map[v.act]];
- r.reportFacts=["Exact conduct observed","Public setting and who was affected","Specific noise/threat/obstruction/hazard or other listed act","Officer commands and subject response when relevant"];
- if(v.act==="speech") r.confirm.push("For speech/gesture, articulate why it was likely to provoke a violent or disorderly response — profanity alone is not enough.");
- if(v.act==="disperse") r.confirm.push("Confirm subject congregated with at least two other persons in a public place and refused a lawful dispersal order.");
- r.verbiage=`The suspect ${v.mental==="purpose"?"purposely caused":"recklessly created a risk of"} public inconvenience, annoyance, or alarm by [describe the exact qualifying conduct].`;
- r.arrest=arrestText(r.classification,v.presence);
- r.sources=[source("Justia — § 5-71-207",URLS.disorderly),source("Arrest authority",URLS.arrest)];
- return r;
+ let r=baseResult("Disorderly Conduct",`§ 5-71-207${map[v.act]}, (b)`,"Class C misdemeanor");r.elements=[v.mental==="purpose"?"Purpose to cause public inconvenience, annoyance, or alarm":"Recklessly created risk of public inconvenience, annoyance, or alarm","Selected listed conduct"];
+ if(v.act==="speech")r.confirm.push("Articulate why the words/gesture were likely to provoke a violent or disorderly response.");
+ if(v.act==="disperse")r.confirm.push("Confirm 2+ other persons were present and a lawful dispersal order was refused.");
+ r.reportFacts=["Exact conduct","Public impact/location","Exact words/noise/obstruction/hazard as applicable","Officer orders and response",...evidenceFacts(v)];
+ r.verbiage=`The suspect ${v.mental==="purpose"?"purposely caused":"recklessly created a risk of"} public inconvenience, annoyance, or alarm by [exact qualifying conduct].`;r.arrest=arrestText(r.classification,v.presence);r.penalty=penaltyFor(r.classification);r.sources=[source("Justia — § 5-71-207",URLS.disorderly),source("Arrest authority",URLS.arrest)];return r;
 };
-
 evaluators.loitering=v=>{
- if(v.variant==="a1" && v.opportunity==="no") return insufficient("§ 5-71-213(c)-(d)","For an (a)(1) arrest, the required opportunity to identify/explain was not provided and no impracticability was selected.",[source("Justia — § 5-71-213",URLS.loiter)]);
- const smap={a1:"§ 5-71-213(a)(1)",a2:"§ 5-71-213(a)(2)",a3a:"§ 5-71-213(a)(3)(A)",a3b:"§ 5-71-213(a)(3)(B)",a3c:"§ 5-71-213(a)(3)(C)",a4:"§ 5-71-213(a)(4)",a5:"§ 5-71-213(a)(5)",a6:"§ 5-71-213(a)(6)",a7:"§ 5-71-213(a)(7)",a8:"§ 5-71-213(a)(8)",a9:"§ 5-71-213(a)(9)"};
- let r=resultBase("Loitering",smap[v.variant],"Class C misdemeanor");
- r.elements=["Lingering/remains/prowls",`Specific statutory circumstance: ${smap[v.variant]}`];
- r.reportFacts=["Exact location and duration/behavior","Why facts fit the selected statutory circumstance","Time of day, concealment, flight, harassment/threat or traffic facts where relevant"];
- if(v.variant==="a1") r.reportFacts.push("Officer's request for identification/explanation; subject's exact response; why explanation was not reasonably credible, or why inquiry was impracticable");
- r.verbiage=v.variant==="a1"?"The subject lingered/remained/prowled at [location] without apparent reason under circumstances warranting alarm or concern. I requested identification and a credible explanation; the subject [refused/responded ___].":`The subject lingered/remained at [location] under circumstances described in ${smap[v.variant]}: [specific facts].`;
- r.arrest=arrestText(r.classification,v.presence);
- r.sources=[source("Justia — § 5-71-213",URLS.loiter),source("Arrest authority",URLS.arrest)];
- return r;
+ if(v.variant==="a1"&&v.opportunity==="no")return insufficient("§ 5-71-213(a)(1), (c)-(d)","Required opportunity to identify/explain was not provided and impracticability was not selected.",[source("Justia — § 5-71-213",URLS.loiter)]);
+ const sm={a1:"(a)(1)",a2:"(a)(2)",a3a:"(a)(3)(A)",a3b:"(a)(3)(B)",a3c:"(a)(3)(C)",a4:"(a)(4)",a5:"(a)(5)",a6:"(a)(6)",a7:"(a)(7)",a8:"(a)(8)",a9:"(a)(9)"};
+ let r=baseResult("Loitering",`§ 5-71-213${sm[v.variant]}, (e)`,"Class C misdemeanor");r.elements=["Lingers/remains/prowls","Exact selected statutory circumstance"];
+ if(v.variant==="a1")r.reportFacts.push("Request for identification/explanation, exact response, and credibility/impracticability facts.");
+ r.reportFacts.push("Exact location/time/duration","Behavior creating alarm/harassment/hazard or unlawful-purpose facts",...evidenceFacts(v));r.verbiage=`The subject lingered/remained at [location] under circumstances matching § 5-71-213${sm[v.variant]}: [specific facts].`;r.arrest=arrestText(r.classification,v.presence);r.penalty=penaltyFor(r.classification);r.sources=[source("Justia — § 5-71-213",URLS.loiter),source("Arrest authority",URLS.arrest)];return r;
 };
-
 evaluators.obstruction=v=>{
- if(v.excluded==="yes") return insufficient("§ 5-54-102(c)","Selected conduct falls within an exclusion: flight, refusal to submit to arrest, or non-affirmative avoidance. Evaluate the separate applicable offense.",[source("Justia — § 5-54-102",URLS.obstruction),source("Arkansas Act 1000 (2025)",URLS.act1000)]);
- let stat,cls="Class C misdemeanor";
- if(v.variant==="interfere") stat="§ 5-54-102(a)(1)";
- if(v.variant==="falseid") stat="§ 5-54-102(a)(4)";
- if(v.variant==="subpoena") stat="§ 5-54-102(a)(5) — added by Act 1000 of 2025";
- if(v.variant==="ivd") stat="§ 5-54-102(a)(2)";
- if(v.variant==="paternity") stat="§ 5-54-102(a)(3)";
- if(v.force==="yes"){cls="Class A misdemeanor";stat+="; § 5-54-102(b)(1)";}
- else if(v.variant==="falseid"&&v.repeatfalse==="yes"){cls="Class A misdemeanor";stat+="; § 5-54-102(b)(2)";}
- else if(v.variant==="subpoena"){stat+="; § 5-54-102(b)(3)";}
- else stat+="; § 5-54-102(b)(4)";
- let r=resultBase("Obstructing Governmental Operations",stat,cls);
- r.elements=[v.variant==="interfere"?"Knowingly obstructed, impaired, or hindered governmental function":v.variant==="falseid"?"Falsely identified self to law/code enforcement":v.variant==="subpoena"?"Personally served qualifying criminal subpoena + knowingly failed to appear":"Specific listed statutory act","No applicable § 5-54-102(c) exclusion"];
- r.reportFacts=["What governmental function was being performed","Exactly what the subject did or said","How conduct actually obstructed/impaired/hindered where (a)(1) is used","False identifying information, subpoena-service facts, commands and responses as applicable"];
- r.verbiage=v.variant==="interfere"?"The suspect knowingly obstructed, impaired, or hindered the performance of [governmental function] by [specific affirmative conduct].":`The suspect committed the listed act under ${stat.split(";")[0]} by [specific facts].`;
- r.arrest=arrestText(cls,v.presence);
- r.sources=[source("Justia — § 5-54-102 (2024 base text)",URLS.obstruction),source("Arkansas Act 1000 (2025 amendment)",URLS.act1000),source("Arrest authority",URLS.arrest)];
- return r;
+ if(v.excluded==="yes")return insufficient("§ 5-54-102(c)","Selected conduct falls within a statutory exclusion; evaluate the separate applicable offense.",[source("2025 Act 1000",URLS.act1000)]);
+ let a={interfere:"(a)(1)",falseid:"(a)(4)",subpoena:"(a)(5)",ivd:"(a)(2)",paternity:"(a)(3)"}[v.variant],b,cls;
+ if(v.force==="yes"){b="(b)(1)";cls="Class A misdemeanor";}else if(v.variant==="falseid"&&v.repeatfalse==="yes"){b="(b)(2)";cls="Class A misdemeanor";}else if(v.variant==="subpoena"){b="(b)(3)";cls="Class C misdemeanor";}else{b="(b)(4)";cls="Class C misdemeanor";}
+ let r=baseResult("Obstructing Governmental Operations",`§ 5-54-102${a}, ${b}`,cls);r.elements=[v.variant==="interfere"?"Knowingly obstructed/impaired/hindered a governmental function":v.variant==="falseid"?"Falsely identified self to law/code enforcement":v.variant==="subpoena"?"Personally served criminal subpoena + knowingly failed to appear":"Selected specifically listed act","No § 5-54-102(c) exclusion"];
+ const f=unknownHistoryFlag(v.repeatfalse,"False-ID repeat history");if(v.variant==="falseid"&&f)r.enhancements.push(f);
+ r.reportFacts=["Governmental function being performed","Exact affirmative obstructive act / false identity / subpoena facts","Commands and subject response","How conduct hindered the function",...evidenceFacts(v)];r.verbiage=v.variant==="interfere"?"The suspect knowingly obstructed, impaired, or hindered [governmental function] by [specific affirmative conduct].":"The suspect committed the listed act by [specific facts].";r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=[source("2025 Act 1000",URLS.act1000),source("Arrest authority",URLS.arrest)];return r;
 };
-
 evaluators.pubintox=v=>{
- if(v.publicplace!=="yes"||v.manifest!=="yes"||v.basis==="none") return insufficient("§ 5-71-212(a)","Need PUBLIC PLACE + manifest intoxication + either danger or unreasonable annoyance.",[source("Justia — § 5-71-212",URLS.pubintox)]);
- let stat=v.basis==="danger"?"§ 5-71-212(a)(1)":"§ 5-71-212(a)(2)";
- let cls=v.priors==="yes"?"Unclassified misdemeanor — § 5-71-212(b)(2)(A)":"Class C misdemeanor — § 5-71-212(b)(1)";
- let r=resultBase("Public Intoxication",stat,cls);
- r.elements=["Public place","Manifestly under influence of alcohol or controlled substance",v.basis==="danger"?"Likely to endanger self, another person, or property":"Unreasonably annoys a person in the vicinity"];
- r.reportFacts=["Public location","Specific signs of intoxication: odor, balance, speech, behavior, admissions","Specific danger created OR identity/conduct toward person unreasonably annoyed","Witness statements and officer observations"];
- r.verbiage=v.basis==="danger"?"The subject appeared in a public place manifestly under the influence, exhibiting [specific signs], to the degree and under circumstances that made the subject likely to endanger [self/person/property] because [specific danger].":"The subject appeared in a public place manifestly under the influence, exhibiting [specific signs], and unreasonably annoyed [person] by [specific repeated conduct].";
- r.arrest=arrestText(cls,v.presence);
- r.sources=[source("Justia — § 5-71-212",URLS.pubintox),source("Arrest authority",URLS.arrest)];
- return r;
+ if(v.publicplace!=="yes"||v.manifest!=="yes")return insufficient("§ 5-71-212(a)","Need public place + manifest intoxication.",[source("Justia — § 5-71-212",URLS.pubintox)]);
+ let a=v.basis==="danger"?"(a)(1)":"(a)(2)",cls=v.priors==="yes"?"Unclassified misdemeanor":"Class C misdemeanor",b=v.priors==="yes"?"(b)(2)(A)-(B)":"(b)(1)";
+ let r=baseResult("Public Intoxication",`§ 5-71-212${a}, ${b}`,cls);r.elements=["Public place","Manifestly under influence of alcohol or controlled substance",v.basis==="danger"?"Likely to endanger self, another person, or property":"Unreasonably annoys a person in the vicinity"];
+ r.reportFacts=[`Objective intoxication signs/evidence: ${(v.intoxSigns||[]).join(", ")}`,v.basis==="danger"?`Danger facts: ${(v.dangerFacts||[]).join(", ")}`:`Annoyance facts: ${(v.annoyFacts||[]).join(", ")}`,...evidenceFacts(v)];
+ if(v.priors==="yes")r.chargeImpact.push("Two or more Public Intoxication convictions within 5 years change the current offense from Class C misdemeanor to the statute-specific unclassified misdemeanor under § 5-71-212(b)(2).");const f=unknownHistoryFlag(v.priors,"Public Intoxication priors within 5 years");if(f)r.enhancements.push(f);
+ r.verbiage=`The subject was in a public place and manifested intoxication through [${(v.intoxSigns||[]).join(", ")}]. ${v.basis==="danger"?"The subject was likely to endanger self/others/property because [specific danger facts].":"The subject unreasonably annoyed a person in the vicinity by [specific repeated conduct]."}`;
+ r.arrest=arrestText(cls,v.presence);r.penalty=v.priors==="yes"?"Statutory maximum: up to 30 days imprisonment + up to $500 fine. Probation/treatment may also be imposed; total imprisonment + probation cannot exceed 1 year under § 5-71-212(b)(2)(B).":penaltyFor(cls);r.sources=[source("Justia — § 5-71-212",URLS.pubintox),source("Arrest authority",URLS.arrest)];return r;
 };
-
-function nextHigher(cls){
- if(/Class A misdemeanor/i.test(cls)) return "Class D felony";
- if(/Class D felony/i.test(cls)) return "Class C felony";
- if(/Class C felony/i.test(cls)) return "Class B felony";
- if(/Class B felony/i.test(cls)) return "Class A felony";
- if(/Class A felony/i.test(cls)) return "Class Y felony";
- return cls+" — check next-higher classification";
-}
+function nextClass(c){return c==="Class A misdemeanor"?"Class D felony":c==="Class D felony"?"Class C felony":c==="Class C felony"?"Class B felony":c==="Class B felony"?"Class A felony":c}
 evaluators.possession=v=>{
- if(v.control!=="yes") return insufficient("§ 5-64-419(a)","Possession/control nexus is not established.",[source("Justia — § 5-64-419",URLS.possession)]);
- if(v.deliver==="yes") return insufficient("Outside simple-possession module","Facts suggest purpose to deliver. Evaluate the applicable PWTD statute rather than forcing a simple-possession result.",[source("Controlled substances subchapter",URLS.possession)]);
- if(v.substance==="unknown") return insufficient("Substance/schedule needed","Identify the controlled substance and schedule before classifying possession.",[source("Justia — § 5-64-419",URLS.possession)]);
- let n=Number(v.amount); if(!Number.isFinite(n)||n<0)return insufficient("Amount needed","Enter aggregate weight/amount.",[source("Justia — § 5-64-419",URLS.possession)]);
- const grams=v.unit==="g"?n:v.unit==="oz"?n*28.349523125:n*453.59237;
- const ounces=grams/28.349523125, pounds=grams/453.59237;
- let charge="Possession of a Controlled Substance",stat="",cls="",desc="";
- if(v.substance==="fentanyl"){
-   charge="Possession of Fentanyl";stat="§ 5-64-421(a)(1)-(2)";cls="Class C felony";desc="Unlawful possession of fentanyl. Fentanyl residue in paraphernalia is addressed separately by § 5-64-421(h).";
- }else if(v.substance==="mhc"){
-   if(grams<2){stat="§ 5-64-419(b)(1)(A)";cls="Class D felony";}
-   else if(grams<10){stat="§ 5-64-419(b)(1)(B)";cls="Class C felony";}
-   else if(grams<200){stat="§ 5-64-419(b)(1)(C)";cls="Class B felony";}
-   else return insufficient("Amount outside automated simple-possession range","Two hundred grams or more of methamphetamine/heroin/cocaine: evaluate trafficking/PWTD/manufacture statutes.",[source("Justia — § 5-64-419",URLS.possession)]);
- }else if(v.substance==="s12other"){
-   if(grams<2){stat="§ 5-64-419(b)(2)(A)";cls="Class D felony";}
-   else if(grams<28){stat="§ 5-64-419(b)(2)(B)";cls="Class C felony";}
-   else if(grams<200){stat="§ 5-64-419(b)(2)(C)";cls="Class B felony";}
-   else return insufficient("Amount outside automated simple-possession range","Two hundred grams or more: evaluate other controlled-substance offenses.",[source("Justia — § 5-64-419",URLS.possession)]);
- }else if(v.substance==="s3"){
-   if(grams<2){stat="§ 5-64-419(b)(3)(A)";cls=v.priors4==="yes"?"Class D felony":"Class A misdemeanor";}
-   else if(grams<28){stat="§ 5-64-419(b)(3)(B)";cls="Class D felony";}
-   else if(grams<200){stat="§ 5-64-419(b)(3)(C)";cls="Class C felony";}
-   else if(grams<400){stat="§ 5-64-419(b)(3)(D)";cls="Class B felony";}
-   else return insufficient("Amount outside automated simple-possession range","Four hundred grams or more Schedule III: evaluate other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);
- }else if(v.substance==="s45"){
-   if(grams<28){stat="§ 5-64-419(b)(4)(A)";cls=v.priors4==="yes"?"Class D felony":"Class A misdemeanor";}
-   else if(grams<200){stat="§ 5-64-419(b)(4)(B)";cls="Class D felony";}
-   else if(grams<400){stat="§ 5-64-419(b)(4)(C)";cls="Class C felony";}
-   else if(grams<800){stat="§ 5-64-419(b)(4)(D)";cls="Class B felony";}
-   else return insufficient("Amount outside automated simple-possession range","Eight hundred grams or more Schedule IV/V: evaluate other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);
- }else if(v.substance==="s6"){
-   if(ounces<4){stat="§ 5-64-419(b)(5)(A)";cls="Class A misdemeanor";if(ounces>=1&&v.priors4==="yes"){stat="§ 5-64-419(b)(5)(B)";cls="Class D felony";}}
-   else if(pounds<10){stat="§ 5-64-419(b)(5)(C)";cls="Class D felony";}
-   else if(pounds<25){stat="§ 5-64-419(b)(5)(D)";cls="Class C felony";}
-   else if(pounds<100){stat="§ 5-64-419(b)(5)(E)";cls="Class B felony";}
-   else if(pounds<500){stat="§ 5-64-419(b)(5)(F)";cls="Class A felony";}
-   else return insufficient("Amount outside automated simple-possession range","Five hundred pounds or more Schedule VI: evaluate trafficking/other applicable statutes.",[source("Justia — § 5-64-419",URLS.possession)]);
- }
- const originalCls=cls;
- if(v.inmate==="yes"){cls=nextHigher(cls);stat+="; enhancement § 5-64-419(c)";}
- let r=resultBase(charge,stat,cls);
- r.elements=["Unlawful possession","Actual dominion/control/management or facts supporting constructive possession","Controlled substance identity/schedule",`Aggregate amount entered: ${n} ${v.unit==="g"?"grams":v.unit==="oz"?"ounces":"pounds"}`];
- if(desc) r.elements.push(desc);
- r.reportFacts=["Exact location of substance and nexus to suspect","Actual/constructive possession facts","Packaging/container and substance appearance","Test/identification basis","Aggregate weight including adulterant/diluent","Statements, admissions, bodycam/photos, chain of custody"];
- r.confirm=["Confirm substance identity/schedule and lab/field-test procedure as applicable.","Check for PWTD indicators before using simple-possession result."];
- if(v.inmate==="yes") r.enhancements.push(`Inmate enhancement selected: ${originalCls} increased to ${cls} under § 5-64-419(c).`);
- r.verbiage=`The suspect exercised actual/constructive dominion, control, or management over [substance] located [where], with an aggregate weight of [weight]. Facts connecting the substance to the suspect included [specific possession/nexus facts].`;
- r.arrest=arrestText(cls,v.presence);
- r.sources=[source(v.substance==="fentanyl"?"Justia — § 5-64-421":"Justia — § 5-64-419",v.substance==="fentanyl"?URLS.fentanyl:URLS.possession),source("Definition of possess — § 5-1-102(15)",URLS.defs),source("Arrest authority",URLS.arrest)];
- return r;
+ if(v.control!=="yes")return insufficient("§ 5-64-419(a)","Possession/control nexus not established.",[source("Justia — § 5-64-419",URLS.possession)]);
+ if(v.deliver==="yes")return insufficient("Simple-possession module","Facts suggest purpose to deliver; evaluate PWTD instead.",[source("Justia — § 5-64-419",URLS.possession)]);
+ if(v.substance==="unknown")return insufficient("Substance/schedule needed","Identify substance/schedule before final classification.",[source("Justia — § 5-64-419",URLS.possession)]);
+ const n=Number(v.amount),g=v.unit==="g"?n:v.unit==="oz"?n*28.349523125:n*453.59237,oz=g/28.349523125,lb=g/453.59237;let stat,cls,url=URLS.possession,charge="Possession of Controlled Substance";
+ if(v.substance==="fentanyl"){charge="Possession of Fentanyl";stat="§ 5-64-421(a)(1)-(2)";cls="Class C felony";url=URLS.fentanyl;}
+ else if(v.substance==="mhc"){if(g<2){stat="§ 5-64-419(b)(1)(A)";cls="Class D felony";}else if(g<10){stat="§ 5-64-419(b)(1)(B)";cls="Class C felony";}else if(g<200){stat="§ 5-64-419(b)(1)(C)";cls="Class B felony";}else return insufficient("Amount outside automated simple-possession range","Evaluate other controlled-substance offenses.",[source("Justia — § 5-64-419",URLS.possession)]);}
+ else if(v.substance==="s12other"){if(g<2){stat="§ 5-64-419(b)(2)(A)";cls="Class D felony";}else if(g<28){stat="§ 5-64-419(b)(2)(B)";cls="Class C felony";}else if(g<200){stat="§ 5-64-419(b)(2)(C)";cls="Class B felony";}else return insufficient("Amount outside automated range","Evaluate other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);}
+ else if(v.substance==="s3"){if(g<2){stat=v.priors4==="yes"?"§ 5-64-419(b)(3)(A)(ii)":"§ 5-64-419(b)(3)(A)(i)";cls=v.priors4==="yes"?"Class D felony":"Class A misdemeanor";}else if(g<28){stat="§ 5-64-419(b)(3)(B)";cls="Class D felony";}else if(g<200){stat="§ 5-64-419(b)(3)(C)";cls="Class C felony";}else if(g<400){stat="§ 5-64-419(b)(3)(D)";cls="Class B felony";}else return insufficient("Amount outside automated range","Evaluate other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);}
+ else if(v.substance==="s45"){if(g<28){stat=v.priors4==="yes"?"§ 5-64-419(b)(4)(A)(ii)":"§ 5-64-419(b)(4)(A)(i)";cls=v.priors4==="yes"?"Class D felony":"Class A misdemeanor";}else if(g<200){stat="§ 5-64-419(b)(4)(B)";cls="Class D felony";}else if(g<400){stat="§ 5-64-419(b)(4)(C)";cls="Class C felony";}else if(g<800){stat="§ 5-64-419(b)(4)(D)";cls="Class B felony";}else return insufficient("Amount outside automated range","Evaluate other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);}
+ else if(v.substance==="s6"){if(oz<4){if(oz>=1&&v.priors4==="yes"){stat="§ 5-64-419(b)(5)(B)";cls="Class D felony";}else{stat="§ 5-64-419(b)(5)(A)";cls="Class A misdemeanor";}}else if(lb<10){stat="§ 5-64-419(b)(5)(C)";cls="Class D felony";}else if(lb<25){stat="§ 5-64-419(b)(5)(D)";cls="Class C felony";}else if(lb<100){stat="§ 5-64-419(b)(5)(E)";cls="Class B felony";}else if(lb<500){stat="§ 5-64-419(b)(5)(F)";cls="Class A felony";}else return insufficient("Amount outside automated range","Evaluate trafficking/other offenses.",[source("Justia — § 5-64-419",URLS.possession)]);}
+ if(v.inmate==="yes"&&v.substance!=="fentanyl"){const old=cls;cls=nextClass(cls)||cls;stat+=`, (c)`;}
+ let r=baseResult(charge,stat,cls);r.elements=["Unlawful possession","Actual or constructive dominion/control/management","Controlled-substance identity/schedule",`Aggregate amount: ${n} ${v.unit}`];r.reportFacts=["Exact location and nexus to suspect","Actual/constructive possession facts","Packaging / appearance / identification basis","Aggregate weight including adulterant/diluent","Chain of custody",...evidenceFacts(v)];
+ const f=unknownHistoryFlag(v.priors4,"Possession-history enhancement");if(f)r.enhancements.push(f);if(v.inmate==="yes")r.enhancements.push("Inmate enhancement applied where § 5-64-419(c) applies.");
+ r.verbiage="The suspect exercised actual/constructive dominion, control, or management over [substance] located [where], with an aggregate weight of [weight]. Facts connecting the substance to the suspect included [specific nexus facts].";r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=[source("Primary statute",url),source("Arrest authority",URLS.arrest)];return r;
 };
-
 evaluators.paraphernalia=v=>{
- if(v.purposeproof!=="yes") return insufficient("§ 5-64-443","Possession of an ordinary object is not enough; facts must establish purpose to use it for a listed drug function.",[source("Justia — § 5-64-443",URLS.paraphernalia)]);
- if(v.substance==="unknown") return insufficient("Substance association needed","The item's purpose is established, but substance type is needed to determine whether a felony enhancement applies.",[source("Justia — § 5-64-443",URLS.paraphernalia)]);
+ if(v.purposeproof!=="yes")return insufficient("§ 5-64-443","Possession of an ordinary object alone is insufficient; drug-related purpose not established.",[source("Justia — § 5-64-443",URLS.paraphernalia)]);
+ if(v.substance==="unknown")return insufficient("Associated substance needed","Substance type needed to resolve enhancement.",[source("Justia — § 5-64-443",URLS.paraphernalia)]);
  let stat,cls;
- if(v.purpose==="use"){
-   stat="§ 5-64-443(a)";
-   cls=(v.substance==="high"&&v.prior==="yes")?"Class D felony — § 5-64-443(a)(2)":"Class A misdemeanor — § 5-64-443(a)(1)";
- }else{
-   stat="§ 5-64-443(b)";
-   cls=v.substance==="high"?"Class B felony — § 5-64-443(b)(2)":"Class D felony — § 5-64-443(b)(1)";
- }
- let r=resultBase("Possession of Drug Paraphernalia",stat,cls);
- r.elements=["Possessed/used drug paraphernalia","Purpose to use it for the selected statutory drug function",v.substance==="high"?"Associated substance: methamphetamine, heroin, fentanyl, or cocaine":"Associated controlled substance"];
- r.reportFacts=["Exact item and where found","Facts proving suspect possessed/controlled item","Drug-specific purpose: residue, configuration, statements, surrounding evidence","Associated substance and test/identification basis","Prior Chapter 64 conviction if relied on for § 5-64-443(a)(2)"];
- r.confirm=["Same conduct may support only one conviction under § 5-64-443(c).","Fentanyl residue in paraphernalia is not charged as fentanyl possession under § 5-64-421(h); evaluate § 5-64-443."];
- r.verbiage=`The suspect possessed [item] with the purpose to use it to ${v.purpose==="use"?"inject/ingest/inhale/introduction or store/contain/conceal/weigh a controlled substance":"plant/grow/manufacture/process/prepare/test/analyze/pack/repack a controlled substance"}. The drug-related purpose was supported by [residue/configuration/statements/location/other facts].`;
- r.arrest=arrestText(cls.split(" — ")[0],v.presence);
- r.sources=[source("Justia — § 5-64-443",URLS.paraphernalia),source("Fentanyl residue rule — § 5-64-421(h)",URLS.fentanyl),source("Arrest authority",URLS.arrest)];
- return r;
+ if(v.purpose==="use"){if(v.substance==="high"&&v.prior==="yes"){stat="§ 5-64-443(a)(2)(A)-(B)";cls="Class D felony";}else{stat="§ 5-64-443(a)(1)";cls="Class A misdemeanor";}}
+ else{if(v.substance==="high"){stat="§ 5-64-443(b)(2)";cls="Class B felony";}else{stat="§ 5-64-443(b)(1)";cls="Class D felony";}}
+ let r=baseResult("Possession of Drug Paraphernalia",stat,cls);r.elements=["Possessed/used drug paraphernalia","Purpose to use it for selected statutory drug function",`Associated substance category: ${v.substance}`];r.reportFacts=["Exact item / location","Possession/control facts","Residue/configuration/statements proving drug-related purpose","Associated substance identification","Prior Chapter 64 conviction if relied upon",...evidenceFacts(v)];
+ if(v.purpose==="use"&&v.substance==="high"&&v.prior==="yes")r.chargeImpact.push("High-risk associated drug + prior Chapter 64 conviction elevates the § 5-64-443(a) paraphernalia offense from Class A misdemeanor to Class D felony.");const f=unknownHistoryFlag(v.prior,"Prior Chapter 64 conviction");if(f)r.enhancements.push(f);r.confirm=["Same conduct may support only one conviction under § 5-64-443(c).","Fentanyl residue in paraphernalia is addressed by § 5-64-443 rather than standalone fentanyl possession under § 5-64-421(h)."];
+ r.verbiage=`The suspect possessed [item] with the purpose to use it to ${v.purpose==="use"?"inject/ingest/inhale/introduction or store/contain/conceal/weigh a controlled substance":"plant/grow/manufacture/process/prepare/test/analyze/pack/repack a controlled substance"}. The drug-related purpose was supported by [residue/configuration/statements/location].`;r.arrest=arrestText(cls,v.presence);r.penalty=penaltyFor(cls);r.sources=[source("Justia — § 5-64-443",URLS.paraphernalia),source("Arrest authority",URLS.arrest)];return r;
 };
 
 function renderResult(r){
- const el=document.getElementById("result");
- const ak=r.arrest?.kind||"no", arrestClass=ak==="yes"?"arrest-yes":ak==="maybe"?"arrest-maybe":"arrest-no";
- const badge=isFelony(r.classification)?"felony":"misd";
- const list=a=>(a&&a.length)?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<span style="color:var(--muted)">None flagged.</span>`;
- el.innerHTML=`<div class="result">
- <div class="result-head"><div class="eyebrow">LIKELY CHARGE / TRIAGE RESULT</div><h2>${esc(r.charge)}</h2><div class="statute">${esc(r.statute)}</div><div class="badge-row"><span class="badge ${badge}">${esc(r.classification)}</span></div></div>
- <div class="result-grid">
-  <div class="block"><h3>Warrantless Arrest?</h3><div class="${arrestClass}">${esc(r.arrest?.text||"Check arrest authority.")}</div></div>
-  <div class="block"><h3>Elements Met / Required</h3>${list(r.elements)}</div>
-  <div class="block"><h3>Confirm Before Charging</h3>${list(r.confirm)}</div>
-  <div class="block"><h3>Enhancements / Situation Flags</h3>${list(r.enhancements)}</div>
-  <div class="block full"><h3>Report Facts to Articulate</h3>${list(r.reportFacts)}</div>
-  <div class="block full"><h3>Charge-Specific Report Verbiage</h3><div class="quote">${esc(r.verbiage)}</div></div>
-  <div class="block full sources"><h3>Primary / Verification Sources</h3>${(r.sources||[]).map(s=>`<a target="_blank" rel="noopener" href="${s.url}">${esc(s.label)} ↗</a>`).join("")}</div>
- </div>
- </div>
- <div class="actions"><button class="primary" onclick="copyResult()">Copy Triage Result</button><button class="secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button><span id="copyok" class="copy-ok"></span></div>`;
- el.scrollIntoView({behavior:"smooth",block:"start"});
+ const el=document.getElementById("result"),ak=r.arrest?.kind||"no",ac=ak==="yes"?"arrest-yes":ak==="maybe"?"arrest-maybe":"arrest-no";
+ const list=a=>a&&a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<span style="color:var(--muted)">None flagged.</span>`;
+ const why=defaultWhy(r);
+ const impact=(r.chargeImpact||[]).length?`<div class="block full"><h3>Why History / Enhancement Matters</h3><div class="impactbox"><strong>CHARGE IMPACT</strong><ul>${r.chargeImpact.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`:"";
+ const confirm=(r.confirm||[]).length?`<div class="block full"><h3>Specific Unresolved Fact — Confirm Before Charging</h3>${list(r.confirm)}</div>`:"";
+ el.innerHTML=`<div class="result"><div class="result-head"><div class="eyebrow">LIKELY CHARGE / TRIAGE RESULT</div><h2>${esc(r.charge)}</h2><div class="statute">${esc(r.statute)}</div><div class="badges"><span class="badge ${isFelony(r.classification)?"red":""}">${esc(r.classification)}</span></div><div class="penalty"><strong>MAX PENALTY / STATUTORY RANGE</strong><br>${esc(r.penalty||penaltyFor(r.classification))}</div><div class="whybox"><strong>WHY THIS CHARGE IS CORRECT</strong><br>${esc(why)}</div></div>
+ <div class="result-grid">${impact}<div class="block"><h3>Warrantless Arrest?</h3><div class="${ac}">${esc(r.arrest?.text||"Check arrest authority.")}</div></div><div class="block"><h3>Elements Resolved From Your Answers</h3>${list(r.elements)}</div>${confirm}<div class="block full"><h3>Enhancements / Situation Flags</h3>${list(r.enhancements)}</div><div class="block full"><h3>Report Facts to Articulate</h3>${list(r.reportFacts)}</div><div class="block full"><h3>Charge-Specific Report Verbiage</h3><div class="quote">${esc(r.verbiage)}</div></div><div class="block full sources"><h3>Primary / Verification Sources</h3>${(r.sources||[]).map(s=>`<a target="_blank" rel="noopener" href="${s.url}">${esc(s.label)} ↗</a>`).join("")}</div></div></div>
+ <div class="actions"><button class="primary" onclick="generateReport()">Generate Optional Report Skeleton</button><button class="secondary" onclick="copyResult()">Copy Triage Result</button></div><div id="reportOut"></div>`;
+ el.dataset.result=JSON.stringify(r);el.scrollIntoView({behavior:"smooth",block:"start"});
 }
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
-function copyResult(){
- const r=document.querySelector(".result");if(!r)return;
- const text=r.innerText;
- if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>doneCopy());}
- else{
-   const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
-   try{document.execCommand("copy");doneCopy();}catch(e){} ta.remove();
+function generateReport(){
+ const el=document.getElementById("result"),r=JSON.parse(el.dataset.result||"{}");
+ const loc=currentVals.exactLocation||currentVals.locationType||"[LOCATION]";
+ let ev=evidenceFacts(currentVals).join(". ");
+ let skeleton=`On [DATE/TIME], I responded to ${loc} regarding [CALL TYPE]. I made contact with [VICTIM / COMPLAINANT / WITNESSES] and [SUSPECT].\n\n`;
+ if(currentVals.relationship&&currentVals.relationship!=="none")skeleton+=`The parties' qualifying family/household relationship was [DESCRIBE RELATIONSHIP]. `;
+ skeleton+=`${r.verbiage}\n\n`;
+ if(r.reportFacts?.length)skeleton+=`Additional facts to document: ${r.reportFacts.join("; ")}.\n\n`;
+ if(ev)skeleton+=`Evidence / preservation notes: ${ev}.\n\n`;
+ skeleton+=`Based on the above facts, the conduct was evaluated under ${r.statute} (${r.charge}). [ARREST / CITATION / WARRANT / DISPOSITION].`;
+ document.getElementById("reportOut").innerHTML=`<div class="report-box"><h3>OPTIONAL REPORT SKELETON</h3><div class="body"><textarea id="reportText">${esc(skeleton)}</textarea><div class="actions"><button class="primary" onclick="copyReport()">Copy Report Skeleton</button></div></div></div>`;
+}
+function copyResult(){const r=document.querySelector(".result");copyText(r?r.innerText:"")}
+function copyReport(){const t=document.getElementById("reportText");copyText(t?t.value:"")}
+function copyText(t){if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t);else{let a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();}}
+
+function openLibrary(){
+ hideAll();const el=document.getElementById("library");el.classList.remove("hidden");
+ el.innerHTML=topTitle("Infographic Library")+`<div class="hero"><h2>Quick-reference pages</h2><p>Tap an infographic to open it full screen. Additional finalized pages can be added to this same library without changing the app address.</p></div><div class="library-grid">${libraryItems.map(x=>`<div class="lib-card"><img src="${x[1]}" alt="${x[0]}" loading="lazy"><strong>${x[0]}</strong><button class="secondary" onclick="viewImage('${x[1]}')">Open Full Screen</button></div>`).join("")}</div>`;
+}
+function viewImage(src){document.getElementById("viewerImg").src=src;document.getElementById("viewer").classList.add("open")}
+function closeViewer(){document.getElementById("viewer").classList.remove("open")}
+
+function openTraffic(){
+ hideAll();const el=document.getElementById("traffic");el.classList.remove("hidden");
+ el.innerHTML=topTitle("Standard Traffic Validation")+`<div class="hero"><h2>Automobile criteria validation</h2><p>This section is intentionally simple. Select a suspected violation and verify the statutory criteria. More common violations will be added later.</p></div>
+ <div class="card"><div class="module-title"><h2>Reckless Driving</h2><p>Ark. Code § 27-50-308</p></div>
+ <div class="tier-title required">Criteria validation</div>
+ <div class="q"><label>Did the driving indicate <strong class="kw-danger">WANTON DISREGARD</strong> for the safety of persons or property? <span class="reqmark">*</span></label><div class="seg"><button onclick="trafficVal('wanton','yes')" id="twYes">YES</button><button onclick="trafficVal('wanton','no')" id="twNo">NO</button><button onclick="trafficVal('wanton','unknown')" id="twUn">UNKNOWN</button></div><span class="hint">Speed alone is not automatically the statutory element; articulate the total driving conduct showing wanton disregard.</span></div>
+ <div class="q"><label>Did physical injury result?</label><div class="seg"><button onclick="trafficVal('injury','yes')" id="tiYes">YES</button><button onclick="trafficVal('injury','no')" id="tiNo">NO</button><button onclick="trafficVal('injury','unknown')" id="tiUn">UNKNOWN</button></div></div>
+ <div class="q"><label>Prior Reckless Driving within 3 years?</label><div class="seg"><button onclick="trafficVal('prior','yes')" id="tpYes">YES</button><button onclick="trafficVal('prior','no')" id="tpNo">NO</button><button onclick="trafficVal('prior','unknown')" id="tpUn">UNKNOWN</button></div><span class="hint">Prior history changes the statutory sentencing range.</span></div>
+ <div class="actions"><button class="primary" onclick="evalReckless()">Validate Reckless Driving</button></div></div><div id="trafficResult"></div>`;
+ window.trafficState={};scrollTo(0,0);
+}
+function trafficVal(k,v){trafficState[k]=v;["yes","no","unknown"].forEach(x=>{let id=(k==="wanton"?"tw":k==="injury"?"ti":"tp")+(x==="yes"?"Yes":x==="no"?"No":"Un");let b=document.getElementById(id);if(b)b.classList.toggle("selected",x===v)})}
+function evalReckless(){
+ const r=document.getElementById("trafficResult");if(!trafficState.wanton){r.innerHTML=`<div class="error">Select whether wanton disregard is established.</div>`;return}
+ if(trafficState.wanton!=="yes"){r.innerHTML=`<div class="vehicle-result"><div class="vehicle-head"><h2>RECKLESS DRIVING NOT VALIDATED</h2></div><div class="block full"><strong>Missing core element:</strong> driving in a manner indicating wanton disregard for safety of persons or property. § 27-50-308(a).</div></div>`;return}
+ let range;
+ if(trafficState.prior==="yes"&&trafficState.injury==="yes")range="Second/subsequent within 3 years + injury: 60 days–1 year imprisonment OR $500–$1,000 fine, or both. § 27-50-308(b)(2)(B).";
+ else if(trafficState.prior==="yes")range="Second/subsequent within 3 years: 30 days–6 months imprisonment OR $500–$1,000 fine, or both. § 27-50-308(b)(2)(A).";
+ else if(trafficState.injury==="yes")range="First conviction + physical injury: 30–90 days imprisonment OR $100–$1,000 fine, or both. § 27-50-308(b)(1)(A).";
+ else range="First conviction, no physical injury: 5–90 days imprisonment OR $25–$500 fine, or both. § 27-50-308(b)(1)(B).";
+ let flags=[];if(trafficState.prior==="unknown")flags.push("CHECK PRIOR HISTORY — a prior reckless-driving offense within 3 years changes the sentencing range.");if(trafficState.injury==="unknown")flags.push("Confirm whether physical injury resulted; it changes the sentencing range.");
+ r.innerHTML=`<div class="vehicle-result"><div class="vehicle-head"><h2>RECKLESS DRIVING — CRITERIA MET</h2><div>§ 27-50-308(a)</div></div><div class="block full"><h3>Required criterion</h3><ul><li>Vehicle driven in a manner indicating <strong>wanton disregard</strong> for safety of persons or property.</li></ul></div><div class="block full"><h3>Penalty range for selected facts</h3>${range}</div><div class="block full"><h3>Confirm / history prompts</h3>${flags.length?`<ul>${flags.map(x=>`<li>${x}</li>`).join("")}</ul>`:"None flagged."}</div><div class="block full sources"><a target="_blank" href="${URLS.reckless}">Justia — § 27-50-308 ↗</a></div></div>`;
+}
+
+function openSpecialVehicle(){
+ hideAll();const el=document.getElementById("special");el.classList.remove("hidden");window.sv={};
+ el.innerHTML=topTitle("Special Vehicle Triage")+`<div class="hero"><h2>What am I looking at?</h2><p>Classify the device first. Then confirm observable stop indicators, licensing / registration / insurance / equipment requirements, and the limits that would make a citation invalid.</p></div>
+ <div class="card"><div class="tier-title required">Device identification</div>
+ ${svChoice("device","Observed device / best visual match",[["ebike","Electric bicycle / bicycle-style"],["escooter","Stand-up electric scooter"],["electricmc","Electric dirt bike / electric motorcycle"],["motorcycle","Gas motorcycle / motor-driven cycle"],["moped","Moped / motorized bicycle"],["slingshot","Polaris Slingshot / autocycle"]])}
+ <div id="svDynamic"></div><div class="actions"><button class="primary" onclick="evalSpecialVehicle()">Triage Special Vehicle</button></div></div><div id="svResult"></div>`;
+ scrollTo(0,0);
+}
+function svChoice(id,label,opts){return `<div class="q"><label>${label}</label><div class="choice-grid">${opts.map(o=>`<button type="button" class="choice" id="sv-${id}-${o[0]}" onclick="svSet('${id}','${o[0]}')"><span class="radio"></span><span><strong>${o[1]}</strong></span></button>`).join("")}</div></div>`}
+function svSet(k,v){sv[k]=v;document.querySelectorAll(`[id^="sv-${k}-"]`).forEach(x=>x.classList.remove("selected"));let b=document.getElementById(`sv-${k}-${v}`);if(b)b.classList.add("selected");renderSVDynamic()}
+function svSeg(k,v){sv[k]=v;renderSVDynamic()}
+function svInput(k,v){sv[k]=v}
+function renderSVDynamic(){
+ const d=sv.device,el=document.getElementById("svDynamic");if(!d){el.innerHTML="";return}
+ let h="";
+ if(d==="ebike"||d==="electricmc"){
+  h+=`<div class="q"><label>Fully operable pedals?</label><div class="seg"><button onclick="svSeg('pedals','yes')" class="${sv.pedals==="yes"?"selected":""}">YES</button><button onclick="svSeg('pedals','no')" class="${sv.pedals==="no"?"selected":""}">NO</button><button onclick="svSeg('pedals','unknown')" class="${sv.pedals==="unknown"?"selected":""}">UNKNOWN</button></div></div>
+  <div class="q"><label>Motor wattage (if known)</label><input type="number" value="${sv.watts||""}" onchange="svInput('watts',this.value)" placeholder="e.g. 750"></div>
+  <div class="q"><label>Motor operation / assisted cutoff</label><select onchange="svInput('assist',this.value)"><option value="">— Select —</option><option value="p20">Pedal-assist only; stops at 20 mph</option><option value="throttle20">Throttle can propel; stops at 20 mph</option><option value="p28">Pedal-assist only; stops at 28 mph</option><option value="over">Assists / propels above legal e-bike thresholds</option><option value="unknown">Unknown</option></select></div>`;
  }
+ if(d==="escooter"){
+  h+=`<div class="q"><label>Standing floorboard + handlebar + 2/3 wheels?</label><div class="seg"><button onclick="svSeg('scooterShape','yes')" class="${sv.scooterShape==="yes"?"selected":""}">YES</button><button onclick="svSeg('scooterShape','no')" class="${sv.scooterShape==="no"?"selected":""}">NO</button><button onclick="svSeg('scooterShape','unknown')" class="${sv.scooterShape==="unknown"?"selected":""}">UNKNOWN</button></div></div>
+  <div class="q"><label>Approx. maximum capability ≤ 20 mph?</label><div class="seg"><button onclick="svSeg('cap20','yes')" class="${sv.cap20==="yes"?"selected":""}">YES</button><button onclick="svSeg('cap20','no')" class="${sv.cap20==="no"?"selected":""}">NO</button><button onclick="svSeg('cap20','unknown')" class="${sv.cap20==="unknown"?"selected":""}">UNKNOWN</button></div></div>`;
+ }
+ if(["motorcycle","moped"].includes(d)){
+  h+=`<div class="q"><label>Engine displacement (cc), if known</label><input type="number" value="${sv.cc||""}" onchange="svInput('cc',this.value)" placeholder="e.g. 49, 150, 300"></div>`;
+ }
+ if(d==="slingshot"){
+  h+=`<div class="callout info">A Slingshot-style vehicle with 3 tires, steering wheel, non-straddle seating, and the required headlights/tail lamps/brakes/horn/signal lamps generally fits Arkansas's <strong>autocycle</strong> definition under § 27-20-303. Seat-belt requirements are addressed separately in § 27-20-306(b).</div>`;
+ }
+ h+=`<div class="tier-title optional">Observable stop indicators / things to check</div>
+ <div class="check-grid">
+ ${[
+ ["noPlate","No visible registration plate where one would be required"],
+ ["noLight","Missing / inoperative headlight or rear lamp when applicable"],
+ ["noHelmet","Operator/passenger appears under 21 and no helmet"],
+ ["noEye","No protective glasses/goggles/face shield on motorcycle-type vehicle"],
+ ["young","Operator appears below statutory minimum age"],
+ ["speed","Observed speed appears above device-specific limit"],
+ ["sidewalk","Operating on sidewalk / prohibited path / limited-access roadway"],
+ ["passenger","Young passenger / passenger-equipment issue"],
+ ["unsafe","Other observable equipment / unsafe-operation issue"]
+ ].map(o=>`<label class="check"><input type="checkbox" ${sv[o[0]]?"checked":""} onchange="sv['${o[0]}']=this.checked"><span>${o[1]}</span></label>`).join("")}</div>`;
+ el.innerHTML=h;
 }
-function doneCopy(){const x=document.getElementById("copyok");if(x){x.textContent="Copied";setTimeout(()=>x.textContent="",1600);}}
-</script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed:', err));
-  });
+function evalSpecialVehicle(){
+ const r=document.getElementById("svResult");if(!sv.device){r.innerHTML=`<div class="error">Select the observed device.</div>`;return}
+ let type="",basis=[],requirements=[],stop=[],limits=[],sources=[];
+ if(["ebike","electricmc"].includes(sv.device)){
+   const watts=Number(sv.watts||0),qualPedals=sv.pedals==="yes",assist=sv.assist;
+   if(qualPedals && (!watts||watts<750) && ["p20","throttle20","p28"].includes(assist)){
+     type=assist==="p20"?"Class 1 Electric Bicycle":assist==="throttle20"?"Class 2 Electric Bicycle":"Class 3 Electric Bicycle";
+     basis.push("Fully operable pedals","Electric motor under 750 W",type==="Class 1 Electric Bicycle"?"Pedal-assist only; assistance ceases at 20 mph":type==="Class 2 Electric Bicycle"?"Motor may propel without pedaling; assistance ceases at 20 mph":"Pedal-assist only; assistance ceases at 28 mph");
+     requirements.push("E-bike is not a motor vehicle; no motor-vehicle insurance, registration, operator-license, or title requirement under § 27-51-1703.");
+     if(type==="Class 3 Electric Bicycle")requirements.push("Operator must be 16+; operator/passenger under 21 must wear helmet; Class 3 must have speedometer. § 27-51-1706.");
+     requirements.push("Manufacturer/distributor label identifies class, top assisted speed, and motor wattage; tampering/modification requires replacement label. § 27-51-1704.");
+     if(sv.young&&type==="Class 3 Electric Bicycle")stop.push("Possible stop/citation basis: operator appears under 16 — confirm age. § 27-51-1706(a)(1).");
+     if(sv.noHelmet&&type==="Class 3 Electric Bicycle")stop.push("Possible basis: Class 3 operator/passenger appears under 21 without required helmet — confirm age. § 27-51-1706(b).");
+     if(sv.sidewalk&&type==="Class 3 Electric Bicycle")stop.push("Check path restriction: Class 3 prohibited on bicycle/multi-use path unless within/adjacent to highway/roadway or locally permitted. § 27-51-1705(b).");
+     limits.push("Do NOT apply motorcycle registration/license/insurance rules merely because the e-bike is electric; qualifying e-bikes are expressly excluded.");
+     sources=[source("E-bike definition",URLS.ebikeDef),source("E-bike legal status",URLS.ebikeRules),source("Equipment",URLS.ebikeEquipment),source("Class 3 rules",URLS.ebikeClass3),source("Path rules",URLS.ebikePaths)];
+   }else{
+     type="Does NOT cleanly qualify as an Arkansas electric bicycle";
+     basis.push("A legal e-bike requires fully operable pedals + electric motor under 750 W + one of the Class 1/2/3 speed/operation definitions.");
+     requirements.push("Evaluate whether the device is instead a motorcycle / other motor vehicle based on seat/saddle, wheels, self-propulsion, and actual specifications.");
+     if(sv.noPlate)stop.push("If further facts establish the device is a registrable motorcycle/motor-driven cycle, lack of required registration/plate may provide an enforcement basis.");
+     if(sv.noHelmet||sv.noEye)stop.push("If classified as motorcycle/motor-driven cycle, helmet/eye-protection rules may apply under § 27-20-104(b).");
+     limits.push("Do not cite motorcycle-specific registration/license violations until the device's legal classification is established.");
+     sources=[source("E-bike definition",URLS.ebikeDef),source("General motorcycle definition",URLS.cycleDef),source("Motorcycle equipment",URLS.cycleEquip)];
+   }
+ } else if(sv.device==="escooter"){
+   if(sv.scooterShape==="yes"&&sv.cap20!=="no"){
+     type="Electric Motorized Scooter";
+     basis.push("Under 100 lb. (confirm if disputed)","2 or 3 wheels","Handlebar","Standing floorboard","Electric motor","Maximum capability 20 mph or less");
+     requirements.push("Operator must be at least 16. § 27-51-1903(1).","May not be operated over 15 mph. § 27-51-1903(2).");
+     if(sv.young)stop.push("Possible stop/citation basis: rider appears under 16 — confirm age.");
+     if(sv.speed)stop.push("Possible stop/citation basis: observed operation above 15 mph — articulate speed basis.");
+     limits.push("The statutory scooter definition excludes motorcycles, e-bikes, motor-driven cycles, motorized bicycles, and mopeds.");
+     sources=[source("E-scooter definition",URLS.escooterDef),source("E-scooter operation",URLS.escooterOp)];
+   }else{
+     type="May NOT meet Electric Motorized Scooter definition";
+     basis.push("Confirm weight, floorboard/handlebar/wheel configuration, and maximum capability.");
+     requirements.push("If the device falls outside § 27-51-1902, classify under the applicable motorcycle/motor vehicle/e-bike statute before charging.");
+     sources=[source("E-scooter definition",URLS.escooterDef)];
+   }
+ } else if(sv.device==="moped"){
+   const cc=Number(sv.cc||0);type=cc&&cc<=50?"Motorized Bicycle (traditional gas moped-type)":"Motorized Bicycle / Motor-Driven Cycle — confirm engine size and transmission";
+   basis.push("Motorized bicycle: automatic transmission + engine ≤ 50 cc; excludes electric bicycle. § 27-20-101(3).");
+   requirements.push("Operator must have qualifying certificate/license; no certificate issued under age 14. § 27-20-111(c).","Cannot operate motorized bicycle on interstate highways, limited-access highways, or sidewalks. § 27-20-111(b).","Equipment requirements in § 27-20-104(d); helmet under 21 + eye protection under § 27-20-104(b).");
+   if(sv.sidewalk)stop.push("Observable basis: motorized bicycle operated on sidewalk / interstate / limited-access highway. § 27-20-111(b).");
+   if(sv.noHelmet)stop.push("Possible basis: operator/passenger appears under 21 without helmet — confirm age. § 27-20-104(b)(1).");
+   if(sv.noEye)stop.push("Possible basis: required protective eye/face equipment absent. § 27-20-104(b)(2).");
+   sources=[source("Definitions",URLS.cycleDef),source("Motorized bicycle rules",URLS.motorizedBicycle),source("Equipment",URLS.cycleEquip)];
+ } else if(sv.device==="motorcycle"){
+   const cc=Number(sv.cc||0);type=cc?cc>250?"Motorcycle (>250 cc)":"Motor-Driven Cycle (≤250 cc, excluding motorized bicycle)":"Motorcycle / Motor-Driven Cycle — confirm cc";
+   basis.push("Seat/saddle; no more than 3 wheels; Chapter 20 classification depends on engine displacement.");
+   requirements.push("Motorcycles/motor-driven cycles are subject to registration. § 27-20-105.","Motorcycle operator license required; age 14–15 special license can apply to ≤250 cc motor-driven cycle. § 27-20-106.","Motor vehicle liability insurance required. § 27-22-104.","Standard equipment includes headlamp, rear reflector/lamp, brakes, horn, muffler, passenger supports, and turn signals. § 27-20-104(a).","Helmet required under 21; protective glasses/goggles/face shield required. § 27-20-104(b).");
+   if(sv.noPlate)stop.push("Possible stop basis: no visible plate on vehicle class requiring registration — confirm registration status.");
+   if(sv.noLight)stop.push("Possible equipment violation — confirm applicable lighting requirement and conditions.");
+   if(sv.noHelmet)stop.push("Possible violation if rider/passenger under 21 — confirm age.");
+   if(sv.noEye)stop.push("Protective eye/face equipment is required under § 27-20-104(b)(2).");
+   sources=[source("Definitions",URLS.cycleDef),source("Equipment",URLS.cycleEquip),source("Registration",URLS.cycleReg),source("License",URLS.cycleLicense),source("Insurance",URLS.insurance)];
+ } else {
+   type="Autocycle (Polaris Slingshot-type), if § 27-20-303 criteria are met";
+   basis.push("3 tires","Steering wheel","Non-straddle seating","Required headlights/tail lamps/brakes/horn/signal lamps");
+   requirements.push("Autocycle is a motor vehicle for minimum liability-insurance purposes. § 27-20-303(c).","§ 27-20-304 allows the owner to register/license an autocycle as a motorcycle and requires proof of insurance with an application to register.","Operator 18+ needs a valid driver's license but not a motorcycle endorsement. § 27-20-306(a)(1).","Under 18 must have a valid instruction permit/learner/intermediate license and comply with its restrictions. § 27-20-306(a)(2).","Seat belts apply to operator and passengers. § 27-20-306(b).","Helmet + eye protection apply unless the qualifying fully enclosed-cab exception applies. § 27-20-306(c).");
+   if(sv.noPlate)stop.push("No visible plate: confirm current registration/licensing requirement and registration status before citing; § 27-20-304 states an autocycle owner may register/license it as a motorcycle.");
+   if(sv.noHelmet||sv.noEye)stop.push("Check whether enclosed-cab exception applies before citing helmet/eye-protection requirement.");
+   limits.push("Do not require a motorcycle endorsement from an autocycle operator age 18+ who has a valid driver's license.","Do not treat rollover protection as part of the Arkansas autocycle definition in § 27-20-303; the current definition focuses on 3 tires, steering wheel, non-straddle seating, and specified equipment.");
+   sources=[source("Autocycle definition",URLS.autocycleDef),source("Autocycle registration/insurance",URLS.autocycleReg),source("Autocycle operation",URLS.autocycleOp)];
+ }
+ if(stop.length===0)stop.push("No specific stop basis selected from the observable indicators. Classification alone is not a stop; identify an actual observed violation or other lawful basis.");
+ r.innerHTML=`<div class="vehicle-result"><div class="vehicle-head"><h2>${type}</h2><div>Special Vehicle Triage</div></div><div class="result-grid"><div class="block"><h3>Why this classification</h3><ul>${basis.map(x=>`<li>${x}</li>`).join("")}</ul></div><div class="block"><h3>Observable Stop / Enforcement Indicators</h3><ul>${stop.map(x=>`<li>${x}</li>`).join("")}</ul></div><div class="block full"><h3>Requirements / What to Confirm</h3><ul>${requirements.map(x=>`<li>${x}</li>`).join("")}</ul></div><div class="block full"><h3>Left / Right Limits</h3>${limits.length?`<ul>${limits.map(x=>`<li>${x}</li>`).join("")}</ul>`:"No additional limitation flagged beyond confirming the exact device classification and statutory elements before citation."}</div><div class="block full sources"><h3>Primary Sources</h3>${sources.map(s=>`<a target="_blank" href="${s.url}">${s.label} ↗</a>`).join("")}</div></div></div>`;
 }
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function escAttr(s){return esc(s)}
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
-
-</body>
-</html>
+</body></html>
