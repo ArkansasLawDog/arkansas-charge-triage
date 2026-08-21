@@ -1,37 +1,58 @@
-ARKANSAS PATROL CHARGE TRIAGE V2.3 — FIELD MODE
+ARKANSAS PATROL CHARGE TRIAGE V2.6 — FIELD SYSTEMS
 
-DESIGN GOAL
-Get the officer from facts to a charge quickly, without scrolling through a legal worksheet.
+THIS UPDATE COMBINES THE CURRENT FIELD-USABILITY, PROPERTY, JUVENILE, MUNICIPAL-ORDINANCE, INFOGRAPHIC, AND SPECIAL-VEHICLE WORK.
 
-WHAT CHANGED
-• One question on screen at a time.
-• Progress bar + Back / Next.
-• No long list of report questions during initial charge triage.
-• Every question has a HELP button.
-• HELP explains what the question is asking and shows the response choices.
-• Persistent bottom buttons while triaging:
-    DEFINITIONS
-    FULL STATUTE / FULL STATUTES
-• Charge-specific definitions include plain-language field cues and a hyperlink to the controlling statute/definition.
-• “Apprehension of imminent physical injury” is identified as a field cue rather than falsely presented as a separately defined Arkansas Code term.
-• The statute button updates as answers narrow the applicable assault statute.
-• Final result is summary-first:
-    likely charge
-    exact subsection
-    classification
-    max penalty
-    why correct
-    warrantless-arrest result
-  Detailed elements, enhancements, report support, and sources are collapsible.
-• V2.2 legal logic, Fort Smith ordinance library, special-vehicle triage, and infographic library remain.
+NEW PROPERTY MODULES
+• Residential Burglary — includes Aggravated Residential Burglary pathways and Class A / Class Y resolution.
+• Commercial Burglary — includes pharmacy consecutive-five-year enhancement.
+• Breaking or Entering — listed targets, theft/felony purpose, separate-target flag.
+• Unauthorized Use of Vehicle — knowing control + another person's vehicle + no owner consent; Theft cross-check.
 
-UPLOAD
-1. Extract the ZIP in Files.
-2. GitHub > ArkansasLawDog/arkansas-charge-triage.
+JUVENILE AREA
+• Dedicated Juvenile section on the home screen.
+• Fort Smith Juvenile Curfew uses current Municode §§ 14-101—14-106.
+• Covers age, location, curfew hours, all current § 14-102 defenses, parent/responsible-adult offense, business-operator offense, and waiver-permit references.
+
+FORT SMITH ORDINANCES
+• City Park Enforcement quick-reference added from current Fort Smith Municode.
+• § 18-58 misdemeanor framework + common park rules.
+• Applicable city ordinances surface beside Arkansas state law when the facts entered make them relevant.
+• State law and city ordinance are clearly labeled separately.
+
+UNIVERSAL REFERENCE STANDARD
+• ALL criminal charge modules retain two separate controls:
+    KEY TERMS — in-app bottom-sheet definitions, simplified plain English first.
+    FULL STATUTE(S) — external complete controlling law.
+• Both remain available during triage and on the final result.
+
+SPECIAL VEHICLE REDESIGN
+• Optional zero-experience officer lifeline: “I’m not sure what this is” and “Where do I find the specs?”
+• Unresolved classification identifies the EXACT missing facts and shows facts already established.
+• E-bike help explains the legally required class / top-assisted-speed / motor-wattage label under § 27-51-1704 and where to look for device/model specifications.
+• Clearly states voltage is NOT wattage and observed speed is not maximum capable speed.
+• Scooter help distinguishes the ≤20 mph maximum-capability definition from the >15 mph operating rule and the shared-scooter unique-ID law.
+• Gas cycle help explains where to find cc and the ≤50 cc / ≤250 cc / >250 cc classification breaks.
+• Slingshot/autocycle no longer dead-ends when one equipment item is NO/UNKNOWN. Baseline autocycle laws always load provisionally when appropriate.
+• Autocycle equipment is checked individually: headlights, tail lamps, brakes, horn, and signal lamps.
+• Electric-autocycle roadway restrictions added.
+• Special Vehicle also has separate KEY TERMS / DEFINITIONS and FULL STATUTE(S) controls.
+
+NEW INFOGRAPHICS
+• Residential / Aggravated Burglary
+• Commercial Burglary
+• Breaking or Entering
+• Unauthorized Use of Vehicle
+• Fort Smith Juvenile Curfew
+• Fort Smith City Park Ordinances
+
+UPDATE ON IPHONE / GITHUB
+1. Extract this ZIP in Files.
+2. Open GitHub in Safari > ArkansasLawDog/arkansas-charge-triage.
 3. Add file > Upload files.
-4. Select EVERY extracted file once.
+4. Select EVERY file in this extracted folder ONCE.
 5. Commit directly to main.
-6. Leave GitHub Pages on main / (root).
-7. Wait about one minute and refresh.
-8. Confirm: V2.3 • Field Mode.
-9. Fully close/reopen the Home Screen app.
+6. Leave GitHub Pages unchanged: main / (root).
+7. Wait about one minute.
+8. Open the live site in Safari and refresh.
+9. Confirm the badge says: V2.6 • Field Systems.
+10. Fully close and reopen the Home Screen app.

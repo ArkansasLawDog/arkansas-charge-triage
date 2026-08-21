@@ -1,7 +1,7 @@
 {
   "name": "Arkansas Patrol Charge Triage",
   "short_name": "AR Charge Triage",
-  "description": "Arkansas patrol charge triage, special-vehicle classification and enforcement, traffic validation, Fort Smith ordinance reference, and infographic library.",
+  "description": "Arkansas patrol charge triage with field-mode definitions, property and juvenile modules, special-vehicle classification, traffic validation, Fort Smith ordinance enforcement, and infographic library.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
