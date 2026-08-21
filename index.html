@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="AR Charge Triage">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
-<title>Arkansas Patrol Charge Triage — v2</title>
+<title>Arkansas Patrol Charge Triage — V2.3 Field Mode</title>
 <style>
 :root{
   --navy:#0b2b57;--blue:#174a7e;--lt:#eef4fb;--line:#ccd7e5;--ink:#111827;
@@ -108,6 +108,247 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:.78rem}
 @media(max-width:650px){.rule-grid{grid-template-columns:1fr}}
 </style>
 
+
+<style id="v23-field-ui">
+:root{
+  --field-bg:#f2f5f8;
+  --field-card:#ffffff;
+  --field-border:#dbe3ec;
+  --field-blue:#0d315f;
+  --field-accent:#1865b3;
+}
+body{background:var(--field-bg)}
+.app{max-width:760px;background:var(--field-bg)}
+header{
+  padding:10px 14px;
+  background:#0b2b57;
+  box-shadow:none;
+  border-bottom:1px solid rgba(255,255,255,.12)
+}
+.header-row{gap:9px}
+.logo{width:36px;height:36px;border-width:2px;font-size:.85rem}
+h1{font-size:1.05rem;letter-spacing:-.01em}
+header p{font-size:.72rem;margin-top:2px;opacity:.86}
+main{padding:10px 10px 88px}
+.status{margin:4px 0 10px;gap:6px}
+.pill{font-size:.68rem;padding:5px 8px}
+.hero{
+  border:0;
+  box-shadow:none;
+  background:transparent;
+  padding:8px 2px 12px;
+  margin:0
+}
+.hero h2{font-size:1.15rem}
+.hero p{font-size:.84rem}
+.grid{grid-template-columns:1fr;gap:8px}
+.cat,.subcat{
+  min-height:0;
+  border:1px solid var(--field-border);
+  border-radius:13px;
+  padding:13px 14px;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+.cat .icon{display:none}
+.cat strong,.subcat strong{font-size:1rem}
+.cat small,.subcat small{font-size:.78rem;line-height:1.3}
+.section-title{
+  margin:2px 0 10px;
+  gap:8px;
+  position:sticky;
+  top:58px;
+  z-index:20;
+  background:var(--field-bg);
+  padding:4px 0 6px
+}
+.section-title h2{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.back{padding:8px 10px;border-radius:9px;font-size:.82rem}
+#wizard .card{
+  border:0;
+  box-shadow:none;
+  background:transparent;
+  padding:0;
+  margin:0
+}
+#wizard .module-title{display:none}
+.flow-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin:2px 2px 8px
+}
+.flow-title{font-size:.83rem;font-weight:900;color:var(--field-blue)}
+.flow-count{font-size:.74rem;color:var(--muted);font-weight:800;white-space:nowrap}
+.flow-bar{height:5px;background:#dbe4ee;border-radius:999px;overflow:hidden;margin:0 2px 12px}
+.flow-bar>span{display:block;height:100%;background:var(--field-accent);border-radius:999px;transition:width .2s ease}
+.flow-card{
+  background:var(--field-card);
+  border:1px solid var(--field-border);
+  border-radius:18px;
+  padding:18px 16px 16px;
+  box-shadow:0 3px 12px rgba(30,50,75,.05)
+}
+.flow-stage{
+  display:inline-flex;
+  border-radius:999px;
+  padding:5px 8px;
+  margin-bottom:12px;
+  font-size:.66rem;font-weight:950;letter-spacing:.06em;text-transform:uppercase
+}
+.flow-stage.required{background:#eef4fb;color:#0d315f}
+.flow-stage.optional{background:#fff4dc;color:#7b4a00}
+.q{margin:0}
+.q-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:12px}
+.q-head label{
+  flex:1;margin:0;color:#132f53;font-weight:900;
+  font-size:1.12rem;line-height:1.28;letter-spacing:-.01em
+}
+.qhelp{
+  flex:0 0 auto;
+  border:0;background:#edf3f9;color:#174a7e;
+  border-radius:999px;padding:7px 9px;
+  font-size:.72rem;font-weight:900
+}
+.choice-grid{gap:8px}
+.choice{
+  padding:13px 12px;
+  border:1px solid #ced9e5;
+  border-radius:12px;
+  box-shadow:none;
+  background:#fff
+}
+.choice.selected{
+  border-color:#0d315f;
+  background:#f1f6fc;
+  box-shadow:inset 0 0 0 1px #0d315f
+}
+.choice .radio{width:18px;height:18px}
+.choice strong{font-size:.92rem}
+.seg{gap:7px}
+.seg button{
+  min-height:50px;
+  padding:9px 7px;
+  border:1px solid #ced9e5;
+  border-radius:11px;
+  font-size:.86rem
+}
+.check-grid{grid-template-columns:1fr;gap:7px}
+.check{padding:11px;border-color:#ced9e5}
+select,input[type=number],input[type=text],textarea{
+  border:1px solid #cbd7e3;
+  min-height:50px;border-radius:11px
+}
+.flow-nav{display:flex;gap:8px;margin-top:14px}
+.flow-nav button{min-height:46px}
+.flow-nav .primary{border-radius:11px}
+.flow-nav .secondary{border-radius:11px}
+.flow-skip{font-size:.74rem;color:var(--muted);margin-top:8px;text-align:center}
+.flow-message{margin-top:10px}
+.law-dock{
+  position:fixed;
+  z-index:70;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:max(8px,env(safe-area-inset-bottom));
+  width:min(calc(100% - 20px),740px);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px);
+  border:1px solid #d2dde8;
+  border-radius:14px;
+  padding:7px;
+  box-shadow:0 8px 28px rgba(16,42,70,.16);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px
+}
+.law-dock button,.law-dock a{
+  min-height:42px;
+  display:flex;align-items:center;justify-content:center;
+  border:0;border-radius:10px;
+  background:#edf3f9;color:#0d315f;
+  font-weight:900;font-size:.82rem;text-decoration:none
+}
+.law-dock a{background:#0d315f;color:#fff}
+.sheet-backdrop{
+  position:fixed;inset:0;z-index:110;
+  background:rgba(5,17,31,.48);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:14px
+}
+.sheet{
+  width:min(100%,720px);
+  max-height:78vh;overflow:auto;
+  background:#fff;border-radius:20px 20px 14px 14px;
+  padding:16px;
+  box-shadow:0 18px 60px rgba(0,0,0,.25)
+}
+.sheet-grab{width:42px;height:4px;border-radius:999px;background:#d5dce5;margin:0 auto 12px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.sheet-head h3{margin:0;color:#0d315f;font-size:1.05rem}
+.sheet-close{border:0;background:#edf3f9;border-radius:999px;width:34px;height:34px;font-size:1.1rem}
+.help-text{color:#334155;line-height:1.45;font-size:.9rem}
+.help-block{border-top:1px solid #e6ebf1;padding:10px 0}
+.help-block:first-of-type{border-top:0}
+.help-block strong{display:block;color:#0d315f;margin-bottom:3px}
+.answer-help{display:grid;gap:7px;margin-top:10px}
+.answer-row{border:1px solid #e1e7ee;border-radius:10px;padding:9px}
+.answer-row b{color:#0d315f}
+.def-row{border:1px solid #e0e6ed;border-radius:12px;padding:11px;margin:8px 0}
+.def-row strong{display:block;color:#0d315f}
+.def-row p{margin:4px 0 5px;color:#334155;line-height:1.42;font-size:.88rem}
+.def-row a{color:#1865b3;font-weight:850;text-decoration:none;font-size:.8rem}
+.stat-row{display:block;border:1px solid #dfe6ee;border-radius:12px;padding:11px;margin:8px 0;text-decoration:none}
+.stat-row strong{display:block;color:#0d315f}
+.stat-row small{display:block;color:#607086;margin-top:3px}
+.result{
+  border:0;
+  border-radius:18px;
+  box-shadow:none;
+  overflow:visible;
+  background:transparent;
+  margin-top:10px
+}
+.result-head{
+  border-radius:18px;
+  padding:16px;
+  background:#0d315f
+}
+.result-head .eyebrow{font-size:.67rem}
+.result-head h2{font-size:1.35rem}
+.result-head .statute{font-size:.9rem}
+.penalty{font-size:.82rem;padding:9px 10px}
+.whybox{font-size:.86rem}
+.result-summary-card{
+  background:#fff;border:1px solid var(--field-border);
+  border-radius:14px;padding:13px;margin-top:9px
+}
+.result-summary-card h3{margin:0 0 6px;color:#0d315f;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.result-details{
+  border:1px solid var(--field-border);
+  background:#fff;border-radius:12px;
+  margin:8px 0;overflow:hidden
+}
+.result-details summary{
+  padding:12px 13px;
+  font-weight:900;color:#0d315f;cursor:pointer
+}
+.result-details .result-detail-body{
+  padding:0 13px 13px;
+  color:#334155;font-size:.88rem;line-height:1.42
+}
+.result-details ul{margin:0;padding-left:19px}
+.result-details li{margin:5px 0}
+.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.result-actions button{min-height:46px}
+footer{padding-bottom:88px}
+@media(max-width:480px){
+  header p{display:none}
+  .section-title{top:54px}
+  .q-head label{font-size:1.05rem}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -115,7 +356,7 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:.78rem}
   <div class="header-row"><div class="logo">AR</div><div><h1>Arkansas Patrol Charge Triage</h1><p>Scenario → elements → exact statute → likely charge → arrest authority → optional report support</p></div></div>
 </header>
 <main>
-<div class="status"><span class="pill green">V2.2 • Field-Ready Workflow</span><span class="pill">2025 Traffic Book baseline</span><span class="pill">Justia / current-law cross-check</span></div>
+<div class="status"><span class="pill green">V2.3 • Field Mode</span><span class="pill">2025 Traffic Book baseline</span><span class="pill">Justia / current-law cross-check</span></div>
 <section id="home">
   <div class="hero"><h2>Select a tool</h2><p>Criminal triage and special-vehicle triage guide unfamiliar scenarios. Standard automobile traffic remains a fast criteria-validation reference.</p></div>
   <div class="grid">
@@ -1074,4 +1315,5 @@ function escAttr(s){return esc(s)}
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 </script>
 <script src="./v22-patch.js"></script>
+<script src="./v23-patch.js"></script>
 </body></html>
