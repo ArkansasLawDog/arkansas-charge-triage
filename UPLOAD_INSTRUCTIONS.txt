@@ -1,58 +1,35 @@
-ARKANSAS PATROL CHARGE TRIAGE V2.6 — FIELD SYSTEMS
+ARKANSAS PATROL FIELD HUB V3.2 — DEPLOY / BEGIN FIELDING
+========================================================
 
-THIS UPDATE COMBINES THE CURRENT FIELD-USABILITY, PROPERTY, JUVENILE, MUNICIPAL-ORDINANCE, INFOGRAPHIC, AND SPECIAL-VEHICLE WORK.
-
-NEW PROPERTY MODULES
-• Residential Burglary — includes Aggravated Residential Burglary pathways and Class A / Class Y resolution.
-• Commercial Burglary — includes pharmacy consecutive-five-year enhancement.
-• Breaking or Entering — listed targets, theft/felony purpose, separate-target flag.
-• Unauthorized Use of Vehicle — knowing control + another person's vehicle + no owner consent; Theft cross-check.
-
-JUVENILE AREA
-• Dedicated Juvenile section on the home screen.
-• Fort Smith Juvenile Curfew uses current Municode §§ 14-101—14-106.
-• Covers age, location, curfew hours, all current § 14-102 defenses, parent/responsible-adult offense, business-operator offense, and waiver-permit references.
-
-FORT SMITH ORDINANCES
-• City Park Enforcement quick-reference added from current Fort Smith Municode.
-• § 18-58 misdemeanor framework + common park rules.
-• Applicable city ordinances surface beside Arkansas state law when the facts entered make them relevant.
-• State law and city ordinance are clearly labeled separately.
-
-UNIVERSAL REFERENCE STANDARD
-• ALL criminal charge modules retain two separate controls:
-    KEY TERMS — in-app bottom-sheet definitions, simplified plain English first.
-    FULL STATUTE(S) — external complete controlling law.
-• Both remain available during triage and on the final result.
-
-SPECIAL VEHICLE REDESIGN
-• Optional zero-experience officer lifeline: “I’m not sure what this is” and “Where do I find the specs?”
-• Unresolved classification identifies the EXACT missing facts and shows facts already established.
-• E-bike help explains the legally required class / top-assisted-speed / motor-wattage label under § 27-51-1704 and where to look for device/model specifications.
-• Clearly states voltage is NOT wattage and observed speed is not maximum capable speed.
-• Scooter help distinguishes the ≤20 mph maximum-capability definition from the >15 mph operating rule and the shared-scooter unique-ID law.
-• Gas cycle help explains where to find cc and the ≤50 cc / ≤250 cc / >250 cc classification breaks.
-• Slingshot/autocycle no longer dead-ends when one equipment item is NO/UNKNOWN. Baseline autocycle laws always load provisionally when appropriate.
-• Autocycle equipment is checked individually: headlights, tail lamps, brakes, horn, and signal lamps.
-• Electric-autocycle roadway restrictions added.
-• Special Vehicle also has separate KEY TERMS / DEFINITIONS and FULL STATUTE(S) controls.
-
-NEW INFOGRAPHICS
-• Residential / Aggravated Burglary
-• Commercial Burglary
-• Breaking or Entering
-• Unauthorized Use of Vehicle
-• Fort Smith Juvenile Curfew
-• Fort Smith City Park Ordinances
-
-UPDATE ON IPHONE / GITHUB
-1. Extract this ZIP in Files.
-2. Open GitHub in Safari > ArkansasLawDog/arkansas-charge-triage.
-3. Add file > Upload files.
-4. Select EVERY file in this extracted folder ONCE.
+UPLOAD TO THE EXISTING GITHUB PAGES REPOSITORY
+1. Extract this ZIP.
+2. Open GitHub > ArkansasLawDog/arkansas-charge-triage.
+3. Choose Add file > Upload files.
+4. Select ALL 82 files from the extracted folder, including:
+   • v32-patch.js
+   • all eight new ref-*.png cards
+   • updated index.html, manifest.webmanifest, and sw.js
 5. Commit directly to main.
-6. Leave GitHub Pages unchanged: main / (root).
-7. Wait about one minute.
-8. Open the live site in Safari and refresh.
-9. Confirm the badge says: V2.6 • Field Systems.
-10. Fully close and reopen the Home Screen app.
+6. Do not change the existing GitHub Pages settings.
+7. Wait for the Pages deployment to complete, then refresh the live site.
+
+POST-DEPLOY CHECK
+1. Confirm the top badge says: V3.2 • Fielding Release.
+2. Open Property Offenses > Theft of Services.
+3. Open Common Traffic > Noncommercial Driver Licensing.
+4. Open Common Traffic > Speeding / Speed for Conditions.
+5. Open Infographic Library and confirm 65 cards are shown.
+6. Fully close and reopen the Home Screen app so the V3.2 service-worker cache
+   replaces the prior cache.
+7. With the app open once online, test one reference card in airplane mode.
+
+IF AN IPHONE STILL SHOWS V3.1
+• Confirm the GitHub Pages deployment completed.
+• Close every Safari tab for the site and fully close the Home Screen app.
+• Reopen the live site, wait a few seconds, then close and reopen once more.
+• If necessary, remove and re-add the Home Screen icon after confirming the live
+  site itself shows V3.2.
+
+FIELDING SAFETY
+This release is a field aid. Current law, agency policy, court decisions,
+supervisor direction, and prosecutor guidance control.
