@@ -1,0 +1,67 @@
+ARKANSAS PATROL FIELD HUB V3.2.2 — FIELDING NOTES
+==================================================
+
+DEFAULT WORKFLOW
+• SIMPLE MODE remains the day-one / rapid-field default.
+• ADVANCED MODE adds enhancement, arrest-authority, evidence, and report support.
+• Key Terms / Definitions remains separate from Full Statute / Full Law.
+• A YES result is a triage aid, not a substitute for probable cause, current law,
+  agency policy, supervisor direction, or prosecutor guidance.
+
+WHAT IS CORRECTED IN V3.2.2
+• Category Card Navigation
+  The shared tap handler is repaired. Charge cards, Quick References, traffic
+  validators, special-vehicle cards, and City Park tools now open normally.
+• Navigation Audit
+  All 79 registered category cards were activated in testing, including all 26
+  unique Quick References and all 29 unique charge modules.
+
+V3.2.1 MUNICIPAL-LINK CORRECTIONS RETAINED
+• Fort Smith Ordinance Quick Reference
+  Every source control now displays the exact ordinance number and current
+  section title inside the hyperlink and opens that selected section directly.
+• Fort Smith City Park Enforcement
+  The offense, § 18-58 park penalty, and § 1-9 general penalty are separate,
+  clearly labeled direct links. The former shared link to § 18-79 is removed.
+• Fort Smith Juvenile Curfew
+  Sections 14-101 through 14-106 now have separate exact source links.
+• Animal Waste
+  Updated from former § 4-130 to current § 4-110 following the 2023 recodification.
+
+WHAT WAS ADDED IN V3.2
+• Property Offenses > Theft of Services
+  Includes dine-and-dash, lodging, transportation, labor, utility theft/diversion,
+  dollar thresholds, threat routes, intent checks, arrest guidance, and reporting.
+• Common Traffic > Noncommercial Driver Licensing
+  Includes permit, learner, intermediate / Class DI, Class D, endorsements,
+  restrictions, status codes, suspension/revocation, and fast field checks.
+• Common Traffic > six additional validation tools
+  Speeding; Careless / Prohibited Driving; License Status / Restrictions;
+  Liability Insurance; Rear Lamps; Traffic-Control Devices / Signals.
+• Infographic Library
+  Eight new matching field cards; 65 cards total.
+
+FIELDING FEEDBACK TO CAPTURE
+• Screen / module and exact fact pattern entered.
+• Whether the user was in Simple or Advanced Mode.
+• The result shown and the result expected.
+• Any question unclear on first read or any avoidable tap/scroll.
+• Any missing definition, statute link, field cue, or report fact.
+• Any municipal link that does not land on the section number printed in the app.
+• Any category card that highlights when tapped but does not open a new screen.
+• Any classification, enhancement, or arrest-authority issue.
+• Any Class DI / permit / learner restriction that was hard to locate.
+• Any traffic validator that returned YES when it should have stayed VERIFY.
+• Any special-vehicle path that still dead-ends.
+• Any infographic wording that cannot be understood at a glance.
+
+RECOMMENDED INITIAL FIELDING
+• Start with a small patrol group and include at least one newer officer.
+• Run real or de-identified recent calls through both Simple and Advanced Mode.
+• Compare every proposed enforcement action with current department policy and
+  the linked primary law before relying on the app in the field.
+• For the first Fort Smith test, open Ordinance Quick Reference > § 18-68 and
+  confirm the OFFENSE link opens “Sec. 18-68. — Hours; park curfew.”
+• Also open City Park Related and tap both Quick Reference cards, then open one
+  charge category and confirm a randomly selected charge starts its triage.
+• Record feedback by module; do not combine unrelated problems into one note.

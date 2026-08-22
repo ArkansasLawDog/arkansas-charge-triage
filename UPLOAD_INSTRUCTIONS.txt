@@ -1,11 +1,13 @@
-ARKANSAS PATROL FIELD HUB V3.2 — DEPLOY / BEGIN FIELDING
-========================================================
+ARKANSAS PATROL FIELD HUB V3.2.2 — DEPLOY / BEGIN FIELDING
+==========================================================
 
 UPLOAD TO THE EXISTING GITHUB PAGES REPOSITORY
 1. Extract this ZIP.
 2. Open GitHub > ArkansasLawDog/arkansas-charge-triage.
 3. Choose Add file > Upload files.
-4. Select ALL 82 files from the extracted folder, including:
+4. Select ALL 84 files from the extracted folder, including:
+   • v322-patch.js
+   • v321-patch.js
    • v32-patch.js
    • all eight new ref-*.png cards
    • updated index.html, manifest.webmanifest, and sw.js
@@ -14,21 +16,27 @@ UPLOAD TO THE EXISTING GITHUB PAGES REPOSITORY
 7. Wait for the Pages deployment to complete, then refresh the live site.
 
 POST-DEPLOY CHECK
-1. Confirm the top badge says: V3.2 • Fielding Release.
+1. Confirm the top badge says: V3.2.2 • Fielding Release.
 2. Open Property Offenses > Theft of Services.
 3. Open Common Traffic > Noncommercial Driver Licensing.
 4. Open Common Traffic > Speeding / Speed for Conditions.
 5. Open Infographic Library and confirm 65 cards are shown.
-6. Fully close and reopen the Home Screen app so the V3.2 service-worker cache
+6. Open City Park Related and confirm both Quick Reference cards open.
+7. Open another category and confirm a randomly selected charge card opens its
+   triage questions.
+8. Open Fort Smith Ordinance Quick Reference > § 18-68 and confirm the OFFENSE
+   link opens Sec. 18-68, not Chapter 18 or § 18-79.
+9. Confirm the ordinance number is visible inside each municipal source link.
+10. Fully close and reopen the Home Screen app so the V3.2.2 service-worker cache
    replaces the prior cache.
-7. With the app open once online, test one reference card in airplane mode.
+11. With the app open once online, test one reference card in airplane mode.
 
-IF AN IPHONE STILL SHOWS V3.1
+IF AN IPHONE STILL SHOWS V3.2.1
 • Confirm the GitHub Pages deployment completed.
 • Close every Safari tab for the site and fully close the Home Screen app.
 • Reopen the live site, wait a few seconds, then close and reopen once more.
 • If necessary, remove and re-add the Home Screen icon after confirming the live
-  site itself shows V3.2.
+  site itself shows V3.2.2.
 
 FIELDING SAFETY
 This release is a field aid. Current law, agency policy, court decisions,

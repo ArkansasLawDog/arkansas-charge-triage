@@ -5,7 +5,7 @@
    ============================================================ */
 
 Object.assign(URLS,{
- fortSmithCode:"https://library.municode.com/ar/fort_smith/codes/code_of_ordinances?nodeId=COOR_CH1GEPR_S1-9PEVI",
+ fortSmithCode:"https://library.municode.com/ar/fort_smith/codes/code_of_ordinances",
  terrorThreat:"https://law.justia.com/codes/arkansas/title-5/subtitle-2/chapter-13/subchapter-3/section-5-13-301/",
  firearmProhibited:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-73/subchapter-1/section-5-73-103/",
  firearmPublic:"https://law.justia.com/codes/arkansas/title-5/subtitle-6/chapter-73/subchapter-1/section-5-73-122/",
@@ -224,7 +224,7 @@ function topicItemButton(x){
  if(x[0]==="traffic")action=`openTrafficCheck('${x[1]}')`;
  if(x[0]==="reckless")action=`openRecklessV30()`;
  if(x[0]==="park")action=`openParkEnforcement()`;
- return `<button class="topic-card ${x[0]==="quick"?"quick":""}" onclick='${action}'><span class="topic-badge">${x[0]==="quick"?"Quick Reference":x[0]==="traffic"||x[0]==="reckless"?"Validation":"Triage"}</span><strong>${x[2]}</strong><small>${x[3]}</small></button>`;
+ return `<button type="button" class="topic-card ${x[0]==="quick"?"quick":""}" onclick="${escAttr(action)}"><span class="topic-badge">${x[0]==="quick"?"Quick Reference":x[0]==="traffic"||x[0]==="reckless"?"Validation":"Triage"}</span><strong>${x[2]}</strong><small>${x[3]}</small></button>`;
 }
 openCriminal=function(){openTopic("violent")};
 openCriminalCat=function(k){openTopic(k)};

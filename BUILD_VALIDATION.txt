@@ -1,0 +1,110 @@
+ARKANSAS PATROL FIELD HUB V3.2.2 — FIELDING RELEASE VALIDATION
+===============================================================
+
+RELEASE DATE
+2026-08-22
+
+TESTED BASELINE RETAINED
+• V3.0 automated browser functional suite: 99 / 99 passed
+• V3.0 deep-navigation actions: 70 / 70 passed
+• V3.0 dual-reference checks: 31 / 31 passed
+• V3.1 fielding audit: 69 / 69 recent/requested topic markers present
+• V3.2 decision/navigation suite: 50 / 50 passed
+• Simple / Advanced mode, domestic-violence logic, special-vehicle lifelines,
+  Fort Smith ordinance links, report support, and separate Key Terms / Full Law
+  controls remain in place.
+
+V3.2.2 CORRECTED SCOPE
+• Replaced the malformed shared category-card onclick construction that could
+  make charge, Quick Reference, traffic, special-vehicle, and park cards appear
+  tappable while doing nothing in Safari/iOS.
+• Routed all category cards through one constant, quote-safe tap handler using
+  explicit route-kind and route-id data.
+• Audited 79 category cards end-to-end, including 26 unique Quick References
+  and 29 unique charge modules.
+
+V3.2.1 MUNICIPAL-LINK CORRECTIONS RETAINED
+• Replaced the shared Fort Smith park URL (which opened § 18-79) with exact,
+  offense-specific Municode links for every municipal quick-reference entry.
+• Put the ordinance number and current section title inside each municipal-code
+  hyperlink so the selected authority remains visible at the source control.
+• Added direct § 18-58 park-penalty and § 1-9 general-penalty links beside park
+  offenses; § 18-82 retains its own specific fine route.
+• Separated juvenile-curfew links into exact §§ 14-101 through 14-106 sources.
+• Restored the generic Fort Smith reference link to the code root instead of
+  incorrectly opening § 1-9.
+• Corrected Animal waste from former § 4-130 to current § 4-110 after checking
+  the 2023 Chapter 4 recodification and current online code text.
+• Exact destinations were checked against Fort Smith Municode Supplement 4,
+  online content updated September 29, 2025.
+
+V3.2 RETAINED SCOPE
+• Added full Theft of Services triage under Property Offenses.
+  - Purpose-to-defraud threshold
+  - Obtain-service and service-diversion routes
+  - Dine-and-dash immediate-payment / absconding presumption
+  - Exact $1,000 / $5,000 / $25,000 boundaries
+  - Threat, fiduciary-threat, utility-damage, contamination, and hazardous-
+    release classifications
+  - Warrantless-arrest, reporting, evidence, and contrary-explanation prompts
+• Added Arkansas Noncommercial Driver Licensing reference under Common Traffic.
+  - Instruction permit, learner, intermediate / Class DI, regular Class D
+  - Passenger, time, accompaniment, belt, and device restrictions
+  - Class / endorsement, ODS status, and common restriction-code cues
+  - Carry/display, no-valid-license, suspended/canceled/revoked, and restriction-
+    violation enforcement routes
+  - Autocycle licensing connection
+• Expanded Common Traffic with interactive validators for:
+  - Speeding / speed too fast for conditions
+  - Careless and prohibited driving
+  - Driver-license status / restrictions
+  - Motor vehicle liability insurance
+  - Tail / plate / stop / turn lamps
+  - Traffic-control devices and signals
+• Preserved existing Reckless Driving, headlights, registration, tint, phone,
+  yield, left-of-center, special-vehicle, criminal, domestic, juvenile, park,
+  and patrol-reference content.
+• Added eight standardized 1086 × 1448 field cards matching the approved
+  navy/red layout and section order.
+
+V3.2.2 VALIDATION RESULTS
+• JavaScript syntax: 11 / 11 files PASS
+• Classic-script runtime + decision/navigation suite: 68 / 68 PASS
+• Shared category-card router markup: 79 / 79 PASS
+• Unique Quick Reference destinations opened: 26 / 26 PASS
+• Unique charge-module destinations opened: 29 / 29 PASS
+• Preset, park, traffic, special-vehicle, and reckless routes: PASS
+• Exact municipal link registry: 40+ current section destinations PASS
+• Ordinance quick-reference rows with exact deep links: 100% PASS
+• Park-curfew offense / park penalty / general penalty link routing: PASS
+• Juvenile-curfew offense and exception link separation: PASS
+• Animal waste current § 4-110 citation and destination: PASS
+• Theft of Services classification boundaries tested: PASS
+• Complete dine-and-dash workflow + rendered result: PASS
+• New traffic positive / negative / verify paths: PASS
+• Driver Licensing / Class DI reference render: PASS
+• Infographic library: 65 / 65 files present
+• New infographic size and PNG integrity: 8 / 8 PASS
+• Service-worker CORE entries: 81; missing cached files: 0
+• Manifest JSON: PASS
+• Script load order (V3.2.2 after V3.2.1): PASS
+• Local served-app spot check: index, manifest, service worker, V3.2.2 patch,
+  and both Fort Smith ordinance cards all returned HTTP 200.
+• Visual contact-sheet review of all eight new cards: PASS; no clipping or
+  inconsistent section order observed.
+
+PRIMARY LAW CROSS-CHECK
+• Arkansas Code § 5-36-104 (2025) — Theft of Services
+• Arkansas Code §§ 27-16-801, -802, -804, -303, -601, -602
+• 2025 Arkansas Act 928 — graduated-license update
+• Arkansas Code §§ 27-51-104, -201, -212; 27-50-302
+• Arkansas Code §§ 27-22-104, -109
+• Arkansas Code §§ 27-36-204, -215, -216
+• Arkansas Code §§ 27-51-503; 27-52-103, -107, -108
+• Fort Smith Municipal Code §§ 1-9, 4-110, 13-214, 14-101—14-106,
+  18-58—18-82, 18-177, 19-66, 24-97, 24-176, 24-178, 25-298—25-299
+
+FIELDING STATUS
+V3.2.2 is the complete corrected fielding release for the approved recent scope. Treat the
+app as a field aid. Current law, agency policy, court decisions, supervisor
+direction, and prosecutor guidance control.
