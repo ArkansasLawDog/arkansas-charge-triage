@@ -1,110 +1,73 @@
-ARKANSAS PATROL FIELD HUB V3.2.2 — FIELDING RELEASE VALIDATION
-===============================================================
+ARKANSAS PATROL FIELD HUB V3.3.1 — TRIAGE FIX VALIDATION
+Date: 2026-09-16
 
-RELEASE DATE
-2026-08-22
+SCOPE
+Repairs the shared View Triage Result failure on the saved V3.3 baseline.
+Does not change charge evaluators, legal content, hosting, or access.
 
-TESTED BASELINE RETAINED
-• V3.0 automated browser functional suite: 99 / 99 passed
-• V3.0 deep-navigation actions: 70 / 70 passed
-• V3.0 dual-reference checks: 31 / 31 passed
-• V3.1 fielding audit: 69 / 69 recent/requested topic markers present
-• V3.2 decision/navigation suite: 50 / 50 passed
-• Simple / Advanced mode, domestic-violence logic, special-vehicle lifelines,
-  Fort Smith ordinance links, report support, and separate Key Terms / Full Law
-  controls remain in place.
+REPRODUCTION
+The V3.3 Theft of Services workflow was completed through rendered controls in
+jsdom. Clicking View Triage Result threw:
+  TypeError: Cannot set properties of null (setting 'innerHTML')
+The result stayed empty. evaluateCurrent() expected #formError, but the current
+single-question wizard supplies #flowMessage instead. The same evaluator entry
+point is used by all charge modules.
 
-V3.2.2 CORRECTED SCOPE
-• Replaced the malformed shared category-card onclick construction that could
-  make charge, Quick Reference, traffic, special-vehicle, and park cards appear
-  tappable while doing nothing in Safari/iOS.
-• Routed all category cards through one constant, quote-safe tap handler using
-  explicit route-kind and route-id data.
-• Audited 79 category cards end-to-end, including 26 unique Quick References
-  and 29 unique charge modules.
+FIX
+- Use the active wizard message box, with legacy formError fallback.
+- Missing optional message containers no longer stop valid evaluation.
+- Required facts still block incomplete triage with a visible message.
+- Unexpected evaluator/render errors show a message and keep entered answers.
+- Clear stale/partial results and result metadata on a caught failure.
+- Mark the workflow error area as an alert for assistive technology.
+- Bump the visible version and service-worker cache to V3.3.1.
 
-V3.2.1 MUNICIPAL-LINK CORRECTIONS RETAINED
-• Replaced the shared Fort Smith park URL (which opened § 18-79) with exact,
-  offense-specific Municode links for every municipal quick-reference entry.
-• Put the ordinance number and current section title inside each municipal-code
-  hyperlink so the selected authority remains visible at the source control.
-• Added direct § 18-58 park-penalty and § 1-9 general-penalty links beside park
-  offenses; § 18-82 retains its own specific fine route.
-• Separated juvenile-curfew links into exact §§ 14-101 through 14-106 sources.
-• Restored the generic Fort Smith reference link to the code root instead of
-  incorrectly opening § 1-9.
-• Corrected Animal waste from former § 4-130 to current § 4-110 after checking
-  the 2023 Chapter 4 recodification and current online code text.
-• Exact destinations were checked against Fort Smith Municode Supplement 4,
-  online content updated September 29, 2025.
+EXECUTED TESTS — ALL PASS
+Environment: Node.js with jsdom 26.1.0. Loads the complete HTML and classic
+scripts in order. Uses rendered controls and DOM event handlers, not only
+direct evaluator calls. Synthetic data only; no external requests.
 
-V3.2 RETAINED SCOPE
-• Added full Theft of Services triage under Property Offenses.
-  - Purpose-to-defraud threshold
-  - Obtain-service and service-diversion routes
-  - Dine-and-dash immediate-payment / absconding presumption
-  - Exact $1,000 / $5,000 / $25,000 boundaries
-  - Threat, fiduciary-threat, utility-damage, contamination, and hazardous-
-    release classifications
-  - Warrantless-arrest, reporting, evidence, and contrary-explanation prompts
-• Added Arkansas Noncommercial Driver Licensing reference under Common Traffic.
-  - Instruction permit, learner, intermediate / Class DI, regular Class D
-  - Passenger, time, accompaniment, belt, and device restrictions
-  - Class / endorsement, ODS status, and common restriction-code cues
-  - Carry/display, no-valid-license, suspended/canceled/revoked, and restriction-
-    violation enforcement routes
-  - Autocycle licensing connection
-• Expanded Common Traffic with interactive validators for:
-  - Speeding / speed too fast for conditions
-  - Careless and prohibited driving
-  - Driver-license status / restrictions
-  - Motor vehicle liability insurance
-  - Tail / plate / stop / turn lamps
-  - Traffic-control devices and signals
-• Preserved existing Reckless Driving, headlights, registration, tint, phone,
-  yield, left-of-center, special-vehicle, criminal, domestic, juvenile, park,
-  and patrol-reference content.
-• Added eight standardized 1086 × 1448 field cards matching the approved
-  navy/red layout and section order.
+- 32 defined modules, including all 29 distinct category-accessible charge
+  destinations and legacy modules.
+- 128 completed workflows: first-option and last-option/unknown cases for
+  every module in both Simple and Advanced modes.
+- 64 additional completed workflows with optional questions skipped.
+- 64 required-answer guards: Next and direct evaluation block missing facts.
+- 128 Report Skeleton actions produce reports carrying the result statute.
+- Result checks: visible charge/statute/classification, arrest section, source
+  link, retained enhancement details, and requested scrolling to the result.
+- Targeted cases: dine-and-dash; back/edit/re-submit; reset; pregnancy/prior
+  history in domestic battery; missing conditional required fact; jumpResult;
+  legacy/absent message container; injected evaluation/render failures with
+  answer preservation, partial-result removal, and successful retry.
+- No unexpected runtime errors. Two deliberately injected failures log errors
+  as intended and do not leave a stale result.
+- 80 rendered category-card actions open their intended section, including
+  all 27 unique Quick References and 29 unique charge destinations.
+- Phonetic input and Clear DOM events: WHITE produces
+  William – Henry – Ida – Tom – Edward, then Clear resets the input/output.
+- All 41 configured municipal section links retain a section-specific nodeId.
+- All 65 reference PNGs remain present.
+- Syntax: 12 classic scripts plus sw.js.
+- Offline-cache inventory: 82 unique entries, no missing assets; every runtime
+  script is included. Cache: ar-patrol-field-hub-v3-3-1-20260916.
 
-V3.2.2 VALIDATION RESULTS
-• JavaScript syntax: 11 / 11 files PASS
-• Classic-script runtime + decision/navigation suite: 68 / 68 PASS
-• Shared category-card router markup: 79 / 79 PASS
-• Unique Quick Reference destinations opened: 26 / 26 PASS
-• Unique charge-module destinations opened: 29 / 29 PASS
-• Preset, park, traffic, special-vehicle, and reckless routes: PASS
-• Exact municipal link registry: 40+ current section destinations PASS
-• Ordinance quick-reference rows with exact deep links: 100% PASS
-• Park-curfew offense / park penalty / general penalty link routing: PASS
-• Juvenile-curfew offense and exception link separation: PASS
-• Animal waste current § 4-110 citation and destination: PASS
-• Theft of Services classification boundaries tested: PASS
-• Complete dine-and-dash workflow + rendered result: PASS
-• New traffic positive / negative / verify paths: PASS
-• Driver Licensing / Class DI reference render: PASS
-• Infographic library: 65 / 65 files present
-• New infographic size and PNG integrity: 8 / 8 PASS
-• Service-worker CORE entries: 81; missing cached files: 0
-• Manifest JSON: PASS
-• Script load order (V3.2.2 after V3.2.1): PASS
-• Local served-app spot check: index, manifest, service worker, V3.2.2 patch,
-  and both Fort Smith ordinance cards all returned HTTP 200.
-• Visual contact-sheet review of all eight new cards: PASS; no clipping or
-  inconsistent section order observed.
+LIMITATIONS / REQUIRED DEVICE CHECK
+- These are local DOM and static tests, not a Chrome/Safari/iPhone test.
+- The cloud browser refused the private local test URL with
+  ERR_BLOCKED_BY_CLIENT. No site was published to work around this.
+- jsdom does not render layout or execute service workers. Scrolling is recorded,
+  not visually checked. Offline install, old-cache replacement, mobile layout,
+  clipboard access, and physical-device taps remain unverified.
+- Legal rules and external source destinations were not independently
+  re-researched for this navigation-only correction. Old test counts are not
+  carried forward as newly executed tests.
+- Test the full result action on the intended device before operational use.
 
-PRIMARY LAW CROSS-CHECK
-• Arkansas Code § 5-36-104 (2025) — Theft of Services
-• Arkansas Code §§ 27-16-801, -802, -804, -303, -601, -602
-• 2025 Arkansas Act 928 — graduated-license update
-• Arkansas Code §§ 27-51-104, -201, -212; 27-50-302
-• Arkansas Code §§ 27-22-104, -109
-• Arkansas Code §§ 27-36-204, -215, -216
-• Arkansas Code §§ 27-51-503; 27-52-103, -107, -108
-• Fort Smith Municipal Code §§ 1-9, 4-110, 13-214, 14-101—14-106,
-  18-58—18-82, 18-177, 19-66, 24-97, 24-176, 24-178, 25-298—25-299
+REPRODUCIBILITY
+The ZIP's separate validation/ folder contains the harness, test scripts,
+dependency lockfile, and instructions. It is not part of the hosted app or cache.
 
-FIELDING STATUS
-V3.2.2 is the complete corrected fielding release for the approved recent scope. Treat the
-app as a field aid. Current law, agency policy, court decisions, supervisor
-direction, and prosecutor guidance control.
+PUBLICATION
+Not deployed. No GitHub, Pages, Floot, hosting, permission, or access setting was
+changed. This static app still does not implement authenticated access.

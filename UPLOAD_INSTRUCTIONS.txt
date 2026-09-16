@@ -1,43 +1,52 @@
-ARKANSAS PATROL FIELD HUB V3.2.2 — DEPLOY / BEGIN FIELDING
-==========================================================
+ARKANSAS PATROL FIELD HUB V3.3.1 — PRIVATE TEST / UPDATE CHECKLIST
+Date: 2026-09-16
 
-UPLOAD TO THE EXISTING GITHUB PAGES REPOSITORY
-1. Extract this ZIP.
-2. Open GitHub > ArkansasLawDog/arkansas-charge-triage.
-3. Choose Add file > Upload files.
-4. Select ALL 84 files from the extracted folder, including:
-   • v322-patch.js
-   • v321-patch.js
-   • v32-patch.js
-   • all eight new ref-*.png cards
-   • updated index.html, manifest.webmanifest, and sw.js
-5. Commit directly to main.
-6. Do not change the existing GitHub Pages settings.
-7. Wait for the Pages deployment to complete, then refresh the live site.
+ACCESS FIRST
+This ZIP is a saved correction, not a deployment. It does not add a login or
+restrict the old public link. No hosting or access settings were changed.
+Because private access was requested, do not publish this to the old public
+GitHub Pages site merely to test the button. Use an approved private/local test
+environment; choose and verify hosting access controls separately.
 
-POST-DEPLOY CHECK
-1. Confirm the top badge says: V3.2.2 • Fielding Release.
-2. Open Property Offenses > Theft of Services.
-3. Open Common Traffic > Noncommercial Driver Licensing.
-4. Open Common Traffic > Speeding / Speed for Conditions.
-5. Open Infographic Library and confirm 65 cards are shown.
-6. Open City Park Related and confirm both Quick Reference cards open.
-7. Open another category and confirm a randomly selected charge card opens its
-   triage questions.
-8. Open Fort Smith Ordinance Quick Reference > § 18-68 and confirm the OFFENSE
-   link opens Sec. 18-68, not Chapter 18 or § 18-79.
-9. Confirm the ordinance number is visible inside each municipal source link.
-10. Fully close and reopen the Home Screen app so the V3.2.2 service-worker cache
-   replaces the prior cache.
-11. With the app open once online, test one reference card in airplane mode.
+PACKAGE CONTENTS
+- arkansas_patrol_field_hub_v33_1/: the complete app, 85 files.
+- validation/: optional developer tests; do not upload as app content.
 
-IF AN IPHONE STILL SHOWS V3.2.1
-• Confirm the GitHub Pages deployment completed.
-• Close every Safari tab for the site and fully close the Home Screen app.
-• Reopen the live site, wait a few seconds, then close and reopen once more.
-• If necessary, remove and re-add the Home Screen icon after confirming the live
-  site itself shows V3.2.2.
+WHEN AN AUTHORIZED HOSTING DESTINATION HAS BEEN CHOSEN
+1. Back up the currently installed app files.
+2. Replace the complete app contents with the 85 files inside the app folder.
+   Keep index.html, all patch scripts, manifest.webmanifest, sw.js, icons, and
+   reference PNGs together. Do not upload just index.html.
+3. Wait for that destination's update process to finish.
+4. Open the approved app URL and confirm the badge says:
+   V3.3.1 • Triage Fix
+5. Close the app and all tabs for its origin, then reopen. Confirm the badge
+   again. An older badge means the corrected app has not loaded yet.
 
-FIELDING SAFETY
-This release is a field aid. Current law, agency policy, court decisions,
-supervisor direction, and prosecutor guidance control.
+FULL-WORKFLOW DEVICE CHECK — USE SYNTHETIC FACTS
+1. In Simple Mode, open Property Offenses > Theft of Services.
+2. Answer the required questions. A reproducible test is: purpose to defraud
+   YES; obtained service; restaurant; left without payment; payment ordinarily
+   due immediately YES; left without payment or offer YES; value 85; presence YES.
+3. Tap View Triage Result. The screen must display the Theft of Services result,
+   a statute, classification, penalty, and arrest section. An empty result or
+   no response is a failure. This synthetic check is not legal advice.
+4. Tap Back, change an answer, and finish again. Confirm the result updates.
+5. Repeat in Advanced Mode, skipping optional evidence prompts. Open Report
+   Skeleton from the result and confirm it contains the selected result.
+6. Complete a Battery workflow with pregnancy/history facts and confirm those
+   selected facts appear in the final result's impact/flags, where applicable.
+7. Leave a required question unanswered. Next must explain what is required.
+8. Confirm City Park Quick References and a random charge card still open.
+9. Confirm Patrol Quick Reference > Name Phonetic Translator renders WHITE as
+   William – Henry – Ida – Tom – Edward.
+10. After loading the approved app online, repeat one complete workflow offline.
+    Automated tests do NOT substitute for this device check.
+
+IF THERE IS STILL A PROBLEM
+Record the version badge, module, Simple/Advanced mode, last question, and any
+visible error. Use synthetic or de-identified facts when reporting a problem.
+Do not rely on an empty, stale, or incomplete result for an enforcement action.
+
+Current law, agency policy, court decisions, supervisor direction, and
+prosecutor guidance control. This is a field aid, not independent authority.

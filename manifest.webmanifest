@@ -1,7 +1,7 @@
 {
   "name": "Arkansas Patrol Field Hub",
   "short_name": "AR Patrol Hub",
-  "description": "V3.2.2 fielding release of the Arkansas patrol law hub with repaired category-card navigation, exact Fort Smith ordinance links, visible section citations, Simple/Advanced modes, charge triage, noncommercial driver licensing, expanded traffic validation, special vehicles, quick references, and standardized infographics.",
+  "description": "V3.3.1 fixes the View Triage Result action in Simple and Advanced workflows. Retains the offline name phonetic translator, category-card navigation, Fort Smith ordinance links, driver licensing, traffic validation, special vehicles, quick references, and standardized infographics.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

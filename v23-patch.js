@@ -278,7 +278,7 @@ renderModule=function(toTop=true){
  <div class="flow-card">
    <div class="flow-stage ${optional?"optional":"required"}">${optional?"Optional — may change charge/arrest":"Required"}</div>
    ${renderQuestion(q,currentVals)}
-   <div id="flowMessage" class="flow-message"></div>
+   <div id="flowMessage" class="flow-message" role="alert"></div>
    <div class="flow-nav">
      ${canBack?`<button class="secondary" onclick="prevFieldQuestion()">Back</button>`:""}
      <button class="primary" onclick="nextFieldQuestion()">${wizardStep===qs.length-1?"View Triage Result":optional&&!valueAnswered(q)?"Skip / Next":"Next"}</button>

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="AR Charge Triage">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
-<title>Arkansas Patrol Field Hub — V3.2.2 Fielding Release</title>
+<title>Arkansas Patrol Field Hub — V3.3.1 Triage Fix</title>
 <style>
 :root{
   --navy:#0b2b57;--blue:#174a7e;--lt:#eef4fb;--line:#ccd7e5;--ink:#111827;
@@ -614,7 +614,7 @@ footer{padding-bottom:88px}
   <div class="header-row"><div class="logo">AR</div><div><h1>Arkansas Patrol Charge Triage</h1><p>Scenario → elements → exact statute → likely charge → arrest authority → optional report support</p></div></div>
 </header>
 <main>
-<div class="status"><span class="pill green">V3.2.2 • Fielding Release</span><span class="pill">2025 Arkansas Code baseline</span><span class="pill">Current-law cross-check</span></div>
+<div class="status"><span class="pill green">V3.3.1 • Triage Fix</span><span class="pill">2025 Arkansas Code baseline</span><span class="pill">Current-law cross-check</span></div>
 <section id="home">
   <div class="hero"><h2>Select a tool</h2><p>Criminal triage and special-vehicle triage guide unfamiliar scenarios. Standard automobile traffic remains a fast criteria-validation reference.</p></div>
   <div class="grid">
@@ -633,7 +633,7 @@ footer{padding-bottom:88px}
 <section id="ordinances" class="hidden"></section>
 <section id="library" class="hidden"></section>
 </main>
-<footer>Arkansas Patrol Field Hub • V3.2.2 fielding release</footer>
+<footer>Arkansas Patrol Field Hub • V3.3.1 triage fix</footer>
 </div>
 <div id="viewer" class="viewer"><button class="close" onclick="closeViewer()">×</button><img id="viewerImg" alt="Infographic"></div>
 <script>
@@ -1041,11 +1041,24 @@ function missingRequired(){
  return missing;
 }
 function evaluateCurrent(){
- const missing=missingRequired();const err=document.getElementById("formError");
- if(missing.length){err.innerHTML=`<div class="error">Required before final triage: ${missing.join("; ")}</div>`;return}
- err.innerHTML="";
- let r=evaluators[currentModule](currentVals);
- renderResult(r);
+ // The single-question wizard uses flowMessage; formError belongs to the
+ // original all-at-once form. Neither missing container may block evaluation.
+ const missing=missingRequired();
+ const err=document.getElementById("flowMessage")||document.getElementById("formError");
+ if(missing.length){if(err)err.innerHTML=`<div class="error">Required before final triage: ${missing.join("; ")}</div>`;return}
+ if(err)err.innerHTML="";
+ try{
+  const r=evaluators[currentModule](currentVals);
+  renderResult(r);
+ }catch(error){
+  // Keep answers available for correction/retry, but never leave a stale or
+  // partially rendered charge on screen after an evaluation failure.
+  const result=document.getElementById("result");
+  if(result){result.innerHTML="";delete result.dataset.result;}
+  if(typeof lastFieldResult!=="undefined")lastFieldResult=null;
+  if(err)err.innerHTML=`<div class="error">Unable to generate the triage result. Your answers have been kept. Try again. If this continues, use Full Statute(s) to verify the charge.</div>`;
+  console.error("Triage result could not be generated.",error);
+ }
 }
 function isFelony(c){return /felony/i.test(c)}
 function penaltyFor(cls,special=null){
@@ -1583,4 +1596,5 @@ if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.se
 <script src="./v32-patch.js"></script>
 <script src="./v321-patch.js"></script>
 <script src="./v322-patch.js"></script>
+<script src="./v33-patch.js"></script>
 </body></html>
